@@ -3,41 +3,77 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Exclusive Teddy Bear Soirée</title>
+    <title>Enchanting Teddy Bear Picnic</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
     <style>
-        /* ... [previous styles] ... */
-
-        /* Additional styles for a more luxurious feel */
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(to bottom, #f5f5f5, #e0e0e0);
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 50px auto;
+            background-color: #fff;
+            padding: 60px;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
         h2 {
-            text-decoration: underline gold;
+            text-align: center;
+            font-size: 3em;
+            padding-bottom: 40px;
+            font-family: 'Playfair Display', serif;
+            color: #555;
+        }
+        .comic-panel {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 40px;
+        }
+        .comic-panel:nth-child(odd) img {
+            order: 2;
+        }
+        .comic-panel img {
+            max-width: 45%;
+            border-radius: 15px;
+            transition: all 0.3s;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .comic-panel img:hover {
+            transform: scale(1.08);
+        }
+        .comic-panel p {
+            width: 50%;
+            font-size: 20px;
+            line-height: 1.7;
+            padding: 30px;
+            background-color: #f5f5f5;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h2>The Teddy Bear Soirée</h2>
+        <h2>An Enchanting Evening</h2>
         <div class="comic-panel">
-            <img src="https://images.pexels.com/photos/159711/book-glasses-green-black-159711.jpeg" alt="Invitation">
-            <p>Whispers spread across the plush town about an exclusive soirée. Only the crème de la crème of teddy bears received the golden embossed invitation.</p>
+            <img src="https://via.placeholder.com/500" alt="Luxury Setting Image 1">
+            <p>Under the soft glow of the twilight, elite teddy bears from all over the town gathered for an evening of allure and mystique.</p>
         </div>
         <div class="comic-panel">
-            <p>The location was a secret, known only to those who were truly in the know. Rumors spoke of a meadow bathed in moonlight, where the grass shimmered like emeralds.</p>
-            <img src="https://images.pexels.com/photos/674010/pexels-photo-674010.jpeg" alt="Meadow">
+            <p>Whispers of secret rendezvous and tales of forbidden love filled the air as they settled on silk blankets, surrounded by candles that flickered seductively.</p>
+            <img src="https://via.placeholder.com/500" alt="Luxury Setting Image 2">
         </div>
         <div class="comic-panel">
-            <img src="https://images.pexels.com/photos/1308881/pexels-photo-1308881.jpeg" alt="Champagne">
-            <p>As the night unfolded, teddies sipped on the finest bubbly, their laughter echoing under the canopy of stars. The air was thick with intrigue and allure.</p>
+            <img src="https://via.placeholder.com/500" alt="Luxury Setting Image 3">
+            <p>Champagne flowed like a river, and the soft melodies of a distant violin played tunes of passion and desire.</p>
         </div>
         <div class="comic-panel">
-            <p>A mysterious bear, draped in a velvet cloak, played enchanting melodies on a grand piano. The music seemed to hold secrets of its own.</p>
-            <img src="https://images.pexels.com/photos/1040626/pexels-photo-1040626.jpeg" alt="Piano">
+            <p>As the night deepened, some teddies disappeared into the shadows, their secrets safe in the embrace of the night.</p>
+            <img src="https://via.placeholder.com/500" alt="Luxury Setting Image 4">
         </div>
-        <div class="comic-panel">
-            <img src="https://images.pexels.com/photos/2404448/pexels-photo-2404448.jpeg" alt="Dance">
-            <p>As dawn approached, teddies danced in pairs, their silhouettes casting long, graceful shadows. The soirée was a night of opulence, mystery, and memories that would last an eternity.</p>
-        </div>
-        <button class="rsvp-button">Request an Invitation</button>
     </div>
 </body>
 </html>
