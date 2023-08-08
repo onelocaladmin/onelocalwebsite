@@ -23,25 +23,45 @@
         }
         h2 {
             text-align: center;
-            color: #333;
             font-size: 2.5em;
-            border-bottom: 2px solid gold;
             padding-bottom: 20px;
             font-family: 'Playfair Display', serif;
+            background: -webkit-linear-gradient(left, red, orange, yellow, green, blue, indigo, violet);
+            -webkit-background-clip: text;
+            color: transparent;
         }
         .comic-panel {
             display: flex;
             justify-content: space-between;
             margin-bottom: 20px;
         }
+        .comic-panel:nth-child(odd) img {
+            order: 2;
+        }
         .comic-panel img {
             max-width: 45%;
             border-radius: 10px;
-            transition: transform 0.3s;
+            transition: all 0.3s;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
         .comic-panel img:hover {
             transform: scale(1.05);
+            filter: brightness(80%);
+        }
+        .comic-panel:nth-child(2) p {
+            border-left: 5px solid red;
+        }
+        .comic-panel:nth-child(3) p {
+            border-left: 5px solid orange;
+        }
+        .comic-panel:nth-child(4) p {
+            border-left: 5px solid yellow;
+        }
+        .comic-panel:nth-child(5) p {
+            border-left: 5px solid green;
+        }
+        .comic-panel:nth-child(6) p {
+            border-left: 5px solid blue;
         }
         .comic-panel p {
             width: 50%;
@@ -51,7 +71,21 @@
             background-color: #eaeaea;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            border-left: 5px solid gold;
+        }
+        .rsvp-button {
+            display: block;
+            margin: 30px auto;
+            padding: 10px 20px;
+            background-color: gold;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .rsvp-button:hover {
+            background-color: #b8860b;
         }
     </style>
 </head>
@@ -78,6 +112,7 @@
             <img src="https://www.pexels.com/photo/brown-bear-plush-toy-on-green-grass-162326/" alt="Luxury Teddy Bear Image 5">
             <p>As the sun set, they all gathered around a lavish campfire, singing songs and making memories under the starlit sky.</p>
         </div>
+        <button class="rsvp-button">RSVP Now</button>
     </div>
 </body>
 </html>
