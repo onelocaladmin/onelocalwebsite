@@ -6,9 +6,22 @@
     <title>Enchanted Teddy Bear Soirée</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
     <style>
+        @keyframes gradientBG {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
         body {
             font-family: 'Roboto', sans-serif;
             background: linear-gradient(45deg, #FFB6C1, #FF69B4, #FF4500, #32CD32, #1E90FF, #9400D3);
+            background-size: 200% 200%;
+            animation: gradientBG 10s ease infinite;
             margin: 0;
             padding: 0;
         }
@@ -19,7 +32,7 @@
             padding: 60px;
             border-radius: 15px;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-            border: 5px dashed #FFD700;
+            border: 5px double gold;
         }
         h2 {
             text-align: center;
@@ -31,15 +44,20 @@
             color: transparent;
             border-bottom: 5px dotted gold;
             margin-bottom: 40px;
+            text-shadow: 2px 2px 4px #000000;
         }
         .comic-panel {
             display: flex;
             justify-content: space-between;
             margin-bottom: 40px;
-            border: 5px dashed rgba(255,0,255,0.7);
+            border: 5px double rgba(255,0,255,0.7);
             padding: 20px;
             border-radius: 20px;
             background-color: rgba(255, 105, 180, 0.2);
+            transition: transform 0.3s;
+        }
+        .comic-panel:hover {
+            transform: scale(1.05);
         }
         .comic-panel:nth-child(odd) img {
             order: 2;
@@ -48,34 +66,15 @@
             max-width: 48%;
             border-radius: 15px;
             transition: all 0.3s;
-            box-shadow: 0 5px 15px rgba(0, 128, 0, 0.5);
+            box-shadow: 0 0 20px rgba(0, 128, 0, 0.9);
             filter: brightness(90%);
-            border: 5px dotted #32CD32;
+            border: 5px double #32CD32;
         }
         .comic-panel img:hover {
             transform: scale(1.08);
             filter: brightness(100%);
-            border: 5px dotted #FF4500;
-        }
-        .comic-panel:nth-child(1) p {
-            background-color: #FFDAB9;
-            border-color: #FF6347;
-        }
-        .comic-panel:nth-child(2) p {
-            background-color: #FFB6C1;
-            border-color: #FF69B4;
-        }
-        .comic-panel:nth-child(3) p {
-            background-color: #98FB98;
-            border-color: #3CB371;
-        }
-        .comic-panel:nth-child(4) p {
-            background-color: #ADD8E6;
-            border-color: #1E90FF;
-        }
-        .comic-panel:nth-child(5) p {
-            background-color: #FFD700;
-            border-color: #FFA500;
+            border: 5px double #FF4500;
+            box-shadow: 0 0 30px rgba(255, 69, 0, 0.9);
         }
         .comic-panel p {
             width: 48%;
@@ -83,33 +82,34 @@
             line-height: 1.7;
             padding: 25px;
             border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0, 0, 255, 0.5);
+            box-shadow: 0 0 20px rgba(0, 0, 255, 0.9);
             border-left: 10px double #9400D3;
+            text-shadow: 1px 1px 3px #000000;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h2>Enchanted Teddy Bear Soirée</h2>
+        <h2>The Enchanted Teddy Bear Soirée</h2>
         <div class="comic-panel">
             <img src="https://images.unsplash.com/photo-1555685812-4b943f1cb0eb?fit=crop&w=500&h=500" alt="Elegant Teddy Bear Image 1">
-            <p>As the sun cast golden hues over the meadow, the elite teddy bears of the town whispered of a secret gathering.</p>
+            <p>As the sun cast golden hues over the meadow, the elite teddy bears of the town whispered of a secret gathering. The air was thick with anticipation.</p>
         </div>
         <div class="comic-panel">
-            <p>Invitations were discreetly passed, hinting at an evening of opulence and allure.</p>
+            <p>Invitations, embossed in gold, were discreetly passed. They hinted at an evening of opulence, allure, and enchantment.</p>
             <img src="https://images.unsplash.com/photo-1546868871-7041f2a55e12?fit=crop&w=500&h=500" alt="Elegant Teddy Bear Image 2">
         </div>
         <div class="comic-panel">
             <img src="https://images.unsplash.com/photo-1555685812-4b943f1cb0eb?fit=crop&w=500&h=500" alt="Elegant Teddy Bear Image 3">
-            <p>At the heart of the forest, a grand table was set, adorned with crystal goblets and golden plates.</p>
+            <p>At the heart of the forest, a grand table was set. Crystal goblets shimmered under the moonlight, and golden plates awaited the feast.</p>
         </div>
         <div class="comic-panel">
-            <p>Whispers of enchantments, secret potions, and dances under the moonlight filled the air.</p>
+            <p>Whispers of enchantments, secret potions, and dances under the moonlight filled the air. The teddies knew this night would be one for the ages.</p>
             <img src="https://images.unsplash.com/photo-1546868871-7041f2a55e12?fit=crop&w=500&h=500" alt="Elegant Teddy Bear Image 4">
         </div>
         <div class="comic-panel">
             <img src="https://images.unsplash.com/photo-1555685812-4b943f1cb0eb?fit=crop&w=500&h=500" alt="Elegant Teddy Bear Image 5">
-            <p>As the night deepened, the teddies reveled in the magic, knowing such nights were rare and to be treasured.</p>
+            <p>As the night deepened, the teddies reveled in the magic. They danced, sang, and celebrated, knowing such nights were rare and to be treasured forever.</p>
         </div>
     </div>
 </body>
