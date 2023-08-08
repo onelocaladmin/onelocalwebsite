@@ -3,39 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Fabulous '80s Teddy Bear Disco!</title>
+    <title>The Wackiest Teddy Bear Party Ever!</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
     <style>
         @font-face {
-            font-family: 'DiscoFont';
+            font-family: 'KitschyFont';
             src: url('https://fonts.gstatic.com/s/pacifico/v17/FwZY7-Qmy14u9lezJ-6H6Mk.woff2');
         }
         body {
             font-family: 'Roboto', sans-serif;
-            background: url('https://www.transparenttextures.com/patterns/psychedelic-pattern.png'), linear-gradient(45deg, #FF00FF, #00FFFF, #FF4500, #32CD32, #1E90FF, #9400D3);
+            background: url('https://media.giphy.com/media/3o7TKU8RvQuomFfUUU/giphy.gif') repeat, linear-gradient(45deg, #FFB6C1, #FF69B4, #FF4500, #32CD32, #1E90FF, #9400D3);
+            cursor: url('https://www.rw-designer.com/cursor-extern.php?id=120547'), auto;
             margin: 0;
             padding: 0;
         }
         .container {
             max-width: 1100px;
             margin: 50px auto;
-            background-color: rgba(0, 0, 0, 0.8); /* Black with transparency */
+            background-color: rgba(255, 255, 0, 0.8); /* Bright yellow! */
             padding: 60px;
             border-radius: 15px;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-            border: 10px solid;
-            border-image-source: linear-gradient(45deg, red, orange, yellow, green, blue, indigo, violet);
-            border-image-slice: 1;
+            border: 10px double pink;
         }
         h2 {
             text-align: center;
-            font-size: 3em;
+            font-size: 5em;
             padding-bottom: 30px;
-            font-family: 'DiscoFont';
-            color: #FF00FF; /* Neon Pink! */
-            text-shadow: 2px 2px 4px #00FFFF; /* Neon Blue shadow */
+            font-family: 'KitschyFont';
+            color: #FF00FF; /* Bright magenta! */
+            text-shadow: 2px 2px 4px #000000;
             border-bottom: 10px dotted gold;
             margin-bottom: 40px;
+            animation: colorChange 1s infinite;
+        }
+        @keyframes colorChange {
+            0% {color: red;}
+            25% {color: blue;}
+            50% {color: green;}
+            75% {color: purple;}
+            100% {color: red;}
         }
         .comic-panel {
             display: flex;
@@ -53,48 +60,60 @@
             max-width: 48%;
             border-radius: 15px;
             border: 5px inset purple;
+            filter: hue-rotate(90deg);
+            transform: rotate(10deg);
+            transition: transform 0.5s;
+        }
+        .comic-panel img:hover {
+            transform: rotate(-10deg);
         }
         .comic-panel p {
             width: 48%;
-            font-size: 20px;
+            font-size: 24px;
             line-height: 1.7;
             padding: 25px;
             border-radius: 15px;
             background-color: #FF69B4; /* Hot pink! */
             border: 5px groove gold;
-            font-family: 'DiscoFont';
-            color: #00FF00; /* Neon Green! */
-            text-shadow: 2px 2px 4px #0000FF; /* Neon Blue shadow */
+            font-family: 'KitschyFont';
+            color: #00FF00; /* Bright green! */
+            text-shadow: 2px 2px 4px #000000;
+            transition: background-color 0.5s;
+        }
+        .comic-panel p:hover {
+            background-color: #FFD700; /* Gold! */
+        }
+        marquee {
+            font-size: 2em;
+            color: gold;
+            font-family: 'KitschyFont';
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h2>The Absolutely Fabulous '80s Teddy Bear Disco!</h2>
+        <marquee>🎉🎉🎉 The Ultimate Teddy Bear Extravaganza! 🎉🎉🎉</marquee>
+        <h2>The <span style="font-family: 'KitschyFont'; color: blue;">Absolutely</span> Fabulous <span style="font-family: 'Playfair Display', serif; color: red;">Teddy Bear</span> Extravaganza! 🐻🎈🎉</h2>
         <div class="comic-panel">
             <img src="https://images.unsplash.com/photo-1555685812-4b943f1cb0eb?fit=crop&w=500&h=500" alt="Elegant Teddy Bear Image 1">
-            <p>Darlings! As the neon lights flashed, the most fabulous teddy bears in town whispered of a disco so legendary, it was the talk of the '80s!</p>
+            <p>Darlings! 🌟 As the sun cast the most dramatic golden hues, the crème de la crème teddy bears whispered of a soirée so fabulous, it was scandalous! 🎉🍾</p>
         </div>
         <div class="comic-panel">
-            <p>Invitations, honey! Glittering in neon, hinting at a night of dance, drama, and pure '80s extravaganza!</p>
-            <img src="https://images.unsplash.com/photo-1546868871-7041f2a55e12?fit=crop&w=500&h=500" alt="Elegant Teddy Bear Image 2">
+            <p>Oh honey, the venue! 🌈 A glen so magical, even the fairies were jealous! 🧚✨ And the teddies? Dressed to the nines, dah-ling! 🎩👠</p>
+            <img src="https://images.unsplash.com/photo-1584714268709-c3dd9c92b378?fit=crop&w=500&h=500" alt="Elegant Teddy Bear Image 2">
         </div>
         <div class="comic-panel">
             <img src="https://images.unsplash.com/photo-1555685812-4b943f1cb0eb?fit=crop&w=500&h=500" alt="Elegant Teddy Bear Image 3">
-            <p>At the heart of the disco, a dance floor so lit, even the stars were jealous! The teddies, darling, they danced the night away under the disco ball!</p>
+            <p>At the heart of the forest, a table so grand it could only be magic! 🍽️ Crystal goblets shimmered, golden plates awaited, and oh honey, the chandeliers! 💎✨</p>
         </div>
         <div class="comic-panel">
-            <p>Whispers of secret moves, fabulous outfits, and the hottest tracks of the '80s! Oh, honey, the teddies knew how to throw a party!</p>
+            <p>Whispers of enchantments, secret potions, and dances so wild, the moon blushed! 🌙 The teddies, darling, they knew this night was legendary! 🎶🕺</p>
             <img src="https://images.unsplash.com/photo-1546868871-7041f2a55e12?fit=crop&w=500&h=500" alt="Elegant Teddy Bear Image 4">
         </div>
         <div class="comic-panel">
             <img src="https://images.unsplash.com/photo-1555685812-4b943f1cb0eb?fit=crop&w=500&h=500" alt="Elegant Teddy Bear Image 5">
-            <p>As the night deepened, the teddies danced, laughed, and celebrated! Oh, darling, such nights are what legends are made of!</p>
+            <p>As the night deepened, the teddies reveled in the magic. They danced, they sang, they celebrated! Oh, darling, such nights are to be treasured forever! 🌌🎉</p>
         </div>
     </div>
-        <audio autoplay loop>
-        <source src="https://freemusicarchive.org/music/Underground_Horns/Live_at_Monty_Hall_for_HONK_NYC_2016/Underground_Horns_-_01_-_Live_HONK_2016/" type="audio/mpeg">
-        Your browser does not support the audio element.
-    </audio>
 </body>
 </html>
