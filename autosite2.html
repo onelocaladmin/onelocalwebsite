@@ -11,83 +11,79 @@
             background-color: #faf3e0;
             color: #333;
             line-height: 1.6;
+            overflow: hidden;
         }
         h1 {
             text-align: center;
             margin-bottom: 50px;
         }
-        .comic-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-        }
         .comic-panel {
             position: relative;
-            overflow: hidden;
+            display: flex;
+            gap: 20px;
+            margin-bottom: 40px;
+            align-items: center;
+            justify-content: center;
+        }
+        .comic-panel img, .comic-panel video {
+            max-width: 300px;
             border: 3px solid #a89f91;
             border-radius: 10px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease;
+            transition: transform 0.5s ease;
+            z-index: 1;
         }
-        .comic-panel:hover {
-            transform: rotate(10deg);
-        }
-        .comic-panel img, .comic-panel video {
-            max-width: 100%;
-            border-radius: 10px;
+        .comic-panel img:hover, .comic-panel video:hover {
+            transform: rotate(360deg);
+            z-index: 2;
         }
         .comic-text {
             position: absolute;
-            bottom: 10px;
-            left: 10px;
-            padding: 10px;
-            background-color: rgba(255, 255, 255, 0.8);
-            border-radius: 5px;
-        }
-        audio {
-            display: none;
+            max-width: 300px;
+            padding: 20px;
+            border: 3px solid #a89f91;
+            border-radius: 10px;
+            background-color: #fff;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            z-index: 0;
         }
     </style>
-    <script>
-        function playAudio(id) {
-            document.getElementById(id).play();
-        }
-        function stopAudio(id) {
-            document.getElementById(id).pause();
-            document.getElementById(id).currentTime = 0;
-        }
-    </script>
 </head>
 <body>
     <h1>The Elegant Teddy Bear Picnic</h1>
 
-    <div class="comic-grid">
-        <div class="comic-panel" onmouseover="playAudio('audio1')" onmouseout="stopAudio('audio1')">
-            <img src="https://via.placeholder.com/300" alt="Teddy bear sitting on grass">
-            <div class="comic-text">
-                <p>Teddy's picnic in the park.</p>
-            </div>
-            <audio id="audio1" src="path_to_audio1.mp3"></audio>
-        </div>
-
-        <div class="comic-panel" onmouseover="playAudio('audio2')" onmouseout="stopAudio('audio2')">
-            <video controls>
-                <source src="https://www.example.com/path/to/video.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-            </video>
-            <div class="comic-text">
-                <p>Teddy's dance party!</p>
-            </div>
-            <audio id="audio2" src="path_to_audio2.mp3"></audio>
-        </div>
-
-        <div class="comic-panel" onmouseover="playAudio('audio3')" onmouseout="stopAudio('audio3')">
-            <img src="https://via.placeholder.com/300" alt="Teddy bear eating sandwich">
-            <div class="comic-text">
-                <p>Delicious sandwiches!</p>
-            </div>
-            <audio id="audio3" src="path_to_audio3.mp3"></audio>
+    <div class="comic-panel">
+        <img src="https://via.placeholder.com/300" alt="Teddy bear sitting on grass" onmouseover="playMusic('track1')">
+        <div class="comic-text">
+            <p>Once upon a time, Teddy decided to have a picnic in the park.</p>
         </div>
     </div>
+
+    <div class="comic-panel">
+        <video controls onmouseover="playMusic('track2')">
+            <source src="https://www.example.com/path/to/video.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <div class="comic-text">
+            <p>He invited all his teddy friends. They danced, sang, and had a lot of fun!</p>
+        </div>
+    </div>
+
+    <div class="comic-panel">
+        <img src="https://via.placeholder.com/300" alt="Teddy bear eating sandwich" onmouseover="playMusic('track3')">
+        <div class="comic-text">
+            <p>They ate delicious sandwiches and drank fresh juice. It was a day to remember!</p>
+        </div>
+    </div>
+
+    <audio id="track1" src="https://www.example.com/path/to/music1.mp3"></audio>
+    <audio id="track2" src="https://www.example.com/path/to/music2.mp3"></audio>
+    <audio id="track3" src="https://www.example.com/path/to/music3.mp3"></audio>
+
+    <script>
+        function playMusic(trackId) {
+            document.getElementById(trackId).play();
+        }
+    </script>
 </body>
 </html>
