@@ -3,19 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Elegant Teddy Bear Picnic</title>
+    <title>Mysterious Teddy Bear Picnic</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
     <style>
         body {
             font-family: 'Playfair Display', serif;
-            background-color: #faf3e0;
-            color: #333;
+            background-color: #2e2e2e;
+            color: #faf3e0;
             line-height: 1.6;
             overflow: hidden;
         }
         h1 {
             text-align: center;
             margin-bottom: 50px;
+            font-size: 2.5em;
         }
         .comic-panel {
             position: relative;
@@ -28,13 +29,15 @@
         .comic-panel img, .comic-panel video {
             max-width: 300px;
             border: 3px solid #a89f91;
-            border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            transition: transform 0.5s ease;
+            border-radius: 50%;
+            box-shadow: 0 4px 15px rgba(250, 243, 224, 0.7);
+            transition: transform 1s ease, filter 1s ease;
+            filter: grayscale(100%);
             z-index: 1;
         }
         .comic-panel img:hover, .comic-panel video:hover {
-            transform: rotate(360deg);
+            transform: scale(1.1) rotate(10deg);
+            filter: grayscale(0%);
             z-index: 2;
         }
         .comic-text {
@@ -43,19 +46,23 @@
             padding: 20px;
             border: 3px solid #a89f91;
             border-radius: 10px;
-            background-color: #fff;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            background-color: rgba(46, 46, 46, 0.8);
+            box-shadow: 0 4px 15px rgba(250, 243, 224, 0.7);
             z-index: 0;
+            transition: background-color 1s ease;
+        }
+        .comic-text:hover {
+            background-color: rgba(250, 243, 224, 0.9);
         }
     </style>
 </head>
 <body>
-    <h1>The Elegant Teddy Bear Picnic</h1>
+    <h1>The Mysterious Teddy Bear Picnic</h1>
 
     <div class="comic-panel">
-        <img src="https://via.placeholder.com/300" alt="Teddy bear sitting on grass" onmouseover="playMusic('track1')">
+        <img src="https://via.placeholder.com/300" alt="Teddy bear with a mask" onmouseover="playMusic('track1')">
         <div class="comic-text">
-            <p>Once upon a time, Teddy decided to have a picnic in the park.</p>
+            <p>In the moonlight, Teddy ventured into the forbidden forest.</p>
         </div>
     </div>
 
@@ -65,20 +72,20 @@
             Your browser does not support the video tag.
         </video>
         <div class="comic-text">
-            <p>He invited all his teddy friends. They danced, sang, and had a lot of fun!</p>
+            <p>Under the twinkling stars, they danced with joy and abandon.</p>
         </div>
     </div>
 
     <div class="comic-panel">
-        <img src="https://via.placeholder.com/300" alt="Teddy bear eating sandwich" onmouseover="playMusic('track3')">
+        <img src="https://via.placeholder.com/300" alt="Teddy bear with a rose" onmouseover="playMusic('track3')">
         <div class="comic-text">
-            <p>They ate delicious sandwiches and drank fresh juice. It was a day to remember!</p>
+            <p>With soft whispers and gentle touches, the night was filled with romance.</p>
         </div>
     </div>
 
-    <audio id="track1" src="https://www.example.com/path/to/music1.mp3"></audio>
-    <audio id="track2" src="https://www.example.com/path/to/music2.mp3"></audio>
-    <audio id="track3" src="https://www.example.com/path/to/music3.mp3"></audio>
+    <audio id="track1" src="https://www.example.com/path/to/mysterious-music.mp3"></audio>
+    <audio id="track2" src="https://www.example.com/path/to/joyful-music.mp3"></audio>
+    <audio id="track3" src="https://www.example.com/path/to/romantic-music.mp3"></audio>
 
     <script>
         function playMusic(trackId) {
