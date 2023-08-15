@@ -1,0 +1,18 @@
+{
+  "@context": {
+    "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+    "hasSkill": "http://example.org/property/hasSkill",
+    "createdProject": "http://example.org/property/createdProject",
+    "requiresSkill": "http://example.org/property/requiresSkill"
+  },
+  "@id": "http://example.org/person/JohnDoe",
+  "hasSkill": {
+    "@id": "http://example.org/skill/WebDevelopment"
+  },
+  "createdProject": {
+    "@id": "http://example.org/project/CommunityWebsite",
+    "requiresSkill": {
+      "@id": "http://example.org/skill/WebDevelopment"
+    }
+  }
+}
