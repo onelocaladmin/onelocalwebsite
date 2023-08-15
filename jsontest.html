@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta name="description" content="[Display User Data from JSON in HTML]">
+    <meta name="description" content="[Display and Edit User Data from JSON in HTML]">
     <meta charset="utf-8">
     <title>User Profile</title>
     <style>
@@ -15,59 +15,44 @@
 <body>
     <h1>User Profile</h1>
     <img id="profileImage" src="#" alt="Profile Image">
-    <p><strong>Username:</strong> <span id="username"></span></p>
-    <p><strong>Display Name:</strong> <span id="displayName"></span></p>
-    <p><strong>Email:</strong> <span id="email"></span></p>
+    <p><strong>Username:</strong> <input type="text" id="username"></p>
+    <p><strong>Display Name:</strong> <input type="text" id="displayName"></p>
+    <p><strong>Email:</strong> <input type="text" id="email"></p>
     <h2>Skills</h2>
-    <ul id="skills"></ul>
+    <textarea id="skills" rows="4" cols="50"></textarea>
     <h2>Resources</h2>
-    <ul id="resources"></ul>
-    <h2>Badges</h2>
-    <ul id="badges"></ul>
-    <h2>Projects</h2>
-    <ul id="projects"></ul>
+    <textarea id="resources" rows="4" cols="50"></textarea>
     <!-- Add more sections as needed -->
+    <button onclick="saveChanges()">Save Changes</button>
 
     <script>
         fetch('https://raw.githubusercontent.com/onelocaladmin/onelocalwebsite/main/data.json')
             .then(response => response.json())
             .then(data => {
-                document.getElementById("username").innerText = data.username;
-                document.getElementById("displayName").innerText = data.displayName;
-                document.getElementById("email").innerText = data.email;
+                document.getElementById("username").value = data.username;
+                document.getElementById("displayName").value = data.displayName;
+                document.getElementById("email").value = data.email;
                 document.getElementById("profileImage").src = data.profileImage;
-
-                const skillsList = document.getElementById("skills");
-                data.skills.forEach(skill => {
-                    const li = document.createElement("li");
-                    li.innerText = skill;
-                    skillsList.appendChild(li);
-                });
-
-                const resourcesList = document.getElementById("resources");
-                data.resources.forEach(resource => {
-                    const li = document.createElement("li");
-                    li.innerText = resource;
-                    resourcesList.appendChild(li);
-                });
-
-                const badgesList = document.getElementById("badges");
-                data.badges.forEach(badge => {
-                    const li = document.createElement("li");
-                    li.innerHTML = `<strong>${badge.name}</strong>: ${badge.description} (Earned on: ${badge.dateEarned})`;
-                    badgesList.appendChild(li);
-                });
-
-                const projectsList = document.getElementById("projects");
-                data.projects.forEach(project => {
-                    const li = document.createElement("li");
-                    li.innerHTML = `<strong>${project.name}</strong> as ${project.role} - Status: ${project.status}`;
-                    projectsList.appendChild(li);
-                });
+                document.getElementById("skills").value = data.skills.join(', ');
+                document.getElementById("resources").value = data.resources.join(', ');
 
                 // Continue in a similar fashion for other sections
             })
             .catch(error => console.error('Error fetching the JSON data:', error));
+
+        function saveChanges() {
+            const updatedData = {
+                username: document.getElementById("username").value,
+                displayName: document.getElementById("displayName").value,
+                email: document.getElementById("email").value,
+                skills: document.getElementById("skills").value.split(', '),
+                resources: document.getElementById("resources").value.split(', '),
+                // ... add other fields as needed
+            };
+
+            // Here you can send the updatedData to your server or save it in some other way
+            console.log(updatedData);
+        }
     </script>
 </body>
 </html>
