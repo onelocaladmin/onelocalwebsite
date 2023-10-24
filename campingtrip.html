@@ -16,7 +16,8 @@
     <script>
         const canvas = document.getElementById('pinwheels');
         const ctx = canvas.getContext('2d');
-        const numPinwheels = 10;
+        const numPinwheels = 5;
+        const pinwheels = [];
 
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
@@ -41,8 +42,8 @@
 
                     for (let i = 0; i < this.segments; i++) {
                         const angle = this.angles[level] + this.direction[level] * (i / this.segments) * Math.PI * 2;
-                        const xOffset = Math.cos(angle) * (radius + level * 20); // Add x offset
-                        const yOffset = Math.sin(angle) * (radius + level * 20); // Add y offset
+                        const xOffset = Math.cos(angle) * (radius + level * 20);
+                        const yOffset = Math.sin(angle) * (radius + level * 20);
                         const x = this.x + xOffset;
                         const y = this.y + yOffset;
 
@@ -61,7 +62,6 @@
                 this.x += this.speedX;
                 this.y += this.speedY;
 
-                // Bounce off the edges
                 if (this.x < 0 || this.x > canvas.width) {
                     this.speedX *= -1;
                 }
@@ -69,9 +69,16 @@
                     this.speedY *= -1;
                 }
             }
-        }
 
-        const pinwheels = [];
+            merge(pinwheel) {
+                // Merge logic goes here
+                const newX = (this.x + pinwheel.x) / 2;
+                const newY = (this.y + pinwheel.y) / 2;
+                const newNumLevels = Math.min(this.numLevels, pinwheel.numLevels) + 1;
+
+                return new Pinwheel(newX, newY, newNumLevels);
+            }
+        }
 
         for (let i = 0; i < numPinwheels; i++) {
             const x = Math.random() * canvas.width;
@@ -84,9 +91,19 @@
         function drawPinwheels() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-            pinwheels.forEach(pinwheel => {
+            for (let i = 0; i < pinwheels.length; i++) {
+                const pinwheel = pinwheels[i];
                 pinwheel.draw();
-            });
+
+                for (let j = i + 1; j < pinwheels.length; j++) {
+                    if (Math.abs(pinwheel.x - pinwheels[j].x) < 20 && Math.abs(pinwheel.y - pinwheels[j].y) < 20) {
+                        const newPinwheel = pinwheel.merge(pinwheels[j]);
+                        pinwheels.push(newPinwheel);
+                        pinwheels.splice(j, 1);
+                        pinwheels.splice(i, 1);
+                    }
+                }
+            }
 
             requestAnimationFrame(drawPinwheels);
         }
