@@ -1,0 +1,12 @@
+{
+    "id": "aria_moonwhisper",
+    "name": "Aria Moonwhisper",
+    "type": "Elf",
+    "description": "Aria Moonwhisper is a skilled elven mage known for her expertise in moon magic. She hails from the Silverwood Forest and is a guardian of its sacred groves.",
+    "abilities": ["Moonbeam", "Lunar Shield", "Starfall"],
+    "icon": "https://example.com/aria-icon.png",
+    "image": "https://example.com/aria-image.jpg",
+    "backgroundImage": "https://example.com/silverwood-forest.jpg",
+    "allies": ["Ember the Dragon"],
+    "items": ["Moonlit Wand"]
+}
