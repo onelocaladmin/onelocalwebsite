@@ -13,16 +13,16 @@
 </head>
 <body>
     <canvas id="pinwheels"></canvas>
-    <div><iframe src="https://drive.google.com/file/d/0B9vgdS-tPS1wRDVFb2F2WnJteVE/preview?resourceKey=0-74th8Hbqhhc_6lROfX6j_w" width="640" height="480" allow="autoplay"></iframe></div>
     <script>
         const canvas = document.getElementById('pinwheels');
         const ctx = canvas.getContext('2d');
-        const numPinwheels = 30;
+        const numPinwheels = 20;
         const pinwheels = [];
         const numLayers = 10;
         const dotSize = 5;
-        const rotationSpeed = 0.02;
-        const mergeProbability = 0.1; // Adjust the merge probability
+        const rotationSpeed = 0.1;
+        const mergeProbability = 0.005;
+        const repelRadius = 60; // Adjust the repel radius
 
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
@@ -35,11 +35,11 @@
                 this.segments = 18;
                 this.bounceFactor = 10;
                 this.bounceFactorX = 5;
-                this.speedX = (Math.random() - 3) * 2;
-                this.speedY = (Math.random() - 3) * 2;
+                this.speedX = (Math.random() - 0.5) * 2;
+                this.speedY = (Math.random() - 0.5) * 2;
                 this.angles = new Array(numLayers).fill(0);
                 this.direction = [-1, 1, -1, 1];
-                this.merged = false; // Track merge state
+                this.merged = false;
             }
 
             draw() {
@@ -50,6 +50,27 @@
                         const angle = this.angles[level] + this.direction[level] * (i / this.segments) * Math.PI * 2;
                         const xOffset = Math.cos(angle) * radius;
                         const yOffset = Math.sin(angle) * radius;
+
+                        // Implement repel behavior for innermost pinwheels
+                        if (level === numLayers - 1) {
+                            for (let j = 0; j < pinwheels.length; j++) {
+                                if (j !== pinwheels.indexOf(this)) {
+                                    const otherPinwheel = pinwheels[j];
+                                    const dx = otherPinwheel.x - (this.x + xOffset);
+                                    const dy = otherPinwheel.y - (this.y + yOffset);
+                                    const distance = Math.sqrt(dx * dx + dy * dy);
+
+                                    if (distance < repelRadius) {
+                                        const angle = Math.atan2(dy, dx);
+                                        const repelForce = (repelRadius - distance) / 2;
+
+                                        this.x -= repelForce * Math.cos(angle);
+                                        this.y -= repelForce * Math.sin(angle);
+                                    }
+                                }
+                            }
+                        }
+
                         const x = this.x + xOffset + Math.sin(this.angles[level] * this.bounceFactorX) * 10;
                         const y = this.y + yOffset;
 
@@ -65,7 +86,6 @@
                     this.angles[level] += this.direction[level] * rotationSpeed;
                 }
 
-                // Implement merging behavior
                 if (Math.random() < mergeProbability && !this.merged) {
                     this.radius *= 2;
                     this.merged = true;
