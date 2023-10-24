@@ -16,25 +16,25 @@
     <script>
         const canvas = document.getElementById('pinwheels');
         const ctx = canvas.getContext('2d');
-        const maxPinwheels = 50; // Maximum number of pinwheels
+        const numPinwheels = 20; // Increase the number of pinwheels
         const pinwheels = [];
 
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
 
         class Pinwheel {
-            constructor(x, y) {
+            constructor(x, y, numLevels) {
                 this.x = x;
                 this.y = y;
-                this.numLevels = 1; // Start with one level
+                this.numLevels = numLevels;
                 this.radiusStep = 30;
                 this.angles = new Array(this.numLevels).fill(0);
                 this.direction = [-1, 1, -1, 1];
                 this.segments = 12;
                 this.bounceFactor = 10;
+                this.bounceFactorX = 5; // Horizontal bounce factor
                 this.speedX = (Math.random() - 0.5) * 2;
                 this.speedY = (Math.random() - 0.5) * 2;
-                this.spawnTimer = 60; // Time before spawning a new pinwheel
             }
 
             draw() {
@@ -45,7 +45,7 @@
                         const angle = this.angles[level] + this.direction[level] * (i / this.segments) * Math.PI * 2;
                         const xOffset = Math.cos(angle) * radius;
                         const yOffset = Math.sin(angle) * radius;
-                        const x = this.x + xOffset;
+                        const x = this.x + xOffset + Math.sin(this.angles[level] * this.bounceFactorX) * 10; // Horizontal bounce
                         const y = this.y + yOffset;
 
                         const bounceOffset = Math.sin(this.angles[level] * this.bounceFactor) * 10;
@@ -69,27 +69,23 @@
                 if (this.y < 0 || this.y > canvas.height) {
                     this.speedY *= -1;
                 }
-
-                this.spawnTimer--;
-                if (this.spawnTimer <= 0 && pinwheels.length < maxPinwheels) {
-                    const newPinwheel = new Pinwheel(this.x, this.y);
-                    pinwheels.push(newPinwheel);
-                    this.spawnTimer = 60; // Reset spawn timer
-                }
             }
+        }
+
+        for (let i = 0; i < numPinwheels; i++) {
+            const x = Math.random() * canvas.width;
+            const y = Math.random() * canvas.height;
+            const numLevels = Math.floor(Math.random() * 5) + 1;
+            const pinwheel = new Pinwheel(x, y, numLevels);
+            pinwheels.push(pinwheel);
         }
 
         function drawPinwheels() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-            for (let i = pinwheels.length - 1; i >= 0; i--) {
+            for (let i = 0; i < pinwheels.length; i++) {
                 const pinwheel = pinwheels[i];
                 pinwheel.draw();
-
-                // Remove pinwheels that move off-screen
-                if (pinwheel.x < -50 || pinwheel.x > canvas.width + 50 || pinwheel.y < -50 || pinwheel.y > canvas.height + 50) {
-                    pinwheels.splice(i, 1);
-                }
             }
 
             requestAnimationFrame(drawPinwheels);
