@@ -1,0 +1,12 @@
+{
+    "id": "moonwood_wand",
+    "name": "Moonwood Wand",
+    "type": "Wand",
+    "material": "moonwood",
+    "description": "This wand is imbued with the power of the moon. It glows with a soft luminescence in the night and is known to amplify the magic of its wielder.",
+    "abilities": ["Lunar Amplification", "Night Vision", "Moon's Blessing"],
+    "icon": "https://example.com/wand-icon.png",
+    "image": "https://example.com/wand-image.jpg",
+    "backgroundImage": "https://example.com/moonlit-night.jpg",
+    "owner": "Aria Moonwhisper"
+}
