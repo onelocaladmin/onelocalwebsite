@@ -16,7 +16,7 @@
     <script>
         const canvas = document.getElementById('pinwheels');
         const ctx = canvas.getContext('2d');
-        const numPinwheels = 20; // Increase the number of pinwheels
+        const numPinwheels = 10; // Reduce the number of pinwheels
         const pinwheels = [];
 
         canvas.width = window.innerWidth;
@@ -27,10 +27,10 @@
                 this.x = x;
                 this.y = y;
                 this.numLevels = numLevels;
-                this.radiusStep = 30;
+                this.radiusStep = 60; // Increase the radius step
                 this.angles = new Array(this.numLevels).fill(0);
                 this.direction = [-1, 1, -1, 1];
-                this.segments = 12;
+                this.segments = 18; // Increase the number of segments
                 this.bounceFactor = 10;
                 this.bounceFactorX = 5; // Horizontal bounce factor
                 this.speedX = (Math.random() - 0.5) * 2;
@@ -52,7 +52,7 @@
                         const rainbowColor = `hsl(${i * (360 / this.segments)}, 100%, 50%)`;
 
                         ctx.beginPath();
-                        ctx.arc(x, y + bounceOffset, 10, 0, Math.PI * 2);
+                        ctx.arc(x, y + bounceOffset, 15, 0, Math.PI * 2); // Increase the circle size
                         ctx.fillStyle = rainbowColor;
                         ctx.fill();
                     }
@@ -75,7 +75,7 @@
         for (let i = 0; i < numPinwheels; i++) {
             const x = Math.random() * canvas.width;
             const y = Math.random() * canvas.height;
-            const numLevels = Math.floor(Math.random() * 5) + 1;
+            const numLevels = Math.floor(Math.random() * 7) + 3; // Increase the range and base number of levels
             const pinwheel = new Pinwheel(x, y, numLevels);
             pinwheels.push(pinwheel);
         }
