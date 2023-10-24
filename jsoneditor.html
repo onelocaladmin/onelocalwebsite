@@ -131,11 +131,14 @@
 
         function toggleExpand(element) {
             const content = element.nextElementSibling;
+            const container = element.parentElement;
+
             if (content.style.display === "none" || content.style.display === "") {
                 content.style.display = "block";
+                container.classList.add("open");
             } else {
                 content.style.display = "none";
-                element.parentElement.style.maxHeight = null; // Set max-height to null when hidden
+                container.classList.remove("open");
             }
         }
 
@@ -246,14 +249,13 @@
                 const input = document.createElement('input');
                 input.type = 'text';
                 input.id = key;
-                input.value = value;
                 input.addEventListener('dblclick', (event) => handleDoubleClick(event, columnIndex));
                 content.appendChild(input);
             } else if (key === 'website') {
                 const iframe = document.createElement('iframe');
                 iframe.src = value;
                 iframe.style.width = '100%';
-                iframe.style height = '200px'; // Fixed a typo here
+                iframe.style.height = '200px';
                 content.appendChild(iframe);
             } else {
                 const input = document.createElement('input');
