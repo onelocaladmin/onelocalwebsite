@@ -11,47 +11,41 @@
     </style>
 </head>
 <body>
-    <canvas id="paperclip"></canvas>
+    <canvas id="rainbowWorm"></canvas>
     <script>
-        const canvas = document.getElementById('paperclip');
+        const canvas = document.getElementById('rainbowWorm');
         const ctx = canvas.getContext('2d');
+        const colors = ['red', 'orange', 'yellow', 'green', 'blue', 'indigo', 'violet'];
+        let frame = 0;
 
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
 
-        const paperclip = new Image();
-        paperclip.src = 'paperclip.png'; // You need to have an image of the paperclip character
+        function draw() {
+            frame += 0.02; // Adjust the speed by changing this value
 
-        const paperclipWidth = 100;
-        const paperclipHeight = 120;
-
-        const paperclipState = {
-            x: canvas.width / 2,
-            y: canvas.height / 2,
-            waving: false,
-        };
-
-        paperclip.onload = function () {
-            drawPaperclip();
-        };
-
-        canvas.addEventListener('click', () => {
-            paperclipState.waving = !paperclipState.waving;
-        });
-
-        function drawPaperclip() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-            if (paperclipState.waving) {
-                ctx.drawImage(paperclip, paperclipState.x, paperclipState.y, paperclipWidth, paperclipHeight);
-                ctx.font = '24px Arial';
-                ctx.fillText('Hello!', paperclipState.x + 30, paperclipState.y - 10);
-            } else {
-                ctx.drawImage(paperclip, paperclipState.x, paperclipState.y, paperclipWidth, paperclipHeight);
+            const radius = 50;
+            const x = canvas.width / 2 + Math.cos(frame) * 100;
+            const y = canvas.height / 2 + Math.sin(frame) * 50;
+            const segments = 10;
+
+            for (let i = 0; i < segments; i++) {
+                const angle = (i / segments) * Math.PI * 2;
+                const color = colors[i % colors.length];
+                const offset = Math.sin(frame + i) * 15;
+                ctx.beginPath();
+                ctx.arc(x + offset, y + offset, radius, angle, angle + Math.PI / segments);
+                ctx.lineTo(x, y);
+                ctx.fillStyle = color;
+                ctx.fill();
             }
 
-            requestAnimationFrame(drawPaperclip);
+            requestAnimationFrame(draw);
         }
+
+        draw();
     </script>
 </body>
 </html>
