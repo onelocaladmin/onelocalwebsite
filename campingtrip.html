@@ -11,36 +11,36 @@
     </style>
 </head>
 <body>
-    <canvas id="rainbowCircle"></canvas>
+    <canvas id="ouroboros"></canvas>
     <script>
-        const canvas = document.getElementById('rainbowCircle');
+        const canvas = document.getElementById('ouroboros');
         const ctx = canvas.getContext('2d');
         const colors = ['red', 'orange', 'yellow', 'green', 'blue', 'indigo', 'violet'];
-        let frame = 0;
+        const segments = 20;
+        const radius = 100;
+        let angle = 0;
 
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
 
         function draw() {
-            frame += 0.01;
+            const centerX = canvas.width / 2;
+            const centerY = canvas.height / 2;
 
             ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-            const radius = 50;
-            const x = frame % canvas.width;
-            const y = canvas.height / 2;
-            const segments = 10;
-
             for (let i = 0; i < segments; i++) {
-                const angle = (i / segments) * Math.PI * 2;
                 const color = colors[i % colors.length];
+                const x = centerX + radius * Math.cos(angle + (i / segments) * Math.PI * 2);
+                const y = centerY + radius * Math.sin(angle + (i / segments) * Math.PI * 2);
+
                 ctx.beginPath();
-                ctx.arc(x, y, radius, angle, angle + Math.PI / segments);
-                ctx.lineTo(x, y);
+                ctx.arc(x, y, 10, 0, Math.PI * 2);
                 ctx.fillStyle = color;
                 ctx.fill();
-                x += radius * 2;
             }
+
+            angle += 0.01;
 
             requestAnimationFrame(draw);
         }
