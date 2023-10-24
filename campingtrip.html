@@ -23,8 +23,8 @@
         const rotationSpeed = 0.02;
         const mergeProbability = 0.02;
         const repelRadius = 90;
-        const stopTime = 23 * 1000; // 23 seconds in milliseconds
-        let dotsStopped = false;
+        const stopTime = 23000; // 23 seconds in milliseconds
+        let scatterMode = false;
 
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
@@ -42,10 +42,15 @@
                 this.angles = new Array(numLayers).fill(0);
                 this.direction = [-1, 1, -1, 1];
                 this.merged = false;
+                this.scatterX = (Math.random() - 0.5) * 2;
+                this.scatterY = (Math.random() - 0.5) * 2;
             }
 
             draw() {
-                if (!dotsStopped) {
+                if (scatterMode) {
+                    this.x += this.scatterX;
+                    this.y += this.scatterY;
+                } else {
                     for (let level = 0; level < numLayers; level++) {
                         const radius = this.radius + level * 30;
 
@@ -96,16 +101,6 @@
                         this.radius /= 2;
                         this.merged = false;
                     }
-
-                    this.x += this.speedX;
-                    this.y += this.speedY;
-
-                    if (this.x < 0 || this.x > canvas.width) {
-                        this.speedX *= -1;
-                    }
-                    if (this.y < 0 || this.y > canvas.height) {
-                        this.speedY *= -1;
-                    }
                 }
             }
         }
@@ -118,7 +113,7 @@
         }
 
         setTimeout(() => {
-            dotsStopped = true;
+            scatterMode = true;
         }, stopTime);
 
         function drawPinwheels() {
