@@ -202,6 +202,13 @@
             const container = document.createElement('div');
             container.className = 'expandable-container';
 
+            const input = document.createElement('input');
+            input.type = 'text';
+            input.id = key;
+            input.value = value;
+            input.addEventListener('dblclick', (event) => handleDoubleClick(event, columnIndex));
+            content.appendChild(input);
+
             const header = document.createElement('h2');
             const icon = document.createElement('img');
             icon.src = iconUrl;
