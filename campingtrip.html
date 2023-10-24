@@ -31,6 +31,8 @@
                 this.direction = [-1, 1, -1, 1];
                 this.segments = 12;
                 this.bounceFactor = 10;
+                this.speedX = (Math.random() - 0.5) * 2;
+                this.speedY = (Math.random() - 0.5) * 2;
             }
 
             draw() {
@@ -51,7 +53,18 @@
                         ctx.fill();
                     }
 
-                    this.angles[level] += this.direction[level] * 0.005;
+                    this.angles[level] += this.direction[level] * 0.01;
+                }
+
+                this.x += this.speedX;
+                this.y += this.speedY;
+
+                // Bounce off the edges
+                if (this.x < 0 || this.x > canvas.width) {
+                    this.speedX *= -1;
+                }
+                if (this.y < 0 || this.y > canvas.height) {
+                    this.speedY *= -1;
                 }
             }
         }
