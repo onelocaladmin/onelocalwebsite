@@ -28,6 +28,8 @@
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
 
+        let animationActive = true;
+
         class Pinwheel {
             constructor(x, y) {
                 this.x = x;
@@ -115,22 +117,20 @@
         }
 
         setTimeout(() => {
-            for (let i = 0; i < pinwheels.length; i++) {
-                const pinwheel = pinwheels[i];
-                pinwheel.speedX = 0; // Stop horizontal movement
-                pinwheel.speedY = 0; // Stop vertical movement
-            }
+            animationActive = false;
         }, stopTime);
 
         function drawPinwheels() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-            for (let i = 0; i < pinwheels.length; i++) {
-                const pinwheel = pinwheels[i];
-                pinwheel.draw();
-            }
+            if (animationActive) {
+                for (let i = 0; i < pinwheels.length; i++) {
+                    const pinwheel = pinwheels[i];
+                    pinwheel.draw();
+                }
 
-            requestAnimationFrame(drawPinwheels);
+                requestAnimationFrame(drawPinwheels);
+            }
         }
 
         drawPinwheels();
