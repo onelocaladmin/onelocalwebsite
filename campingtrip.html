@@ -22,13 +22,10 @@
         const dotSize = 5;
         const rotationSpeed = 0.02;
         const mergeProbability = 0.02;
-        const repelRadius = 90;
-        const stopTime = 23000; // 23 seconds in milliseconds
+        const repelRadius = 90; // Adjust the repel radius
 
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
-
-        let animationActive = true;
 
         class Pinwheel {
             constructor(x, y) {
@@ -54,6 +51,7 @@
                         const xOffset = Math.cos(angle) * radius;
                         const yOffset = Math.sin(angle) * radius;
 
+                        // Implement repel behavior for innermost pinwheels
                         if (level === numLayers - 1) {
                             for (let j = 0; j < pinwheels.length; j++) {
                                 if (j !== pinwheels.indexOf(this)) {
@@ -68,6 +66,7 @@
 
                                         this.x -= repelForce * Math.cos(angle);
                                         this.y -= repelForce * Math.sin(angle);
+                                        // Change direction on collision
                                         this.direction[level] *= -1;
                                     }
                                 }
@@ -103,7 +102,7 @@
                 if (this.x < 0 || this.x > canvas.width) {
                     this.speedX *= -1;
                 }
-                if (this.y < 0 || this y > canvas.height) {
+                if (this.y < 0 || this.y > canvas.height) {
                     this.speedY *= -1;
                 }
             }
@@ -116,24 +115,42 @@
             pinwheels.push(pinwheel);
         }
 
-        setTimeout(() => {
-            animationActive = false;
-        }, stopTime);
-
         function drawPinwheels() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-            if (animationActive) {
-                for (let i = 0; i < pinwheels.length; i++) {
-                    const pinwheel = pinwheels[i];
-                    pinwheel.draw();
-                }
-
-                requestAnimationFrame(drawPinwheels);
+            for (let i = 0; i < pinwheels.length; i++) {
+                const pinwheel = pinwheels[i];
+                pinwheel.draw();
             }
+
+            requestAnimationFrame(drawPinwheels);
         }
 
-        drawPinwheels();
+        setTimeout(() => {
+            // Stop the animation and expand the layers
+            cancelAnimationFrame(requestID);
+
+            // Add code to expand the layers and disperse the dots
+            function expandAndDisperse() {
+                // Code to expand layers and disperse dots
+                for (let i = 0; i < numPinwheels; i++) {
+                    const pinwheel = pinwheels[i];
+                    // Modify the pinwheel properties to achieve the desired effect
+                    // You can control how the layers expand and dots disperse here
+                }
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                // Draw the expanded and dispersed elements
+            }
+
+            const dispersalInterval = setInterval(() => {
+                expandAndDisperse();
+                // Stop the dispersal after a certain time (adjust as needed)
+                clearInterval(dispersalInterval);
+            }, 1000 / 60); // Adjust the interval for animation speed
+        }, 23000); // Trigger after 23 seconds
+
+        // Store the request ID for the animation frame
+        const requestID = requestAnimationFrame(drawPinwheels);
     </script>
 </body>
 </html>
