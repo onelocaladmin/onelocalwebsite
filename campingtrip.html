@@ -16,7 +16,6 @@
     <script>
         const canvas = document.getElementById('pinwheels');
         const ctx = canvas.getContext('2d');
-        const colors = ['darkred', 'darkorange', 'gold', 'yellow', 'green', 'teal', 'aqua', 'blue', 'indigo', 'purple', 'magenta', 'red'];
         const numPinwheels = 10;
 
         canvas.width = window.innerWidth;
@@ -38,14 +37,15 @@
                     const radius = (level + 1) * this.radiusStep;
 
                     for (let i = 0; i < this.segments; i++) {
-                        const color = colors[i % colors.length];
                         const angle = this.angles[level] + this.direction[level] * (i / this.segments) * Math.PI * 2;
                         const x = this.x + radius * Math.cos(angle);
                         const y = this.y + radius * Math.sin(angle);
 
+                        const rainbowColor = `hsl(${i * (360 / this.segments)}, 100%, 50%)`;
+
                         ctx.beginPath();
                         ctx.arc(x, y, 10, 0, Math.PI * 2);
-                        ctx.fillStyle = color;
+                        ctx.fillStyle = rainbowColor;
                         ctx.fill();
                     }
 
