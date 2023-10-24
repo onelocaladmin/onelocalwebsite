@@ -1,0 +1,12 @@
+{
+    "id": "ember_dragon",
+    "name": "Ember",
+    "type": "Dragon",
+    "description": "Ember is a fierce and majestic fire dragon. Despite her fiery nature, she has a kind heart and often helps those in need. She resides atop the Molten Peak.",
+    "abilities": ["Fire Breath", "Wing Gust", "Inferno Roar"],
+    "icon": "https://example.com/ember-icon.png",
+    "image": "https://example.com/ember-image.jpg",
+    "backgroundImage": "https://example.com/molten-peak.jpg",
+    "allies": ["Aria Moonwhisper"],
+    "treasures": ["Golden Chalice", "Mystic Rune"]
+}
