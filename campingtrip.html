@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Camping Trip with Dakota and Cameron</title>
+    <title>Camping Trip with Rainbow Worm</title>
     <style>
         body {
             font-family: 'Helvetica Neue', Arial, sans-serif;
@@ -12,6 +12,7 @@
             background-color: #f5f5f5;
             color: #333;
             position: relative;
+            overflow: hidden;
         }
 
         .container {
@@ -29,6 +30,12 @@
             right: 0;
             width: 100px;
             height: 100px;
+            overflow: hidden;
+        }
+
+        .rainbow-worm {
+            width: 100%;
+            height: 100%;
         }
 
         h2 {
@@ -49,7 +56,7 @@
         p {
             font-size: 16px;
             line-height: 1.7;
-            margin-bottom: 20px;
+            margin bottom: 20px;
         }
 
         .signature {
@@ -61,15 +68,53 @@
 <body>
     <div class="container">
         <h2>Exclusive Camping Trip Details</h2>
-        <!-- Your content goes here -->
-
-        <!-- Rainbow Worm Container -->
-        <div class="worm-container">
-            <canvas id="rainbowWorm"></canvas>
-        </div>
+        <p>Hey everybody! We are so looking forward to camping and partying with you in a few weeks. Here are a couple of maps and photos for ease of communicating our location, how to get there and carpooling logistics.</p>
+        <p>Here's a google maps link to nav to the parking area for low clearance vehicles: <a href="https://goo.gl/maps/dgbQRmhvbaU9CkKk7" target="_blank">View on Google Maps</a></p>
+        <p>(read on after pictures)</p>
+        <img src="https://i.imgur.com/ARN7oo2.jpg" alt="Camping Image 1">
+        <img src="https://i.imgur.com/peyR7Fp.jpg" alt="Camping Image 2">
+        <img src="https://i.imgur.com/UVVZjjI.jpg" alt="Camping Image 3">
+        <img src="https://i.imgur.com/0SYKRVA.jpg" alt="Camping Image 4">
+        <img src="https://i.imgur.com/Xa8lzVo.jpg" alt="Camping Image 5">
+        <p>For low-clearance vehicles (all you Outbacks, CRV's, RAV4's and the like), please carefully drive your cars up to the meadow spot we have identified on the map with the label "parking for low clearance". Park there and we will have a couple different carpool/shuttle times scheduled with higher clearance 4X4 trucks to come pick you up and bring you the rest of the way to Jenny Lake. If you are a low clearance vehicle and plan to come, PLEASE RSVP with how many people you have in your group and tell us which pick up time you prefer and if you have any other needs around leaving early, etc. Right now we are thinking we'll pick a group up from the meadow spot parking area at 3pm and 6pm on Monday, August 28th.</p>
+        <p>If you have a higher clearance 4X4 vehicle and would like to support us in shuttling people up the mountain, please TEXT Cameron or Dakota to coordinate. Otherwise, come up in your own timing.</p>
+        <p>You will not have service once we're up the mountain, so we want all communications to happen beforehand to make it as seamless as possible! Download the images we've provided and the map/GPS to your phones so you can access them without service. This is very important because we don't want anyone getting lost or missed.</p>
+        <p>If you have any questions at all, please feel free to text us or respond on the Evite platform.</p>
+        <p class="signature">Looking forward to being with you soon!<br>Dakota and Cameron</p>
+        <p>P.S. If y'all want to coordinate carpooling amongst yourselves from Boulder or Nederland, please do so! Those of you that live together or want to come up together - that would help a lot! Please do let us know if you plan to do this, though.</p>
     </div>
+
     <script>
-        // Your rainbow worm JavaScript (provided in the previous response)
+        // Rainbow worm JavaScript (slow animation)
+        const canvas = document.getElementById('rainbowWorm');
+        const ctx = canvas.getContext('2d');
+
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        let hue = 0;
+        let increment = 1;
+        let x = 0;
+
+        function animate() {
+            requestAnimationFrame(animate);
+
+            ctx.fillStyle = 'hsla(' + hue + ', 100%, 50%, 0.05)';
+            ctx.fillRect(x, 0, 10, canvas.height);
+
+            hue += increment;
+            x += 1;
+
+            if (x >= canvas.width) {
+                x = 0;
+            }
+
+            if (hue >= 360) {
+                hue = 0;
+            }
+        }
+
+        animate();
     </script>
 </body>
 </html>
