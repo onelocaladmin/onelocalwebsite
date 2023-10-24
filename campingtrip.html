@@ -21,7 +21,7 @@
         const numLayers = 10;
         const dotSize = 5;
         const rotationSpeed = 0.02;
-        const mergeProbability = 0.02;
+        const mergeProbability = 0.008;
         const repelRadius = 90; // Adjust the repel radius
 
         canvas.width = window.innerWidth;
@@ -66,6 +66,8 @@
 
                                         this.x -= repelForce * Math.cos(angle);
                                         this.y -= repelForce * Math.sin(angle);
+                                        // Change direction on collision
+                                        this.direction[level] *= -1;
                                     }
                                 }
                             }
