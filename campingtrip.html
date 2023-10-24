@@ -22,22 +22,89 @@
         canvas.height = window.innerHeight;
 
         class Segment {
-            constructor(x, y, angle, level, pinwheel) {
+            constructor(x, y, radius, color) {
                 this.x = x;
                 this.y = y;
-                this.angle = angle;
-                this.level = level;
-                this.pinwheel = pinwheel;
-                this.radius = (level + 1) * this.pinwheel.radiusStep;
+                this.radius = radius;
+                this.color = color;
+                this.velocityX = (Math.random() - 0.5) * 4;
+                this.velocityY = (Math.random() - 0.5) * 4;
             }
 
             draw() {
-                const x = this.x + this.radius * Math.cos(this.angle);
-                const y = this.y + this.radius * Math.sin(this.angle);
-                const bounceFactor = 10;
-                const bounceOffset = Math.sin(this.angle * bounceFactor) * 10;
-                const rainbowColor = `hsl(${this.pinwheel.segmentIndex * (360 / this.pinwheel.segments)}, 100%, 50%)`;
-
                 ctx.beginPath();
-                ctx.arc(x, y + bounceOffset, 10, 0, Math.PI * 2);
-               
+                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                ctx.fillStyle = this.color;
+                ctx.fill();
+            }
+
+            update() {
+                this.x += this.velocityX;
+                this.y += this.velocityY;
+
+                if (this.x - this.radius < 0 || this.x + this.radius > canvas.width) {
+                    this.velocityX *= -1;
+                }
+                if (this.y - this.radius < 0 || this.y + this.radius > canvas.height) {
+                    this.velocityY *= -1;
+                }
+            }
+        }
+
+        const segments = [];
+
+        function initializeSegments() {
+            for (let i = 0; i < numSegments; i++) {
+                const x = Math.random() * canvas.width;
+                const y = Math.random() * canvas.height;
+                const radius = 20;
+                const color = `hsl(${i * (360 / numSegments)}, 100%, 50%)`;
+                const segment = new Segment(x, y, radius, color);
+                segments.push(segment);
+            }
+        }
+
+        initializeSegments();
+
+        function drawSegments() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            for (let i = 0; i < segments.length; i++) {
+                const segment = segments[i];
+                segment.draw();
+                segment.update();
+
+                for (let j = i + 1; j < segments.length; j++) {
+                    const other = segments[j];
+                    const dx = other.x - segment.x;
+                    const dy = other.y - segment.y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+
+                    if (distance < segment.radius + other.radius) {
+                        // Collision response
+                        const angle = Math.atan2(dy, dx);
+                        const sine = Math.sin(angle);
+                        const cosine = Math.cos(angle);
+
+                        // Rotate velocities
+                        const v1x = segment.velocityX * cosine + segment.velocityY * sine;
+                        const v1y = segment.velocityY * cosine - segment.velocityX * sine;
+                        const v2x = other.velocityX * cosine + other.velocityY * sine;
+                        const v2y = other.velocityY * cosine - other.velocityX * sine;
+
+                        // Update velocities
+                        segment.velocityX = v2x * cosine - v1y * sine;
+                        segment.velocityY = v2y * cosine + v1x * sine;
+                        other.velocityX = v1x * cosine - v2y * sine;
+                        other.velocityY = v1y * cosine + v2x * sine;
+                    }
+                }
+            }
+
+            requestAnimationFrame(drawSegments);
+        }
+
+        drawSegments();
+    </script>
+</body>
+</html>
