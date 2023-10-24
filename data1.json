@@ -1,0 +1,12 @@
+{
+    "id": "luna",
+    "name": "Luna Starshine",
+    "type": "Human Mage",
+    "description": "Luna Starshine is a renowned mage known for her celestial magic. She's a seeker of knowledge and often embarks on quests to uncover ancient artifacts and secrets.",
+    "abilities": ["Starburst", "Celestial Sight", "Astral Projection"],
+    "icon": "https://i.imgur.com/YTFyCYO.jpg",
+    "image": "https://i.imgur.com/YTFyCYO.jpg",
+    "backgroundImage": "https://i.imgur.com/0SYKRVA.jpg",
+    "allies": ["aria_moonwhisper", "ember_dragon"],
+    "items": ["moonlit_wand"]
+}
