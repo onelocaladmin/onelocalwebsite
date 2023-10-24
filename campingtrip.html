@@ -7,7 +7,7 @@
         body {
             margin: 0;
             overflow: hidden;
-            background-color: black; /* Set the background color to black */
+            background-color: black;
         }
     </style>
 </head>
@@ -17,8 +17,9 @@
         const canvas = document.getElementById('ouroboros');
         const ctx = canvas.getContext('2d');
         const colors = ['darkred', 'darkorange', 'gold', 'yellow', 'green', 'teal', 'aqua', 'blue', 'indigo', 'purple', 'magenta', 'red'];
-        const segments = 36; // Increased segments
-        const radius = 300;
+        const segments = 36;
+        const outerRadius = 300;
+        const innerRadius = 150; // Added inner circle radius
         let angle = 0;
 
         canvas.width = window.innerWidth;
@@ -30,13 +31,26 @@
 
             ctx.clearRect(0, 0, canvas.width, canvas.height);
 
+            // Draw the outer circle
             for (let i = 0; i < segments; i++) {
                 const color = colors[i % colors.length];
-                const x = centerX + radius * Math.cos(angle + (i / segments) * Math.PI * 2);
-                const y = centerY + radius * Math.sin(angle + (i / segments) * Math.PI * 2);
+                const x = centerX + outerRadius * Math.cos(angle + (i / segments) * Math.PI * 2);
+                const y = centerY + outerRadius * Math.sin(angle + (i / segments) * Math.PI * 2);
 
                 ctx.beginPath();
                 ctx.arc(x, y, 10, 0, Math.PI * 2);
+                ctx.fillStyle = color;
+                ctx.fill();
+            }
+
+            // Draw the inner circle
+            for (let i = 0; i < segments; i++) {
+                const color = colors[i % colors.length];
+                const x = centerX + innerRadius * Math.cos(-angle + (i / segments) * Math.PI * 2);
+                const y = centerY + innerRadius * Math.sin(-angle + (i / segments) * Math.PI * 2);
+
+                ctx.beginPath();
+                ctx.arc(x, y, 5, 0, Math.PI * 2);
                 ctx.fillStyle = color;
                 ctx.fill();
             }
