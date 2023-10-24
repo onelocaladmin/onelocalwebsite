@@ -18,9 +18,9 @@
         const ctx = canvas.getContext('2d');
         const colors = ['darkred', 'darkorange', 'gold', 'yellow', 'green', 'teal', 'aqua', 'blue', 'indigo', 'purple', 'magenta', 'red'];
         const segments = 36;
-        const outerRadius = 300;
-        const innerRadius = 150; // Added inner circle radius
-        let angle = 0;
+        const numLevels = 4; // Number of nested levels
+        const radiusStep = 50; // Radius step for each level
+        let angles = new Array(numLevels).fill(0);
 
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
@@ -31,31 +31,22 @@
 
             ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-            // Draw the outer circle
-            for (let i = 0; i < segments; i++) {
-                const color = colors[i % colors.length];
-                const x = centerX + outerRadius * Math.cos(angle + (i / segments) * Math.PI * 2);
-                const y = centerY + outerRadius * Math.sin(angle + (i / segments) * Math.PI * 2);
+            for (let level = 0; level < numLevels; level++) {
+                const radius = (level + 1) * radiusStep;
 
-                ctx.beginPath();
-                ctx.arc(x, y, 10, 0, Math.PI * 2);
-                ctx.fillStyle = color;
-                ctx.fill();
+                for (let i = 0; i < segments; i++) {
+                    const color = colors[i % colors.length];
+                    const x = centerX + radius * Math.cos(angles[level] + (i / segments) * Math.PI * 2);
+                    const y = centerY + radius * Math.sin(angles[level] + (i / segments) * Math.PI * 2);
+
+                    ctx.beginPath();
+                    ctx.arc(x, y, 10, 0, Math.PI * 2);
+                    ctx.fillStyle = color;
+                    ctx.fill();
+                }
+
+                angles[level] += (0.005 * (level % 2 === 0 ? 1 : -1)); // Rotate in alternating directions
             }
-
-            // Draw the inner circle
-            for (let i = 0; i < segments; i++) {
-                const color = colors[i % colors.length];
-                const x = centerX + innerRadius * Math.cos(-angle + (i / segments) * Math.PI * 2);
-                const y = centerY + innerRadius * Math.sin(-angle + (i / segments) * Math.PI * 2);
-
-                ctx.beginPath();
-                ctx.arc(x, y, 5, 0, Math.PI * 2);
-                ctx.fillStyle = color;
-                ctx.fill();
-            }
-
-            angle += 0.01;
 
             requestAnimationFrame(draw);
         }
