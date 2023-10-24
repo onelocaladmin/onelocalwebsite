@@ -22,6 +22,8 @@
         const dotSize = 5;
         const rotationSpeed = 0.1;
         const repulsionDistance = 100;
+        const mergeChance = 0.005;
+        const mergeDistance = 50;
 
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
@@ -38,6 +40,7 @@
                 this.speedY = (Math.random() - 0.5) * 2;
                 this.angles = new Array(numLayers).fill(0);
                 this.direction = [-1, 1, -1, 1];
+                this.merged = false;
             }
 
             draw() {
@@ -63,6 +66,10 @@
                     this.angles[level] += this.direction[level] * rotationSpeed;
                 }
 
+                if (Math.random() < mergeChance && !this.merged) {
+                    this.mergeWithRandom();
+                }
+
                 this.x += this.speedX;
                 this.y += this.speedY;
 
@@ -74,6 +81,28 @@
                 }
 
                 this.checkRepulsion();
+            }
+
+            mergeWithRandom() {
+                for (let i = 0; i < pinwheels.length; i++) {
+                    const other = pinwheels[i];
+                    if (other !== this && !other.merged) {
+                        const dx = other.x - this.x;
+                        const dy = other.y - this.y;
+                        const distance = Math.sqrt(dx * dx + dy * dy);
+
+                        if (distance < mergeDistance) {
+                            other.merged = true;
+                            this.merged = true;
+                            this.x = (this.x + other.x) / 2;
+                            this.y = (this.y + other.y) / 2;
+                            this.radius *= 2;
+                            this.segments += other.segments;
+                            this.angles = new Array(numLayers).fill(0);
+                            break;
+                        }
+                    }
+                }
             }
 
             checkRepulsion() {
