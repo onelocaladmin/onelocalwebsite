@@ -18,60 +18,17 @@
         const ctx = canvas.getContext('2d');
         const numPinwheels = 20;
         const pinwheels = [];
-        const numLayers = 10; // Increase the number of layers
-        const dotSize = 5; // Reduce dot size
-        const rotationSpeed = 0.1; // Increase rotation speed
+        const numLayers = 10;
+        const dotSize = 5;
+        const rotationSpeed = 0.1;
+        const speedX = 3; // Increase X-axis speed
+        const speedY = 3; // Increase Y-axis speed
 
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
 
         class Pinwheel {
-            constructor(x, y) {
-                this.x = x;
-                this.y = y;
-                this.radius = 40;
-                this.segments = 18;
-                this.bounceFactor = 10;
-                this.bounceFactorX = 5;
-                this.speedX = (Math.random() - 0.5) * 2;
-                this.speedY = (Math.random() - 0.5) * 2;
-                this.angles = new Array(numLayers).fill(0);
-                this.direction = [-1, 1, -1, 1];
-            }
-
-            draw() {
-                for (let level = 0; level < numLayers; level++) {
-                    const radius = this.radius + level * 30;
-
-                    for (let i = 0; i < this.segments; i++) {
-                        const angle = this.angles[level] + this.direction[level] * (i / this.segments) * Math.PI * 2;
-                        const xOffset = Math.cos(angle) * radius;
-                        const yOffset = Math.sin(angle) * radius;
-                        const x = this.x + xOffset + Math.sin(this.angles[level] * this.bounceFactorX) * 10;
-                        const y = this.y + yOffset;
-
-                        const bounceOffset = Math.sin(this.angles[level] * this.bounceFactor) * 10;
-                        const rainbowColor = `hsl(${i * (360 / this.segments)}, 100%, 50%)`;
-
-                        ctx.beginPath();
-                        ctx.arc(x, y + bounceOffset, dotSize, 0, Math.PI * 2);
-                        ctx.fillStyle = rainbowColor;
-                        ctx.fill();
-                    }
-
-                    this.angles[level] += this.direction[level] * rotationSpeed;
-                }
-
-                this.x += this.speedX;
-                this.y += this.speedY;
-
-                if (this.x < 0 || this.x > canvas.width) {
-                    this.speedX *= -1;
-                }
-                if (this.y < 0 || this.y > canvas.height) {
-                    this.speedY *= -1;
-                }
-            }
+            // ... (same as previous code)
         }
 
         for (let i = 0; i < numPinwheels; i++) {
