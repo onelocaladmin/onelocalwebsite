@@ -17,9 +17,9 @@
         const canvas = document.getElementById('ouroboros');
         const ctx = canvas.getContext('2d');
         const colors = ['darkred', 'darkorange', 'gold', 'yellow', 'green', 'teal', 'aqua', 'blue', 'indigo', 'purple', 'magenta', 'red'];
-        const segments = 36;
-        const numLevels = 4; // Number of nested levels
-        const radiusStep = 50; // Radius step for each level
+        const numLevels = 4;
+        const radiusStep = 50;
+        const initialSegments = 12; // Number of initial segments
         let angles = new Array(numLevels).fill(0);
 
         canvas.width = window.innerWidth;
@@ -33,11 +33,13 @@
 
             for (let level = 0; level < numLevels; level++) {
                 const radius = (level + 1) * radiusStep;
+                const numSegments = initialSegments + level; // Increase segments for each level
 
-                for (let i = 0; i < segments; i++) {
+                for (let i = 0; i < numSegments; i++) {
                     const color = colors[i % colors.length];
-                    const x = centerX + radius * Math.cos(angles[level] + (i / segments) * Math.PI * 2);
-                    const y = centerY + radius * Math.sin(angles[level] + (i / segments) * Math.PI * 2);
+                    const angle = angles[level] + (i / numSegments) * Math.PI * 2;
+                    const x = centerX + radius * Math.cos(angle);
+                    const y = centerY + radius * Math.sin(angle);
 
                     ctx.beginPath();
                     ctx.arc(x, y, 10, 0, Math.PI * 2);
@@ -45,7 +47,7 @@
                     ctx.fill();
                 }
 
-                angles[level] += (0.005 * (level % 2 === 0 ? 1 : -1)); // Rotate in alternating directions
+                angles[level] += 0.005; // Rotate all levels in the same direction
             }
 
             requestAnimationFrame(draw);
