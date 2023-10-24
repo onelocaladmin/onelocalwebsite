@@ -7,52 +7,44 @@
         body {
             margin: 0;
             overflow: hidden;
-            background: black;
-        }
-
-        .morphing-string {
-            font-size: 24px;
-            font-weight: bold;
-            font-family: 'Arial', sans-serif;
-            color: transparent;
-            background-image: linear-gradient(to right, violet, indigo, blue, green, yellow, orange, red);
-            background-clip: text;
-            -webkit-background-clip: text;
-            animation: wormy 5s linear infinite;
-        }
-
-        @keyframes wormy {
-            0% {
-                transform: translate(0, 0);
-            }
-            25% {
-                transform: translate(100px, 50px);
-            }
-            50% {
-                transform: translate(200px, 0);
-            }
-            75% {
-                transform: translate(100px, -50px);
-            }
-            100% {
-                transform: translate(0, 0);
-            }
         }
     </style>
 </head>
 <body>
-    <div class="morphing-string">Morphing Rainbow</div>
+    <canvas id="rainbowWorm"></canvas>
     <script>
-        const morphingString = document.querySelector('.morphing-string');
-        const rainbowColors = ['violet', 'indigo', 'blue', 'green', 'yellow', 'orange', 'red'];
-        let colorIndex = 0;
+        const canvas = document.getElementById('rainbowWorm');
+        const ctx = canvas.getContext('2d');
+        const colors = ['red', 'orange', 'yellow', 'green', 'blue', 'indigo', 'violet'];
+        let frame = 0;
 
-        function changeColor() {
-            morphingString.style.backgroundImage = `linear-gradient(to right, ${rainbowColors[colorIndex]}, transparent)`;
-            colorIndex = (colorIndex + 1) % rainbowColors.length;
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        function draw() {
+            frame += 0.1;
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            const radius = 50;
+            const x = canvas.width / 2 + Math.cos(frame) * 100;
+            const y = canvas.height / 2 + Math.sin(frame) * 50;
+            const segments = 10;
+
+            for (let i = 0; i < segments; i++) {
+                const angle = (i / segments) * Math.PI * 2;
+                const color = colors[i % colors.length];
+                const offset = Math.sin(frame + i) * 15;
+                ctx.beginPath();
+                ctx.arc(x + offset, y + offset, radius, angle, angle + Math.PI / segments);
+                ctx.lineTo(x, y);
+                ctx.fillStyle = color;
+                ctx.fill();
+            }
+
+            requestAnimationFrame(draw);
         }
 
-        setInterval(changeColor, 300); // Change color every 300ms
+        draw();
     </script>
 </body>
 </html>
