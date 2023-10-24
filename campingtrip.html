@@ -16,12 +16,12 @@
     <script>
         const canvas = document.getElementById('pinwheels');
         const ctx = canvas.getContext('2d');
-        const numPinwheels = 20;
+        const numPinwheels = 30;
         const pinwheels = [];
         const numLayers = 10;
         const dotSize = 5;
         const rotationSpeed = 0.02;
-        const mergeProbability = 0.5; // Adjust the merge probability
+        const mergeProbability = 0.1; // Adjust the merge probability
 
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
@@ -34,8 +34,8 @@
                 this.segments = 18;
                 this.bounceFactor = 10;
                 this.bounceFactorX = 5;
-                this.speedX = (Math.random() - 1) * 2;
-                this.speedY = (Math.random() - 1) * 2;
+                this.speedX = (Math.random() - 3) * 2;
+                this.speedY = (Math.random() - 3) * 2;
                 this.angles = new Array(numLayers).fill(0);
                 this.direction = [-1, 1, -1, 1];
                 this.merged = false; // Track merge state
