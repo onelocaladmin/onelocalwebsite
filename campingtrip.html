@@ -41,8 +41,10 @@
 
                     for (let i = 0; i < this.segments; i++) {
                         const angle = this.angles[level] + this.direction[level] * (i / this.segments) * Math.PI * 2;
-                        const x = this.x + radius * Math.cos(angle);
-                        const y = this.y + radius * Math.sin(angle);
+                        const xOffset = Math.cos(angle) * (radius + level * 20); // Add x offset
+                        const yOffset = Math.sin(angle) * (radius + level * 20); // Add y offset
+                        const x = this.x + xOffset;
+                        const y = this.y + yOffset;
 
                         const bounceOffset = Math.sin(this.angles[level] * this.bounceFactor) * 10;
                         const rainbowColor = `hsl(${i * (360 / this.segments)}, 100%, 50%)`;
