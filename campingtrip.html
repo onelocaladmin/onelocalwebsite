@@ -11,9 +11,9 @@
     </style>
 </head>
 <body>
-    <canvas id="rainbowWorm"></canvas>
+    <canvas id="rainbowCircle"></canvas>
     <script>
-        const canvas = document.getElementById('rainbowWorm');
+        const canvas = document.getElementById('rainbowCircle');
         const ctx = canvas.getContext('2d');
         const colors = ['red', 'orange', 'yellow', 'green', 'blue', 'indigo', 'violet'];
         let frame = 0;
@@ -22,24 +22,24 @@
         canvas.height = window.innerHeight;
 
         function draw() {
-            frame += 0.02; // Adjust the speed by changing this value
+            frame += 0.01;
 
             ctx.clearRect(0, 0, canvas.width, canvas.height);
 
             const radius = 50;
-            const x = canvas.width / 2 + Math.cos(frame) * 100;
-            const y = canvas.height / 2 + Math.sin(frame) * 50;
+            const x = frame % canvas.width;
+            const y = canvas.height / 2;
             const segments = 10;
 
             for (let i = 0; i < segments; i++) {
                 const angle = (i / segments) * Math.PI * 2;
                 const color = colors[i % colors.length];
-                const offset = Math.sin(frame + i) * 15;
                 ctx.beginPath();
-                ctx.arc(x + offset, y + offset, radius, angle, angle + Math.PI / segments);
+                ctx.arc(x, y, radius, angle, angle + Math.PI / segments);
                 ctx.lineTo(x, y);
                 ctx.fillStyle = color;
                 ctx.fill();
+                x += radius * 2;
             }
 
             requestAnimationFrame(draw);
