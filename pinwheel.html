@@ -32,12 +32,6 @@
                 this.angle = 0;
                 this.direction = 1;
                 this.segments = 18;
-                this.bounceFactor = 10;
-                this.bounceFactorX = 5;
-                this.speedX = (Math.random() - 0.5) * 2;
-                this.speedY = (Math.random() - 0.5) * 2;
-                this.angles = new Array(numLayers).fill(0);
-                this.direction = [-1, 1, -1, 1];
             }
 
             draw() {
@@ -54,15 +48,17 @@
                 }
 
                 this.angle += rotationSpeed;
-                this.x += this.speedX;
-                this.y += this.speedY;
 
-                // Add bouncing behavior
-                if (this.x < 0 || this.x > canvas.width) {
-                    this.speedX *= -1;
+                // Simple bouncing behavior
+                this.x += this.direction * 2; // Horizontal movement
+                this.y += Math.random() * 2 - 1; // Vertical movement
+
+                // Bounce when reaching canvas boundaries
+                if (this.x > canvas.width || this.x < 0) {
+                    this.direction *= -1;
                 }
-                if (this.y < 0 || this.y > canvas.height) {
-                    this.speedY *= -1;
+                if (this.y > canvas.height || this.y < 0) {
+                    this.y = Math.min(canvas.height, Math.max(0, this.y));
                 }
             }
 
