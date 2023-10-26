@@ -39,14 +39,13 @@
                 this.angles = new Array(numLayers).fill(0);
                 this.direction = [-1, 1, -1, 1];
             }
-            }
 
             draw() {
-                for (let i = 0; i < numSegments; i++) {
-                    const angle = this.angle + (i / numSegments) * Math.PI * 2;
+                for (let i = 0; i < this.segments; i++) {
+                    const angle = this.angle + this.direction * (i / this.segments) * Math.PI * 2;
                     const x = this.x + this.radius * Math.cos(angle);
                     const y = this.y + this.radius * Math.sin(angle);
-                    const rainbowColor = `hsl(${i * (360 / numSegments)}, 100%, 50%)`;
+                    const rainbowColor = `hsl(${i * (360 / this.segments)}, 100%, 50%)`;
 
                     ctx.beginPath();
                     ctx.arc(x, y, segmentSize, 0, Math.PI * 2);
@@ -54,7 +53,17 @@
                     ctx.fill();
                 }
 
-                this.angle += this.direction * rotationSpeed;
+                this.angle += rotationSpeed;
+                this.x += this.speedX;
+                this.y += this.speedY;
+
+                // Add bouncing behavior
+                if (this.x < 0 || this.x > canvas.width) {
+                    this.speedX *= -1;
+                }
+                if (this.y < 0 || this.y > canvas.height) {
+                    this.speedY *= -1;
+                }
             }
 
             reverseDirection() {
