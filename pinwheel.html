@@ -17,11 +17,11 @@
         const canvas = document.getElementById('ouroboros');
         const ctx = canvas.getContext('2d');
         const colors = ['darkred', 'darkorange', 'gold', 'yellow', 'green', 'teal', 'aqua', 'blue', 'indigo', 'purple', 'magenta', 'red'];
-        const numLevels = 4;
+        const numLevels = 10;
         const radiusStep = 50;
         const initialSegments = 12; // Number of initial segments
-        const bounceFactor = 5; // Added bounceFactor
-        const bounceFactorX = 2; // Added bounceFactorX
+        const bounceFactor = 10; // Added bounceFactor
+        const bounceFactorX = 5; // Added bounceFactorX
         let angles = new Array(numLevels).fill(0);
         const direction = [-1, 1, -1, 1]; // Array to control rotation direction
 
