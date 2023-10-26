@@ -18,7 +18,7 @@
         const ctx = canvas.getContext('2d');
         const numLayers = 12;
         const dotSize = 5;
-        const rotationSpeeds = Array.from({ length: numLayers }, (_, i) => (i % 2 === 0 ? 1 : -1));
+        const rotationSpeed = 0.01;
 
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
@@ -29,6 +29,7 @@
                 this.y = y;
                 this.radius = 150;
                 this.segments = 36;
+                this.angle = 0;
             }
 
             draw() {
@@ -39,7 +40,7 @@
                     const radius = this.radius - level * 10;
 
                     for (let i = 0; i < this.segments; i++) {
-                        const angle = (i / this.segments) * Math.PI * 2 + rotationSpeeds[level] * 0.02;
+                        const angle = (i / this.segments) * Math.PI * 2 + this.angle;
                         const xOffset = Math.cos(angle) * radius;
                         const yOffset = Math.sin(angle) * radius;
                         const x = centerX + xOffset;
@@ -52,6 +53,8 @@
                         ctx.fill();
                     }
                 }
+
+                this.angle += rotationSpeed;
             }
         }
 
