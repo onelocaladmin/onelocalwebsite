@@ -12,63 +12,49 @@
     </style>
 </head>
 <body>
-    <canvas id="pinwheel"></canvas>
+    <canvas id="ouroboros"></canvas>
     <script>
-        const canvas = document.getElementById('pinwheel');
+        const canvas = document.getElementById('ouroboros');
         const ctx = canvas.getContext('2d');
-        const numLayers = 12;
-        const dotSize = 5;
-        const rotationSpeed = 0.01;
+        const colors = ['darkred', 'darkorange', 'gold', 'yellow', 'green', 'teal', 'aqua', 'blue', 'indigo', 'purple', 'magenta', 'red'];
+        const numLevels = 4;
+        const radiusStep = 50;
+        const initialSegments = 12; // Number of initial segments
+        let angles = new Array(numLevels).fill(0);
+        const direction = [-1, 1, -1, 1]; // Array to control rotation direction
 
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
 
-        class Pinwheel {
-            constructor(x, y) {
-                this.x = x;
-                this.y = y;
-                this.radius = 150;
-                this.segments = 36;
-                this.angle = 0;
-            }
+        function draw() {
+            const centerX = canvas.width / 2;
+            const centerY = canvas.height / 2;
 
-            draw() {
-                const centerX = this.x;
-                const centerY = this.y;
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-                for (let level = 0; level < numLayers; level++) {
-                    const radius = this.radius - level * 10;
+            for (let level = 0; level < numLevels; level++) {
+                const radius = (level + 1) * radiusStep;
+                const numSegments = initialSegments + level; // Increase segments for each level
 
-                    for (let i = 0; i < this.segments; i++) {
-                        const angle = (i / this.segments) * Math.PI * 2 + this.angle + level * rotationSpeed * (i % 2 === 0 ? 1 : -1);
-                        const xOffset = Math.cos(angle) * radius;
-                        const yOffset = Math.sin(angle) * radius;
-                        const x = centerX + xOffset;
-                        const y = centerY + yOffset;
-                        const rainbowColor = `hsl(${i * (360 / this.segments)}, 100%, 50%)`;
+                for (let i = 0; i < numSegments; i++) {
+                    const color = colors[i % colors.length];
+                    const angle = angles[level] + direction[level] * (i / numSegments) * Math.PI * 2;
+                    const x = centerX + radius * Math.cos(angle);
+                    const y = centerY + radius * Math.sin(angle);
 
-                        ctx.beginPath();
-                        ctx.arc(x, y, dotSize, 0, Math.PI * 2);
-                        ctx.fillStyle = rainbowColor;
-                        ctx.fill();
-                    }
+                    ctx.beginPath();
+                    ctx.arc(x, y, 10, 0, Math.PI * 2);
+                    ctx.fillStyle = color;
+                    ctx.fill();
                 }
 
-                this.angle += rotationSpeed;
+                angles[level] += direction[level] * 0.005; // Rotate each level in the specified direction
             }
+
+            requestAnimationFrame(draw);
         }
 
-        const x = canvas.width / 2;
-        const y = canvas.height / 2;
-        const pinwheel = new Pinwheel(x, y);
-
-        function drawPinwheel() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            pinwheel.draw();
-            requestAnimationFrame(drawPinwheel);
-        }
-
-        drawPinwheel();
+        draw();
     </script>
 </body>
 </html>
