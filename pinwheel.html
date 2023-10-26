@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            background-color: black;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="pinwheel"></canvas>
+    <script>
+        const canvas = document.getElementById('pinwheel');
+        const ctx = canvas.getContext('2d');
+        const numLayers = 10;
+        const dotSize = 5;
+        const rotationSpeed = 0.1;
+
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        class Pinwheel {
+            constructor(x, y) {
+                this.x = x;
+                this.y = y;
+                this.radius = 200;
+                this.segments = 18;
+                this.bounceFactor = 10;
+                this.angles = new Array(numLayers).fill(0);
+                this.direction = [-1, 1, -1, 1];
+            }
+
+            draw() {
+                const centerX = this.x;
+                const centerY = this.y;
+
+                for (let level = 0; level < numLayers; level++) {
+                    const radius = this.radius - level * 15;
+
+                    for (let i = 0; i < this.segments; i++) {
+                        const angle = this.angles[level] + this.direction[level] * (i / this.segments) * Math.PI * 2;
+                        const xOffset = Math.cos(angle) * radius;
+                        const yOffset = Math.sin(angle) * radius;
+
+                        const x = centerX + xOffset;
+                        const y = centerY + yOffset;
+
+                        const bounceOffset = Math.sin(this.angles[level] * this.bounceFactor) * 10;
+                        const rainbowColor = `hsl(${i * (360 / this.segments)}, 100%, 50%)`;
+
+                        ctx.beginPath();
+                        ctx.arc(x, y + bounceOffset, dotSize, 0, Math.PI * 2);
+                        ctx.fillStyle = rainbowColor;
+                        ctx.fill();
+                    }
+
+                    this.angles[level] += this.direction[level] * rotationSpeed;
+                }
+            }
+        }
+
+        const pinwheel = new Pinwheel(canvas.width / 2, canvas.height / 2);
+
+        function drawPinwheel() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            pinwheel.draw();
+            requestAnimationFrame(drawPinwheel);
+        }
+
+        drawPinwheel();
+    </script>
+</body>
+</html>
