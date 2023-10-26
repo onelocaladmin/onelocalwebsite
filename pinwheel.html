@@ -13,52 +13,45 @@
 </head>
 <body>
     <canvas id="pinwheels"></canvas>
-    <div><iframe src="https://drive.google.com/file/d/0B9vgdS-tPS1wRDVFb2F2WnJteVE/preview?resourceKey=0-74th8Hbqhhc_6lROfX6j_w" width="640" height="480" allow="autoplay"></iframe></div>
-    <!-- Create a canvas for drawing the pinwheels -->
     <script>
         const canvas = document.getElementById('pinwheels');
         const ctx = canvas.getContext('2d');
-        // Get the canvas and its 2D rendering context
-
-        const numPinwheels = 30; // Number of pinwheels
-        const pinwheels = []; // Array to store pinwheel objects
-        const numLayers = 10; // Number of layers in each pinwheel
-        const dotSize = 5; // Size of the dots
-        const rotationSpeed = 0.02; // Speed of rotation
-        const mergeProbability = 0.02; // Probability of merging/unmerging
-        const repelRadius = 90; // Radius for repulsion
+        const numPinwheels = 30;
+        const pinwheels = [];
+        const numLayers = 10;
+        const dotSize = 5;
+        const rotationSpeed = 0.02;
+        const mergeProbability = 0.02;
+        const repelRadius = 90; // Adjust the repel radius
 
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
-        // Set the canvas size to match the window dimensions
 
         class Pinwheel {
             constructor(x, y) {
-                // Constructor for a Pinwheel object
                 this.x = x;
                 this.y = y;
-                this.radius = 40; // Initial radius
-                this.segments = 18; // Number of segments
-                this.bounceFactor = 10; // Factor for bounce animation
-                this.bounceFactorX = 5; // X-axis bounce factor
-                this.speedX = (Math.random() - 0.5) * 2; // Initial X-axis speed
-                this.speedY = (Math.random() - 0.5) * 2; // Initial Y-axis speed
-                this.angles = new Array(numLayers).fill(0); // Initialize angles for layers
-                this.direction = [-1, 1, -1, 1]; // Rotation direction for layers
-                this.merged = false; // Merging state
+                this.radius = 40;
+                this.segments = 18;
+                this.bounceFactor = 10;
+                this.bounceFactorX = 5;
+                this.speedX = (Math.random() - 0.5) * 2;
+                this.speedY = (Math.random() - 0.5) * 2;
+                this.angles = new Array(numLayers).fill(0);
+                this.direction = [-1, 1, -1, 1];
+                this.merged = false;
             }
 
             draw() {
-                // Method to draw the pinwheel
                 for (let level = 0; level < numLayers; level++) {
-                    const radius = this.radius + level * 30; // Layer-specific radius
+                    const radius = this.radius + level * 30;
 
                     for (let i = 0; i < this.segments; i++) {
                         const angle = this.angles[level] + this.direction[level] * (i / this.segments) * Math.PI * 2;
                         const xOffset = Math.cos(angle) * radius;
                         const yOffset = Math.sin(angle) * radius;
 
-                        // Implement repulsion behavior for innermost pinwheels
+                        // Implement repel behavior for innermost pinwheels
                         if (level === numLayers - 1) {
                             for (let j = 0; j < pinwheels.length; j++) {
                                 if (j !== pinwheels.indexOf(this)) {
@@ -96,10 +89,10 @@
                 }
 
                 if (Math.random() < mergeProbability && !this.merged) {
-                    this.radius *= 2; // Merge the pinwheel
+                    this.radius *= 2;
                     this.merged = true;
                 } else if (Math.random() < mergeProbability && this.merged) {
-                    this.radius /= 2; // Unmerge the pinwheel
+                    this.radius /= 2;
                     this.merged = false;
                 }
 
@@ -115,7 +108,6 @@
             }
         }
 
-        // Create and initialize multiple pinwheel objects
         for (let i = 0; i < numPinwheels; i++) {
             const x = Math.random() * canvas.width;
             const y = Math.random() * canvas.height;
@@ -124,7 +116,6 @@
         }
 
         function drawPinwheels() {
-            // Function to draw and animate the pinwheels
             ctx.clearRect(0, 0, canvas.width, canvas.height);
 
             for (let i = 0; i < pinwheels.length; i++) {
@@ -135,31 +126,31 @@
             requestAnimationFrame(drawPinwheels);
         }
 
+        let requestID = requestAnimationFrame(drawPinwheels);
+
+        // Stop the animation and expand the layers after a specified time
         setTimeout(() => {
-            // Stop the animation and expand the layers
             cancelAnimationFrame(requestID);
-
-            // Add code to expand the layers and disperse the dots
-            function expandAndDisperse() {
-                // Code to expand layers and disperse dots
-                for (let i = 0; i < numPinwheels; i++) {
-                    const pinwheel = pinwheels[i];
-                    // Modify the pinwheel properties to achieve the desired effect
-                    // You can control how the layers expand and dots disperse here
-                }
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
-                // Draw the expanded and dispersed elements
-            }
-
-            const dispersalInterval = setInterval(() => {
-                expandAndDisperse();
-                // Stop the dispersal after a certain time (adjust as needed)
-                clearInterval(dispersalInterval);
-            }, 1000 / 60); // Adjust the interval for animation speed
+            expandAndDisperse();
         }, 23000); // Trigger after 23 seconds
 
-        // Store the request ID for the animation frame
-        const requestID = requestAnimationFrame(drawPinwheels);
+        // Expand the layers and disperse the dots
+        function expandAndDisperse() {
+            // Code to expand layers and disperse dots
+            const dispersalInterval = setInterval(() => {
+                // Modify the pinwheel properties to achieve the desired effect
+                for (let i = 0; i < pinwheels.length; i++) {
+                    const pinwheel = pinwheels[i];
+                    // Adjust properties to expand and disperse
+                    // Example: pinwheel.radius += 1; or pinwheel.x += 1;
+                }
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+            }, 1000 / 60); // Adjust the interval for animation speed
+
+            setTimeout(() => {
+                clearInterval(dispersalInterval);
+            }, 10000); // Stop the dispersal after 10 seconds (adjust as needed)
+        }
     </script>
 </body>
 </html>
