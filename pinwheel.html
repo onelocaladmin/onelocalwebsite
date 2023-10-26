@@ -40,7 +40,7 @@
                     const radius = this.radius - level * 10;
 
                     for (let i = 0; i < this.segments; i++) {
-                        const angle = (i / this.segments) * Math.PI * 2 + this.angle;
+                        const angle = (i / this.segments) * Math.PI * 2 + this.angle + level * rotationSpeed * (i % 2 === 0 ? 1 : -1);
                         const xOffset = Math.cos(angle) * radius;
                         const yOffset = Math.sin(angle) * radius;
                         const x = centerX + xOffset;
