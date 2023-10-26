@@ -16,12 +16,8 @@
     <script>
         const canvas = document.getElementById('pinwheel');
         const ctx = canvas.getContext('2d');
-        const numLayers = 10;
+        const numLayers = 12;
         const dotSize = 5;
-        const rotationSpeed = 0.005;
-        const bounceFactor = 10;
-        const sideToSideFactor = 2;
-        const sideToSideSpeed = 0.05;
 
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
@@ -30,10 +26,8 @@
             constructor(x, y) {
                 this.x = x;
                 this.y = y;
-                this.radius = 200;
-                this.segments = 18;
-                this.angles = new Array(numLayers).fill(0);
-                this.direction = [-1, 1, -1, 1];
+                this.radius = 150;
+                this.segments = 36;
             }
 
             draw() {
@@ -41,32 +35,28 @@
                 const centerY = this.y;
 
                 for (let level = 0; level < numLayers; level++) {
-                    const radius = this.radius - level * 15;
-                    const sideToSideOffset = Math.sin(this.angles[level] * sideToSideFactor) * sideToSideFactor;
+                    const radius = this.radius - level * 10;
 
                     for (let i = 0; i < this.segments; i++) {
-                        const angle = this.angles[level] + this.direction[level] * (i / this.segments) * Math.PI * 2;
-                        const xOffset = Math.cos(angle) * radius + sideToSideOffset;
+                        const angle = (i / this.segments) * Math.PI * 2;
+                        const xOffset = Math.cos(angle) * radius;
                         const yOffset = Math.sin(angle) * radius;
-
                         const x = centerX + xOffset;
                         const y = centerY + yOffset;
-
-                        const bounceOffset = Math.sin(this.angles[level] * bounceFactor) * 10;
                         const rainbowColor = `hsl(${i * (360 / this.segments)}, 100%, 50%)`;
 
                         ctx.beginPath();
-                        ctx.arc(x, y + bounceOffset, dotSize, 0, Math.PI * 2);
+                        ctx.arc(x, y, dotSize, 0, Math.PI * 2);
                         ctx.fillStyle = rainbowColor;
                         ctx.fill();
                     }
-
-                    this.angles[level] += this.direction[level] * rotationSpeed;
                 }
             }
         }
 
-        const pinwheel = new Pinwheel(canvas.width / 2, canvas.height / 2);
+        const x = canvas.width / 2;
+        const y = canvas.height / 2;
+        const pinwheel = new Pinwheel(x, y);
 
         function drawPinwheel() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
