@@ -23,6 +23,7 @@
         const bounceFactor = 20; // Added bounceFactor
         const bounceFactorX = 10; // Added bounceFactorX
         let angles = new Array(numLevels).fill(0);
+        let bounceOffsets = new Array(numLevels).fill(0); // Initialize bounceOffsets
         const direction = [-1, 1, -1, 1]; // Array to control rotation direction
 
         canvas.width = window.innerWidth;
@@ -46,11 +47,15 @@
 
                     ctx.beginPath();
                     // Incorporating bounceFactor and bounceFactorX
-                    const bounceOffset = Math.sin(angles[level] * bounceFactorX) * bounceFactor;
-                    ctx.arc(x + bounceOffset, y, 10, 0, Math.PI * 2);
+                    const bounceOffsetX = Math.sin(angles[level] * bounceFactorX) * bounceFactor;
+                    const bounceOffsetY = Math.cos(angles[level] * bounceFactorX) * bounceFactor;
+                    ctx.arc(x + bounceOffsetX, y + bounceOffsets[level], 10, 0, Math.PI * 2);
                     ctx.fillStyle = color;
                     ctx.fill();
                 }
+
+                // Update bounceOffsets for each level
+                bounceOffsets[level] = Math.sin(angles[level] * bounceFactor) * bounceFactor;
 
                 angles[level] += direction[level] * 0.005; // Rotate each level in the specified direction
             }
