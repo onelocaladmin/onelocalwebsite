@@ -57,7 +57,7 @@
                 // Update bounceOffsets for each level
                 bounceOffsets[level] = Math.sin(angles[level] * bounceFactor) * bounceFactor;
 
-                angles[level] += direction[level] * 0.05; // Rotate each level in the specified direction
+                angles[level] += direction[level] * 0.5; // Rotate each level in the specified direction
             }
 
             requestAnimationFrame(draw);
