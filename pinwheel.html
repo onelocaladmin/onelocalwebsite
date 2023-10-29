@@ -49,7 +49,7 @@
                     // Incorporating bounceFactor and bounceFactorX
                     const bounceOffsetX = Math.sin(angles[level] * bounceFactorX) * bounceFactor;
                     const bounceOffsetY = Math.cos(angles[level] * bounceFactorX) * bounceFactor;
-                    ctx.arc(x + bounceOffsetX, y + bounceOffsets[level], 10, 0, Math.PI * 2);
+                    ctx.arc(x + bounceOffsetX, y + bounceOffsets[level], 50, 0, Math.PI * 2);
                     ctx.fillStyle = color;
                     ctx.fill();
                 }
