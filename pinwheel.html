@@ -52,7 +52,7 @@
                     const color = colors[i % colors.length];
 
                     // Calculate the angle for the current segment based on rotation angle and level
-                    const angle = angles[level] + direction[level] * (i / numSegments) * Math.PI * 4;
+                    const angle = angles[level] + direction[level] * (i / numSegments) * Math.PI * 40;
 
                     // Calculate the position of the segment
                     const x = centerX + radius * Math.cos(angle);
