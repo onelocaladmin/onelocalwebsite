@@ -40,7 +40,7 @@
                 const numSegments = initialSegments + level; // Increase segments for each level
 
                 for (let i = 0; i < numSegments; i++) {
-                    const color = colors[level % colors.length]; // Use the color from the colors array
+                    const color = colors[i % colors.length]; // Use the color from the colors array
                     const angle = angles[level] + direction[level] * (i / numSegments) * Math.PI * 2;
                     const x = centerX + radius * Math.cos(angle);
                     const y = centerY + radius * Math.sin(angle);
@@ -57,7 +57,7 @@
                 // Update bounceOffsets for each level
                 bounceOffsets[level] = Math.sin(angles[level] * bounceFactor) * bounceFactor;
 
-                angles[level] += direction[level] * 0.5; // Rotate each level in the specified direction
+                angles[level] += direction[level] * 0.05; // Rotate each level in the specified direction
             }
 
             requestAnimationFrame(draw);
