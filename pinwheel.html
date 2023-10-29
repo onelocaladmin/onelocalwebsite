@@ -7,62 +7,86 @@
         body {
             margin: 0;
             overflow: hidden;
-            background-color: black;
+            background-color: black; // Set the background color of the HTML page to black
         }
     </style>
 </head>
 <body>
     <canvas id="ouroboros"></canvas>
     <script>
+        // Get a reference to the canvas element and its 2D rendering context
         const canvas = document.getElementById('ouroboros');
         const ctx = canvas.getContext('2d');
+
+        // An array of colors for the segments
         const colors = ['darkred', 'darkorange', 'gold', 'yellow', 'green', 'teal', 'aqua', 'blue', 'indigo', 'purple', 'magenta', 'red'];
-        const numLevels = 10;
-        const radiusStep = 50;
-        const initialSegments = 12; // Number of initial segments
-        const bounceFactor = 20; // Added bounceFactor
-        const bounceFactorX = 20; // Added bounceFactorX
-        let angles = new Array(numLevels).fill(0);
-        let bounceOffsets = new Array(numLevels).fill(0); // Initialize bounceOffsets
+
+        // Configuration parameters
+        const numLevels = 10;           // Number of concentric levels
+        const radiusStep = 50;          // Step between the radii of the levels
+        const initialSegments = 12;     // Number of initial segments per level
+        const bounceFactor = 20;        // Added bounceFactor for vertical bouncing
+        const bounceFactorX = 20;       // Added bounceFactorX for controlling the bouncing frequency
         const direction = [-1, 1, -1, 1]; // Array to control rotation direction
 
+        // Set the canvas size to match the window dimensions
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
 
+        // Function to continuously draw the animation
         function draw() {
-            const centerX = canvas.width / 2;
-            const centerY = canvas.height / 2;
+            const centerX = canvas.width / 2; // Horizontal center of the canvas
+            const centerY = canvas.height / 2; // Vertical center of the canvas
 
+            // Clear the entire canvas on each frame to prepare for new drawing
             ctx.clearRect(0, 0, canvas.width, canvas.height);
 
+            // Loop through the concentric levels
             for (let level = 0; level < numLevels; level++) {
-                const radius = (level + 1) * radiusStep;
+                const radius = (level + 1) * radiusStep; // Calculate the radius for this level
                 const numSegments = initialSegments + level; // Increase segments for each level
 
+                // Loop through the segments of the current level
                 for (let i = 0; i < numSegments; i++) {
-                    const color = colors[i % colors.length]; // Use the color from the colors array
-                    const angle = angles[level] + direction[level] * (i / numSegments) * Math.PI * 2;
+                    // Use the color from the colors array based on the segment index
+                    const color = colors[i % colors.length];
+
+                    // Calculate the angle for the current segment based on rotation angle and level
+                    const angle = angles[level] + direction[level] * (i / numSegments) * Math.PI * 4;
+
+                    // Calculate the position of the segment
                     const x = centerX + radius * Math.cos(angle);
                     const y = centerY + radius * Math.sin(angle);
 
+                    // Start drawing a path
                     ctx.beginPath();
-                    // Incorporating bounceFactor and bounceFactorX
+
+                    // Incorporating bounceFactor and bounceFactorX to create vertical bouncing
                     const bounceOffsetX = Math.sin(angles[level] * bounceFactorX) * bounceFactor;
                     const bounceOffsetY = Math.cos(angles[level] * bounceFactorX) * bounceFactor;
+
+                    // Draw a circular segment with the adjusted position
                     ctx.arc(x + bounceOffsetX, y + bounceOffsets[level], 10, 0, Math.PI * 2);
+
+                    // Set the fill color
                     ctx.fillStyle = color;
+
+                    // Fill the segment with the chosen color
                     ctx.fill();
                 }
 
-                // Update bounceOffsets for each level
+                // Update bounceOffsets for each level based on the sine of the angle
                 bounceOffsets[level] = Math.sin(angles[level] * bounceFactor) * bounceFactor;
 
-                angles[level] += direction[level] * 0.05; // Rotate each level in the specified direction
+                // Rotate each level in the specified direction
+                angles[level] += direction[level] * 0.05;
             }
 
+            // Request the next frame of the animation
             requestAnimationFrame(draw);
         }
 
+        // Start the animation by calling the draw function
         draw();
     </script>
 </body>
