@@ -42,8 +42,8 @@
                 for (let i = 0; i < numSegments; i++) {
                     const color = colors[i % colors.length];
                     const angle = angles[level] + direction[level] * (i / numSegments) * Math.PI * 2;
-                    const x = centerX + radius * Math.cos(angle);
-                    const y = centerY + radius * Math.sin(angle);
+                    const x = centerX + (radius + level * 10) * Math.cos(angle);
+                    const y = centerY + (radius + level * 10) * Math.sin(angle);
 
                     ctx.beginPath();
 
