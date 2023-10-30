@@ -84,8 +84,8 @@
                 // Update bounceOffsets for each level based on the sine of the angle
                 bounceOffsets[level] = Math.sin(angles[level] * bounceFactor) * bounceFactor;
 
-                // Rotate each level in the specified direction
-                angles[level] += direction[level] * .007;
+                // Rotate each level in the specified direction with a slower speed
+                angles[level] += direction[level] * 0.005;
             }
 
             // Request the next frame of the animation
