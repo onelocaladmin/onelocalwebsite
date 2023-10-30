@@ -84,7 +84,7 @@
                 // Update angles for each level to make inner layers spiral
                 angles[level] += direction[level] * 0.01;
                 // Update bounceOffsets for each level to create a chrysanthemum effect
-                bounceOffsets[level] = direction[level] * 5 * Math.sin(angles[level] * bounceFactorX);
+                bounceOffsets[level] = direction[level] * 10 * Math.sin(angles[level] * bounceFactorX);
             }
 
             // Request the next frame of the animation
