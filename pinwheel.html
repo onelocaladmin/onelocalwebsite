@@ -29,6 +29,10 @@
         const bounceFactorX = 20;       // Added bounceFactorX for controlling the bouncing frequency
         const direction = [-1, 1, -1, 1]; // Array to control rotation direction
 
+        // Initialize arrays to store angles and bounceOffsets for each level
+        const angles = new Array(numLevels).fill(0);
+        const bounceOffsets = new Array(numLevels).fill(0);
+
         // Set the canvas size to match the window dimensions
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
