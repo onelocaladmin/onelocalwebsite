@@ -72,7 +72,7 @@
                     const bounceOffsetY = Math.cos(angles[level] * bounceFactorX) * bounceFactor;
 
                     // Draw a circular segment with the adjusted position
-                    ctx.arc(x + bounceOffsetX, y + bounceOffsets[level], 10, 0, Math.PI * 2);
+                    ctx.arc(x + bounceOffsetX, y + bounceOffsets[level], 20, 0, Math.PI * 2);
 
                     // Set the fill color
                     ctx.fillStyle = color;
@@ -85,7 +85,7 @@
                 bounceOffsets[level] = Math.sin(angles[level] * bounceFactor) * bounceFactor;
 
                 // Rotate each level in the specified direction
-                angles[level] += direction[level] * 100;
+                angles[level] += direction[level] * 1000;
             }
 
             // Request the next frame of the animation
