@@ -25,6 +25,7 @@
         const direction = [-1, 1, -1, 1];
         const angles = new Array(numLevels).fill(0);
         const bounceOffsets = new Array(numLevels).fill(0);
+        const angleIncrements = new Array(numLevels).fill(0);
 
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
@@ -42,8 +43,8 @@
                 for (let i = 0; i < numSegments; i++) {
                     const color = colors[i % colors.length];
                     const angle = angles[level] + direction[level] * (i / numSegments) * Math.PI * 2;
-                    const x = centerX + (radius + level * 10) * Math.cos(angle);
-                    const y = centerY + (radius + level * 10) * Math.sin(angle);
+                    const x = centerX + radius * Math.cos(angle);
+                    const y = centerY + radius * Math.sin(angle);
 
                     ctx.beginPath();
 
@@ -55,8 +56,10 @@
                     ctx.fill();
                 }
 
-                angles[level] += direction[level] * 0.01;
-                bounceOffsets[level] = direction[level] * (level + 1) * 10 * Math.sin(angles[level] * bounceFactorX);
+                // Adjust angle increment for spirals
+                angleIncrements[level] += 0.001 * (level + 1);
+                angles[level] += direction[level] * angleIncrements[level];
+                bounceOffsets[level] = direction[level] * 10 * Math.sin(angles[level] * bounceFactorX);
             }
 
             requestAnimationFrame(draw);
