@@ -12,7 +12,70 @@
     </style>
 </head>
 <body>
+    <canvas id="ouroboros"></canvas><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            background-color: black;
+        }
+    </style>
+</head>
+<body>
     <canvas id="ouroboros"></canvas>
+    <script>
+        const canvas = document.getElementById('ouroboros');
+        const ctx = canvas.getContext('2d');
+        const colors = ['darkred', 'darkorange', 'gold', 'yellow', 'green', 'teal', 'aqua', 'blue', 'indigo', 'purple', 'magenta', 'red'];
+        const numLevels = 10;
+        const numPetals = 12; // Number of petals in the daisy
+        const petalLength = 80; // Length of each petal
+        const angleIncrement = 0.02; // Controls the spiral effect
+        const petalAngleIncrement = (2 * Math.PI) / numPetals;
+        let angle = 0;
+
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        function draw() {
+            const centerX = canvas.width / 2;
+            const centerY = canvas.height / 2;
+
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            for (let level = 0; level < numLevels; level++) {
+                const radius = level * petalLength;
+
+                for (let i = 0; i < numPetals; i++) {
+                    const color = colors[i % colors.length];
+                    const x = centerX + radius * Math.cos(angle);
+                    const y = centerY + radius * Math.sin(angle);
+
+                    ctx.beginPath();
+                    ctx.moveTo(x, y);
+                    const x2 = centerX + (radius + petalLength) * Math.cos(angle);
+                    const y2 = centerY + (radius + petalLength) * Math.sin(angle);
+                    ctx.lineTo(x2, y2);
+                    ctx.strokeStyle = color;
+                    ctx.lineWidth = 5;
+                    ctx.stroke();
+
+                    angle += angleIncrement;
+                }
+            }
+
+            requestAnimationFrame(draw);
+        }
+
+        draw();
+    </script>
+</body>
+</html>
+
     <script>
         const canvas = document.getElementById('ouroboros');
         const ctx = canvas.getContext('2d');
