@@ -26,7 +26,7 @@
         const radiusStep = 50;          // Step between the radii of the levels
         const initialSegments = 12;     // Number of initial segments per level
         const bounceFactor = 20;        // Added bounceFactor for vertical bouncing
-        const bounceFactorX = 20;       // Added bounceFactorX for controlling the bouncing frequency
+        const bounceFactorX = 10;       // Added bounceFactorX for controlling the bouncing frequency
         const direction = [-1, 1, -1, 1]; // Array to control rotation direction
 
         // Initialize arrays to store angles and bounceOffsets for each level
@@ -85,7 +85,7 @@
                 bounceOffsets[level] = Math.sin(angles[level] * bounceFactor) * bounceFactor;
 
                 // Rotate each level in the specified direction
-                angles[level] += direction[level] * .0001;
+                angles[level] += direction[level] * .007;
             }
 
             // Request the next frame of the animation
