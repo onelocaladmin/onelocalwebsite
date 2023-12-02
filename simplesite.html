@@ -3,99 +3,108 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Eco-Village AR Platform - Expanded Dark Mode</title>
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<title>AR Gigwork Eco-Village</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <style>
   body {
-    background-color: #121212; /* Dark background */
+    background-color: #262626; /* Dark but not too dark background */
     color: #e0e0e0; /* Light text for contrast */
     font-family: 'Arial', sans-serif;
   }
-  .column-widget {
-    background: #1e1e1e; /* Dark widget background */
+  .widget {
+    background: rgba(50, 50, 50, 0.8); /* Dark widget with some opacity */
     border-radius: 8px;
-    padding: 20px;
-    margin-bottom: 20px;
-    transition: transform 0.3s ease;
+    margin: 10px 0;
+    padding: 15px;
+    border: 2px solid; /* Bright colored border, color set in individual widgets */
+    transition: all 0.3s ease;
   }
-  .column-widget:hover {
-    transform: translateY(-5px);
+  .widget:hover {
+    transform: scale(1.02);
   }
   .header {
-    background: #333; /* Dark header background */
-    color: #fff;
-    padding: 10px;
-    border-radius: 5px 5px 0 0;
-    text-align: center;
     font-weight: bold;
-  }
-  .widget-content {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    align-items: center;
-    margin-top: 15px;
+    margin-bottom: 10px;
+    text-align: center;
   }
   .widget-item {
-    background: #252525; /* Dark item background */
-    border-radius: 5px;
+    background: #3a3a3a; /* Widget item background */
     padding: 10px;
-    margin: 5px;
-    flex-basis: calc(33% - 10px);
-    text-align: center;
+    margin: 5px 0;
+    border-radius: 5px;
+    border: 1px solid #ccc; /* Light border for contrast */
     transition: all 0.3s ease;
   }
   .widget-item:hover {
-    background: #2d2d2d; /* Slightly lighter on hover */
+    background: #4a4a4a;
   }
 
-  /* Broad range of border colors */
-  .border-1 { border: 1px solid #ff5722; } /* Deep orange */
-  .border-2 { border: 1px solid #ffc107; } /* Amber */
-  .border-3 { border: 1px solid #4caf50; } /* Green */
-  .border-4 { border: 1px solid #2196f3; } /* Blue */
-  .border-5 { border: 1px solid #9c27b0; } /* Purple */
-  .border-6 { border: 1px solid #e91e63; } /* Pink */
-  .border-7 { border: 1px solid #00bcd4; } /* Cyan */
-  .border-8 { border: 1px solid #cddc39; } /* Lime */
-  .border-9 { border: 1px solid #ffeb3b; } /* Yellow */
-  .border-10 { border: 1px solid #ff9800; } /* Orange */
-  .border-11 { border: 1px solid #795548; } /* Brown */
-  .border-12 { border: 1px solid #607d8b; } /* Blue Grey */
+  /* Widget Border Colors */
+  .event-widget { border-color: #FF6347; }
+  .task-widget { border-color: #4682B4; }
+  .org-widget { border-color: #32CD32; }
+
+  /* Color Palette for Widgets */
+  .color1 { color: #FF4500; }
+  .color2 { color: #FFD700; }
+  .color3 { color: #90EE90; }
+  .color4 { color: #00BFFF; }
+  .color5 { color: #9932CC; }
+  .color6 { color: #FF69B4; }
+  .color7 { color: #FFA500; }
 </style>
 </head>
 <body>
-<div class="container">
-  <h1 class="text-center my-4">Eco-Village AR Platform - Expanded Dark Mode</h1>
+<div class="container my-3">
+  <h1 class="text-center text-light mb-4">AR Gigwork Eco-Village</h1>
   
   <div class="row">
-    <!-- Each widget column -->
+    <!-- Events Column -->
     <div class="col-lg-4">
-      <div class="column-widget">
-        <div class="header">Eco-Village Network</div>
-        <div class="widget-content">
-          <!-- Widget items with different border colors -->
-          <div class="widget-item border-1">Resource Locator</div>
-          <div class="widget-item border-2">Eco Market</div>
-          <div class="widget-item border-3">Community Board</div>
-          <div class="widget-item border-4">Green Tips</div>
-          <div class="widget-item border-5">Workshops</div>
-          <div class="widget-item border-6">Virtual Tours</div>
-          <div class="widget-item border-7">Donation Drives</div>
-          <div class="widget-item border-8">Eco Challenges</div>
-          <div class="widget-item border-9">News & Updates</div>
-        </div>
+      <div class="widget event-widget">
+        <h2 class="header color1">Events</h2>
+        <div class="widget-item color2">Live Concerts</div>
+        <div class="widget-item color3">Art Exhibitions</div>
+        <div class="widget-item color4">Tech Meetups</div>
+        <div class="widget-item color5">Food Festivals</div>
+        <div class="widget-item color6">Workshops</div>
+        <div class="widget-item color7">Community Service</div>
+        <!-- Add more widgets as needed -->
       </div>
     </div>
     
-    <!-- Repeat for other columns with different components -->
-    <!-- ... -->
-
+    <!-- Tasks Column -->
+    <div class="col-lg-4">
+      <div class="widget task-widget">
+        <h2 class="header color4">Tasks</h2>
+        <div class="widget-item color5">Daily Goals</div>
+        <div class="widget-item color6">Project Milestones</div>
+        <div class="widget-item color7">Collaborative Assignments</div>
+        <div class="widget-item color1">Personal Errands</div>
+        <div class="widget-item color2">Fitness Challenges</div>
+        <div class="widget-item color3">Learning Objectives</div>
+        <!-- Add more widgets as needed -->
+      </div>
+    </div>
+    
+    <!-- Organizations Column -->
+    <div class="col-lg-4">
+      <div class="widget org-widget">
+        <h2 class="header color3">Organizations</h2>
+        <div class="widget-item color4">Non-Profits</div>
+        <div class="widget-item color5">Local Businesses</div>
+        <div class="widget-item color6">Startups</div>
+        <div class="widget-item color7">Clubs</div>
+        <div class="widget-item color1">Social Groups</div>
+        <div class="widget-item color2">Co-ops</div>
+        <!-- Add more widgets as needed -->
+      </div>
+    </div>
   </div>
 </div>
 
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
