@@ -3,100 +3,97 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AR Gigwork Eco-Village</title>
+<title>Eco-Village AR Gigwork Platform</title>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-<link href="https://cdn.lineicons.com/3.0/lineicons.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
 <style>
   body {
-    background-color: #121212; /* Dark background for dark mode */
-    color: #e0e0e0; /* Light text for contrast */
+    background-color: #282c34; /* Mild dark background for dark mode */
+    color: #ffffff; /* White text for dark mode */
     font-family: 'Arial', sans-serif;
   }
   .container-fluid {
     padding: 20px;
   }
+  .column {
+    padding: 0 15px;
+  }
   .widget {
-    background: rgba(50, 50, 50, 0.8); /* Semi-transparent background for widgets */
-    border-radius: 8px;
+    background: #333; /* Dark background for widgets */
     padding: 20px;
-    margin-bottom: 20px;
-    border: 1px solid #525252; /* Solid border for widgets */
-    transition: transform 0.3s;
+    margin-bottom: 30px;
+    border-radius: 5px;
+    border-left: 5px solid; /* Solid border for widgets, color set in individual widget */
   }
-  .widget:hover {
-    transform: translateY(-5px);
-  }
-  .header {
+  /* Smooth gradient for widget borders */
+  .widget:nth-child(1) { border-color: #ff7e67; }
+  .widget:nth-child(2) { border-color: #ffad5a; }
+  .widget:nth-child(3) { border-color: #ffd050; }
+  .widget:nth-child(4) { border-color: #4cd964; }
+  .widget:nth-child(5) { border-color: #5ac8fa; }
+  .widget:nth-child(6) { border-color: #ff2d55; }
+  .widget-header {
+    font-size: 18px;
     font-weight: bold;
     margin-bottom: 15px;
-    color: #ffffff;
   }
-  .widget-row {
+  .widget-content {
     display: flex;
     flex-wrap: wrap;
-    margin: -10px;
-  }
-  .widget-column {
-    padding: 10px;
-    flex: 0 0 20%;
-    max-width: 20%;
+    justify-content: space-between;
   }
   .widget-item {
-    background: #2d2d2d; /* Darker background for widget items */
+    background: #424242; /* Slightly lighter background for items */
     padding: 10px;
     margin-bottom: 10px;
-    border-radius: 4px;
-    color: #ffffff;
-    transition: background-color 0.3s;
+    border-radius: 3px;
+    width: calc(50% - 10px);
+    margin-right: 10px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    transition: transform 0.3s ease;
+    display: flex;
+    align-items: center;
+    color: #fff;
   }
   .widget-item:hover {
-    background-color: #3a3a3a;
+    transform: translateY(-3px);
   }
-  .lni {
-    margin-right: 8px;
+  .icon {
+    margin-right: 10px;
   }
-  @media (max-width: 1400px) {
-    .widget-column {
-      flex: 0 0 25%;
-      max-width: 25%;
-    }
-  }
-  @media (max-width: 768px) {
-    .widget-column {
-      flex: 0 0 50%;
-      max-width: 50%;
-    }
-  }
-  @media (max-width: 576px) {
-    .widget-column {
-      flex: 0 0 100%;
-      max-width: 100%;
+  @media (max-width: 1200px) {
+    .widget-item {
+      width: 100%;
+      margin-right: 0;
     }
   }
 </style>
 </head>
 <body>
 <div class="container-fluid">
-  <h1 class="text-center text-light mb-4">AR Gigwork Eco-Village</h1>
-  <div class="widget-row">
-    <!-- Repeat this structure for 5 columns -->
-    <div class="widget-column">
+  <div class="row">
+    <!-- Columns with Widgets -->
+    <!-- Repeat the following structure for 5 columns -->
+    <div class="col-md-2 col-sm-4 col-6 column">
       <div class="widget">
-        <h2 class="header">Column 1</h2>
-        <div class="widget-item"><i class="lni lni-home"></i> Home</div>
-        <div class="widget-item"><i class="lni lni-search"></i> Search</div>
-        <div class="widget-item"><i class="lni lni-users"></i> Social</div>
-        <!-- Additional widgets as needed -->
+        <div class="widget-header"><i class="fas fa-briefcase icon"></i>Gig Tasks</div>
+        <div class="widget-content">
+          <div class="widget-item"><i class="fas fa-hammer icon"></i>Repairs</div>
+          <div class="widget-item"><i class="fas fa-paint-brush icon"></i>Art Projects</div>
+          <!-- Additional widget items -->
+        </div>
       </div>
       <div class="widget">
-        <h2 class="header">Column 1.1</h2>
-        <div class="widget-item"><i class="lni lni-heart"></i> Favorites</div>
-        <div class="widget-item"><i class="lni lni-star"></i> Reviews</div>
-        <!-- Additional widgets as needed -->
+        <div class="widget-header"><i class="fas fa-tree icon"></i>Eco Projects</div>
+        <div class="widget-content">
+          <div class="widget-item"><i class="fas fa-recycle icon"></i>Recycling</div>
+          <div class="widget-item"><i class="fas fa-solar-panel icon"></i>Solar Energy</div>
+          <!-- Additional widget items -->
+        </div>
       </div>
+      <!-- Additional widgets for the column -->
     </div>
     <!-- ... -->
-    <!-- Add more .widget-column here for a total of 5 -->
   </div>
 </div>
 
