@@ -5,7 +5,112 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Eco-Village AR Platform</title>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<style><!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Eco-Village AR Platform</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <style>
+  body {
+    background-color: #e8f5e9; /* Light green background */
+    color: #37474f; /* Dark text for contrast */
+    font-family: 'Arial', sans-serif;
+  }
+  .column-widget {
+    background: rgba(255, 255, 255, 0.8); /* Semi-transparent background */
+    border: 2px solid #aed581; /* Thin green border */
+    border-radius: 8px;
+    padding: 20px;
+    margin-top: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  .header {
+    background: rgba(129, 199, 132, 0.9); /* Semi-transparent green header background */
+    color: #fff;
+    padding: 10px;
+    border-radius: 5px 5px 0 0;
+    text-align: center;
+    font-weight: bold;
+    border-bottom: 2px solid #81c784; /* Bright green border */
+  }
+  .button {
+    background-color: rgba(255, 255, 255, 0.5); /* Semi-transparent button background */
+    border: 1px solid #64b5f6; /* Thin blue border */
+    color: #37474f;
+    padding: 10px 20px;
+    border-radius: 20px;
+    text-align: center;
+    display: inline-block;
+    margin: 10px 0;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  .button:hover {
+    background-color: rgba(255, 255, 255, 0.7); /* Increase opaqueness on hover */
+  }
+  .icon {
+    width: 50px;
+    height: 50px;
+    display: inline-block;
+    background-size: contain;
+    margin-right: 10px;
+  }
+  .eco-village {
+    background-image: url('eco-village-icon.png');
+  }
+  .task-manager {
+    background-image: url('task-manager-icon.png');
+  }
+  .event-planner {
+    background-image: url('event-planner-icon.png');
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1 class="text-center my-4">Welcome to the Eco-Village AR Platform</h1>
+  
+  <div class="row">
+    <!-- Column 1: Eco-Village Network -->
+    <div class="col-md-4">
+      <div class="column-widget">
+        <div class="header">Eco-Village Network</div>
+        <div class="icon eco-village"></div>
+        <p>Connect with your eco-community, find local resources, and engage in sustainable projects.</p>
+        <div class="button">Join Now</div>
+      </div>
+    </div>
+    
+    <!-- Column 2: Task Manager -->
+    <div class="col-md-4">
+      <div class="column-widget">
+        <div class="header">Task Manager</div>
+        <div class="icon task-manager"></div>
+        <p>Organize your day, manage gig tasks, and track your progress with our AR task manager.</p>
+        <div class="button">View Tasks</div>
+      </div>
+    </div>
+    
+    <!-- Column 3: Event Planner -->
+    <div class="col-md-4">
+      <div class="column-widget">
+        <div class="header">Event Planner</div>
+        <div class="icon event-planner"></div>
+        <p>Discover events, create meetups, and experience the joy of community gatherings.</p>
+        <div class="button">Plan Event</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>
+
   body {
     background-color: #e8f5e9; /* Light green background */
     color: #37474f; /* Dark text for contrast */
