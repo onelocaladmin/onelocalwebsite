@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your AR Platform</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            overflow: hidden;
+        }
+        .header, .footer {
+            background: #333;
+            color: #fff;
+            padding: 20px 0;
+            text-align: center;
+        }
+        .navigation {
+            background: #444;
+            color: #fff;
+            padding: 10px 0;
+            text-align: center;
+        }
+        .navigation a {
+            color: #fff;
+            text-decoration: none;
+            padding: 0 15px;
+        }
+        .content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+        .card {
+            background: #fff;
+            padding: 20px;
+            margin-bottom: 20px;
+            width: calc(33.333% - 20px);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .card h3 {
+            margin-top: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Welcome to Your AR Platform</h1>
+    </div>
+    <div class="navigation">
+        <a href="#events">Events</a>
+        <a href="#tasks">Tasks</a>
+        <a href="#offers">Offers</a>
+        <!-- Add more navigation items as needed -->
+    </div>
+    <div class="container">
+        <div id="events" class="content">
+            <div class="card">
+                <h3>Event 1</h3>
+                <p>Description of Event 1</p>
+            </div>
+            <!-- More event cards -->
+        </div>
+        <div id="tasks" class="content">
+            <div class="card">
+                <h3>Task 1</h3>
+                <p>Description of Task 1</p>
+            </div>
+            <!-- More task cards -->
+        </div>
+        <div id="offers" class="content">
+            <div class="card">
+                <h3>Offer 1</h3>
+                <p>Description of Offer 1</p>
+            </div>
+            <!-- More offer cards -->
+        </div>
+        <!-- Add more sections as needed -->
+    </div>
+    <div class="footer">
+        <p>Footer Content</p>
+    </div>
+</body>
+</html>
