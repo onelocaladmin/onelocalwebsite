@@ -3,181 +3,97 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Eco-Village AR Platform</title>
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-<style><!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Eco-Village AR Platform</title>
+<title>Eco-Village AR Platform - Dark Mode</title>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <style>
   body {
-    background-color: #e8f5e9; /* Light green background */
-    color: #37474f; /* Dark text for contrast */
+    background-color: #121212; /* Dark background */
+    color: #e0e0e0; /* Light text for contrast */
     font-family: 'Arial', sans-serif;
   }
   .column-widget {
-    background: rgba(255, 255, 255, 0.8); /* Semi-transparent background */
-    border: 2px solid #aed581; /* Thin green border */
+    background: #1e1e1e; /* Dark widget background */
+    border: 2px solid #64b5f6; /* Thin blue border */
     border-radius: 8px;
     padding: 20px;
-    margin-top: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    transition: transform 0.3s ease;
+  }
+  .column-widget:hover {
+    transform: translateY(-5px);
   }
   .header {
-    background: rgba(129, 199, 132, 0.9); /* Semi-transparent green header background */
+    background: #333; /* Dark header background */
     color: #fff;
     padding: 10px;
     border-radius: 5px 5px 0 0;
     text-align: center;
     font-weight: bold;
-    border-bottom: 2px solid #81c784; /* Bright green border */
   }
-  .button {
-    background-color: rgba(255, 255, 255, 0.5); /* Semi-transparent button background */
+  .widget-content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 15px;
+  }
+  .widget-item {
+    background: #252525; /* Dark item background */
     border: 1px solid #64b5f6; /* Thin blue border */
-    color: #37474f;
-    padding: 10px 20px;
-    border-radius: 20px;
-    text-align: center;
-    display: inline-block;
-    margin: 10px 0;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  .button:hover {
-    background-color: rgba(255, 255, 255, 0.7); /* Increase opaqueness on hover */
-  }
-  .icon {
-    width: 50px;
-    height: 50px;
-    display: inline-block;
-    background-size: contain;
-    margin-right: 10px;
-  }
-  .eco-village {
-    background-image: url('eco-village-icon.png');
-  }
-  .task-manager {
-    background-image: url('task-manager-icon.png');
-  }
-  .event-planner {
-    background-image: url('event-planner-icon.png');
-  }
-</style>
-</head>
-<body>
-<div class="container">
-  <h1 class="text-center my-4">Welcome to the Eco-Village AR Platform</h1>
-  
-  <div class="row">
-    <!-- Column 1: Eco-Village Network -->
-    <div class="col-md-4">
-      <div class="column-widget">
-        <div class="header">Eco-Village Network</div>
-        <div class="icon eco-village"></div>
-        <p>Connect with your eco-community, find local resources, and engage in sustainable projects.</p>
-        <div class="button">Join Now</div>
-      </div>
-    </div>
-    
-    <!-- Column 2: Task Manager -->
-    <div class="col-md-4">
-      <div class="column-widget">
-        <div class="header">Task Manager</div>
-        <div class="icon task-manager"></div>
-        <p>Organize your day, manage gig tasks, and track your progress with our AR task manager.</p>
-        <div class="button">View Tasks</div>
-      </div>
-    </div>
-    
-    <!-- Column 3: Event Planner -->
-    <div class="col-md-4">
-      <div class="column-widget">
-        <div class="header">Event Planner</div>
-        <div class="icon event-planner"></div>
-        <p>Discover events, create meetups, and experience the joy of community gatherings.</p>
-        <div class="button">Plan Event</div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-</body>
-</html>
-
-  body {
-    background-color: #e8f5e9; /* Light green background */
-    color: #37474f; /* Dark text for contrast */
-    font-family: 'Arial', sans-serif;
-  }
-  .column-widget {
-    background: #fff;
-    border-radius: 8px;
-    padding: 20px;
-    margin-top: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
-  .header {
-    background: #81c784; /* Green header background */
-    color: #fff;
+    border-radius: 5px;
     padding: 10px;
-    border-radius: 5px 5px 0 0;
+    margin: 5px;
+    flex-basis: calc(50% - 10px);
     text-align: center;
-    font-weight: bold;
+    transition: all 0.3s ease;
   }
-  .icon {
-    width: 50px;
-    height: 50px;
-    display: inline-block;
-    background-size: contain;
-    margin-right: 10px;
-  }
-  .eco-village {
-    background-image: url('eco-village-icon.png');
-  }
-  .task-manager {
-    background-image: url('task-manager-icon.png');
-  }
-  .event-planner {
-    background-image: url('event-planner-icon.png');
+  .widget-item:hover {
+    background: #2d2d2d; /* Slightly lighter on hover */
+    border-color: #bb86fc; /* Purple border on hover */
   }
 </style>
 </head>
 <body>
 <div class="container">
-  <h1 class="text-center my-4">Welcome to the Eco-Village AR Platform</h1>
+  <h1 class="text-center my-4">Eco-Village AR Platform - Dark Mode</h1>
   
   <div class="row">
-    <!-- Column 1: Eco-Village Network -->
+    <!-- Column 1 -->
     <div class="col-md-4">
       <div class="column-widget">
         <div class="header">Eco-Village Network</div>
-        <div class="icon eco-village"></div>
-        <p>Connect with your eco-community, find local resources, and engage in sustainable projects.</p>
+        <div class="widget-content">
+          <div class="widget-item">Find Resources</div>
+          <div class="widget-item">Community Chat</div>
+          <div class="widget-item">New Projects</div>
+          <div class="widget-item">Sustainability Tips</div>
+        </div>
       </div>
     </div>
     
-    <!-- Column 2: Task Manager -->
+    <!-- Column 2 -->
     <div class="col-md-4">
       <div class="column-widget">
         <div class="header">Task Manager</div>
-        <div class="icon task-manager"></div>
-        <p>Organize your day, manage gig tasks, and track your progress with our AR task manager.</p>
+        <div class="widget-content">
+          <div class="widget-item">Today's Agenda</div>
+          <div class="widget-item">Upcoming Deadlines</div>
+          <div class="widget-item">Collaborative Tasks</div>
+          <div class="widget-item">Progress Tracker</div>
+        </div>
       </div>
     </div>
     
-    <!-- Column 3: Event Planner -->
+    <!-- Column 3 -->
     <div class="col-md-4">
       <div class="column-widget">
         <div class="header">Event Planner</div>
-        <div class="icon event-planner"></div>
-        <p>Discover events, create meetups, and experience the joy of community gatherings.</p>
+        <div class="widget-content">
+          <div class="widget-item">Local Events</div>
+          <div class="widget-item">Create Event</div>
+          <div class="widget-item">Event Invitations</div>
+          <div class="widget-item">Calendar Sync</div>
+        </div>
       </div>
     </div>
   </div>
