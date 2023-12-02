@@ -3,83 +3,86 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AR Gigwork Eco-Village</title>
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<title>Eco-Village AR Platform - Light Mode</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
 <style>
   body {
-    background: #121212; /* Dark background */
+    background-color: #f7f7f7; /* Light background for light mode */
+    color: #333; /* Darker text for readability */
     font-family: 'Arial', sans-serif;
   }
   .widget {
-    background: rgba(255, 255, 255, 0.05); /* Very dark widgets with a hint of visibility */
-    border-radius: 8px;
-    margin: 10px 0;
-    padding: 15px;
-    border-left: 5px solid; /* Solid color border on the left */
-    transition: all 0.3s ease;
+    background-color: #ffffff; /* White background for widgets */
+    border: 1px solid #ddd; /* Thin border for widgets */
+    border-left: 5px solid; /* Colored left border for widgets */
+    border-radius: 0.25rem;
+    margin-bottom: 1rem;
+    padding: 1rem;
+    transition: box-shadow 0.2s ease-in-out;
   }
   .widget:hover {
-    background: rgba(255, 255, 255, 0.1); /* Slightly lighter on hover */
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
   }
   .header {
     font-weight: bold;
-    margin-bottom: 10px;
+    margin-bottom: 1rem;
     text-align: center;
-    color: #e0e0e0;
   }
   .widget-item {
-    color: #e0e0e0;
-    padding: 10px;
-    margin: 5px 0;
-    border-radius: 5px;
-    transition: all 0.3s ease;
-    display: flex;
-    align-items: center;
+    border: 1px solid #ddd; /* Thin border for items */
+    border-radius: 0.25rem;
+    margin-bottom: 0.5rem;
+    padding: 0.5rem 1rem;
+    transition: background-color 0.2s ease-in-out;
   }
-  .widget-item i {
-    margin-right: 10px;
+  .widget-item:hover {
+    background-color: #f8f9fa;
   }
-  /* Gradient colors for widgets */
-  .event-widget { border-color: #FF6F61; }
-  .task-widget { border-color: #6B5B95; }
-  .org-widget { border-color: #88B04B; }
 
-  /* Gradient color for widget items */
-  .widget-item:nth-child(odd) { background: #333333; }
-  .widget-item:nth-child(even) { background: #444444; }
+  /* Colored borders for widgets */
+  .events-widget { border-color: #ff7e5f; }
+  .tasks-widget { border-color: #7868e6; }
+  .orgs-widget { border-color: #ffafcc; }
+
+  /* Icon colors */
+  .fa-calendar-alt { color: #ff7e5f; }
+  .fa-tasks { color: #7868e6; }
+  .fa-users { color: #ffafcc; }
 </style>
 </head>
 <body>
-<div class="container my-3">
-  <h1 class="text-center text-light mb-4">AR Gigwork Eco-Village</h1>
+<div class="container my-4">
+  <h1 class="text-center mb-4">Eco-Village AR Platform</h1>
   
-  <div class="row">
+  <div class="row text-center">
     <!-- Events Column -->
-    <div class="col-lg-4">
-      <div class="widget event-widget">
+    <div class="col-md-4">
+      <div class="widget events-widget">
         <h2 class="header"><i class="fas fa-calendar-alt"></i> Events</h2>
-        <div class="widget-item"><i class="fas fa-music"></i> Live Concerts</div>
-        <div class="widget-item"><i class="fas fa-paint-brush"></i> Art Exhibitions</div>
-        <!-- ... more items ... -->
+        <div class="widget-item">Community Gatherings</div>
+        <div class="widget-item">Local Workshops</div>
+        <!-- More items can be added here -->
       </div>
     </div>
     
     <!-- Tasks Column -->
-    <div class="col-lg-4">
-      <div class="widget task-widget">
+    <div class="col-md-4">
+      <div class="widget tasks-widget">
         <h2 class="header"><i class="fas fa-tasks"></i> Tasks</h2>
-        <div class="widget-item"><i class="fas fa-briefcase"></i> Work Projects</div>
-        <!-- ... more items ... -->
+        <div class="widget-item">Daily Goals</div>
+        <div class="widget-item">Project Milestones</div>
+        <!-- More items can be added here -->
       </div>
     </div>
     
     <!-- Organizations Column -->
-    <div class="col-lg-4">
-      <div class="widget org-widget">
+    <div class="col-md-4">
+      <div class="widget orgs-widget">
         <h2 class="header"><i class="fas fa-users"></i> Organizations</h2>
-        <div class="widget-item"><i class="fas fa-tree"></i> Environmental Groups</div>
-        <!-- ... more items ... -->
+        <div class="widget-item">Environmental Clubs</div>
+        <div class="widget-item">Social Groups</div>
+        <!-- More items can be added here -->
       </div>
     </div>
   </div>
@@ -87,6 +90,6 @@
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js"></script>
 </body>
 </html>
