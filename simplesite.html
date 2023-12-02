@@ -3,97 +3,83 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ONE Social Coordination Platform</title>
+<title>Eco-Village AR Platform</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <style>
-    body {
-        font-family: 'Arial', sans-serif;
-        background-color: #1a1a1a;
-        color: white;
-        margin: 0;
-        padding: 0;
-    }
-    .header {
-        background-color: #333;
-        padding: 10px;
-        text-align: center;
-    }
-    .main-container {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        padding: 20px;
-    }
-    .card {
-        background: linear-gradient(45deg, #6e48aa, #9d50bb);
-        border-radius: 10px;
-        padding: 20px;
-        margin: 10px;
-        width: 90%;
-        color: white;
-    }
-    .card img {
-        width: 100%;
-        border-radius: 5px;
-    }
-    .footer {
-        background-color: #333;
-        padding: 10px;
-        text-align: center;
-    }
-    .button {
-        background-color: #f1c40f;
-        border: none;
-        padding: 10px 20px;
-        text-align: center;
-        display: inline-block;
-        margin: 4px 2px;
-        border-radius: 16px;
-        color: black;
-    }
-    .grid-container {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-        gap: 10px;
-        width: 100%;
-    }
-    .grid-item {
-        background: #222;
-        padding: 10px;
-        border-radius: 5px;
-        text-align: center;
-    }
+  body {
+    background-color: #e8f5e9; /* Light green background */
+    color: #37474f; /* Dark text for contrast */
+    font-family: 'Arial', sans-serif;
+  }
+  .column-widget {
+    background: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    margin-top: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  .header {
+    background: #81c784; /* Green header background */
+    color: #fff;
+    padding: 10px;
+    border-radius: 5px 5px 0 0;
+    text-align: center;
+    font-weight: bold;
+  }
+  .icon {
+    width: 50px;
+    height: 50px;
+    display: inline-block;
+    background-size: contain;
+    margin-right: 10px;
+  }
+  .eco-village {
+    background-image: url('eco-village-icon.png');
+  }
+  .task-manager {
+    background-image: url('task-manager-icon.png');
+  }
+  .event-planner {
+    background-image: url('event-planner-icon.png');
+  }
 </style>
 </head>
 <body>
-
-<div class="header">
-    <h1>ONE Social Coordination</h1>
+<div class="container">
+  <h1 class="text-center my-4">Welcome to the Eco-Village AR Platform</h1>
+  
+  <div class="row">
+    <!-- Column 1: Eco-Village Network -->
+    <div class="col-md-4">
+      <div class="column-widget">
+        <div class="header">Eco-Village Network</div>
+        <div class="icon eco-village"></div>
+        <p>Connect with your eco-community, find local resources, and engage in sustainable projects.</p>
+      </div>
+    </div>
+    
+    <!-- Column 2: Task Manager -->
+    <div class="col-md-4">
+      <div class="column-widget">
+        <div class="header">Task Manager</div>
+        <div class="icon task-manager"></div>
+        <p>Organize your day, manage gig tasks, and track your progress with our AR task manager.</p>
+      </div>
+    </div>
+    
+    <!-- Column 3: Event Planner -->
+    <div class="col-md-4">
+      <div class="column-widget">
+        <div class="header">Event Planner</div>
+        <div class="icon event-planner"></div>
+        <p>Discover events, create meetups, and experience the joy of community gatherings.</p>
+      </div>
+    </div>
+  </div>
 </div>
 
-<div class="main-container">
-    <div class="card">
-        <h2>Upcoming Events</h2>
-        <img src="event-placeholder.jpg" alt="Event">
-        <p>Join our community for the latest events!</p>
-        <button class="button">Explore Events</button>
-    </div>
-    <div class="grid-container">
-        <div class="grid-item">Organization</div>
-        <div class="grid-item">Projects</div>
-        <div class="grid-item">Services</div>
-        <div class="grid-item">Groups</div>
-    </div>
-    <div class="card">
-        <h2>Featured Project</h2>
-        <img src="project-placeholder.jpg" alt="Project">
-        <p>Participate in exciting new projects.</p>
-        <button class="button">Join Project</button>
-    </div>
-</div>
-
-<div class="footer">
-    <p>&copy; 2023 ONE Social Coordination</p>
-</div>
-
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </body>
 </html>
