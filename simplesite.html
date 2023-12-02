@@ -3,40 +3,32 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AR Gigwork Eco-Village</title>
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<title>Eco-Village AR Platform - Expanded Dark Mode</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <link href="https://cdn.lineicons.com/3.0/lineicons.css" rel="stylesheet">
 <style>
-  :root {
-    --start-color: #84fab0; /* Start of gradient */
-    --end-color: #8fd3f4; /* End of gradient */
-  }
-
   body {
-    background-color: #262626; /* Dark but not too dark background */
+    background-color: #121212; /* Dark background */
     color: #e0e0e0; /* Light text for contrast */
     font-family: 'Arial', sans-serif;
   }
-
-  .widget {
-    background: rgba(50, 50, 50, 0.8); /* Dark widget with some opacity */
+  .column-widget {
+    background: rgba(50, 50, 50, 0.8); /* Semi-transparent dark widget */
     border-radius: 8px;
-    margin: 10px 0;
-    padding: 15px;
-    transition: all 0.3s ease;
+    padding: 20px;
+    margin-bottom: 20px;
+    border: 2px solid; /* Dynamic border color */
+    transition: transform 0.3s ease;
   }
-
-  .widget:hover {
-    transform: scale(1.02);
+  .column-widget:hover {
+    transform: translateY(-5px);
   }
-
   .header {
     font-weight: bold;
     margin-bottom: 10px;
     text-align: center;
     position: relative;
   }
-
   .header::after {
     content: '';
     position: absolute;
@@ -47,72 +39,69 @@
     background: linear-gradient(to right, var(--start-color), var(--end-color));
     border-radius: 2px;
   }
-
+  .widget-content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 15px;
+  }
   .widget-item {
-    background: #3a3a3a; /* Widget item background */
-    padding: 10px;
-    margin: 5px 0;
+    background: #252525; /* Dark item background */
     border-radius: 5px;
-    border: 1px solid #ccc; /* Light border for contrast */
+    padding: 10px;
+    margin: 5px;
+    flex-basis: calc(33% - 10px);
+    text-align: center;
     transition: all 0.3s ease;
     display: flex;
     align-items: center;
+    border: 1px solid transparent; /* Invisible border for hover effect */
   }
-
   .widget-item:hover {
-    background: #4a4a4a;
+    background: #2d2d2d; /* Slightly lighter on hover */
+    border-color: var(--hover-border-color); /* Dynamic border color on hover */
   }
-
+  
   .lni {
     margin-right: 8px;
     font-size: 20px;
     flex-shrink: 0;
   }
 
-  .gradient-text {
-    background: linear-gradient(to left, var(--start-color), var(--end-color));
-    -webkit-background-clip: text;
-    color: transparent;
-  }
+  /* Dynamic border colors based on gradient */
+  .border-1 { --start-color: #ff5722; --end-color: #ffc107; --hover-border-color: #ff5722; } /* Deep orange to Amber */
+  .border-2 { --start-color: #4caf50; --end-color: #2196f3; --hover-border-color: #4caf50; } /* Green to Blue */
+  .border-3 { --start-color: #9c27b0; --end-color: #e91e63; --hover-border-color: #9c27b0; } /* Purple to Pink */
+  /* ... More gradient combinations */
+
+  /* Color Palette for Widget Headers */
+  .color1 { color: #FF4500; }
+  .color2 { color: #FFD700; }
+  .color3 { color: #90EE90; }
+  /* ... More colors */
 </style>
 </head>
 <body>
-<div class="container my-3">
-  <h1 class="text-center gradient-text mb-4">AR Gigwork Eco-Village</h1>
+<div class="container">
+  <h1 class="text-center my-4">Eco-Village AR Platform - Expanded Dark Mode</h1>
   
   <div class="row">
-    <!-- Events Column -->
+    <!-- Each widget column -->
     <div class="col-lg-4">
-      <div class="widget">
-        <h2 class="header gradient-text">Events</h2>
-        <div class="widget-item"><i class="lni lni-mic"></i> Live Concerts</div>
-        <div class="widget-item"><i class="lni lni-brush"></i> Art Exhibitions</div>
-        <div class="widget-item"><i class="lni lni-laptop-phone"></i> Tech Meetups</div>
-        <!-- Add more widgets with linear icons as needed -->
+      <div class="column-widget border-1">
+        <div class="header color1">Eco-Village Network</div>
+        <div class="widget-content">
+          <!-- Widget items with linear icons and color gradients -->
+          <div class="widget-item color2"><i class="lni lni-world"></i> Resource Locator</div>
+          <div class="widget-item color3"><i class="lni lni-seedling"></i> Eco Market</div>
+          <!-- ... More widgets -->
+        </div>
       </div>
     </div>
     
-    <!-- Tasks Column -->
-    <div class="col-lg-4">
-      <div class="widget">
-        <h2 class="header gradient-text">Tasks</h2>
-        <div class="widget-item"><i class="lni lni-calendar"></i> Daily Goals</div>
-        <div class="widget-item"><i class="lni lni-target"></i> Project Milestones</div>
-        <!-- Add more widgets with linear icons as needed -->
-      </div>
-    </div>
-    
-    <!-- Organizations Column -->
-    <div class="col-lg-4">
-      <div class="widget">
-        <h2 class="header gradient-text">Organizations</h2>
-        <div class="widget-item"><i class="lni lni-world"></i> Non-Profits</div>
-        <div class="widget-item"><i class="lni lni-users"></i> Local Businesses</div>
-        <!-- Add more widgets with linear icons as needed -->
-      </div>
-    </div>
+    <!-- Repeat for other columns with different components -->
+    <!-- ... -->
+
   </div>
 </div>
-
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@pop
