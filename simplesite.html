@@ -1,57 +1,93 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>AR Platform Dashboard</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stylish Webpage</title>
     <style>
         body {
             font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
             margin: 0;
             padding: 0;
-            background-color: #f4f4f4;
         }
-        .navbar {
+
+        header {
             background-color: #333;
             color: white;
-            padding: 15px;
             text-align: center;
-        }
-        .container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
             padding: 20px;
         }
-        .card {
-            background-color: #fff;
-            border: 1px solid #ddd;
+
+        nav {
+            background-color: #444;
+            text-align: center;
+            padding: 10px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: white;
             margin: 10px;
-            padding: 20px;
-            width: 300px;
-            border-radius: 8px;
-            box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
         }
-        .card h3 {
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .section {
+            background-color: #fff;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .section h2 {
             color: #333;
         }
-        .card p {
-            color: #666;
+
+        .section p {
+            color: #555;
+        }
+
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 10px;
         }
     </style>
 </head>
 <body>
-    <div class="navbar">
-        <h1>AR Platform Dashboard</h1>
-    </div>
-
+    <header>
+        <h1>Welcome to our Stylish Webpage</h1>
+    </header>
+    <nav>
+        <a href="#">Home</a>
+        <a href="#">About</a>
+        <a href="#">Services</a>
+        <a href="#">Portfolio</a>
+        <a href="#">Contact</a>
+    </nav>
     <div class="container">
-        <!-- Example Object Card -->
-        <div class="card">
-            <h3>Object Class 1</h3>
-            <p>Description or details of Object Class 1.</p>
+        <div class="section">
+            <h2>About Us</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod elit eu efficitur.</p>
         </div>
-
-        <!-- Repeat for other object classes -->
-        <!-- ... -->
+        <div class="section">
+            <h2>Our Services</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod elit eu efficitur.</p>
+        </div>
+        <div class="section">
+            <h2>Portfolio</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod elit eu efficitur.</p>
+        </div>
     </div>
+    <footer>
+        &copy; 2023 Stylish Webpage. All rights reserved.
+    </footer>
 </body>
 </html>
