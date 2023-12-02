@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Eco-Village AR Platform - Dark Mode</title>
+<title>Eco-Village AR Platform - Expanded Dark Mode</title>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <style>
   body {
@@ -13,7 +13,6 @@
   }
   .column-widget {
     background: #1e1e1e; /* Dark widget background */
-    border: 2px solid #64b5f6; /* Thin blue border */
     border-radius: 8px;
     padding: 20px;
     margin-bottom: 20px;
@@ -39,63 +38,59 @@
   }
   .widget-item {
     background: #252525; /* Dark item background */
-    border: 1px solid #64b5f6; /* Thin blue border */
     border-radius: 5px;
     padding: 10px;
     margin: 5px;
-    flex-basis: calc(50% - 10px);
+    flex-basis: calc(33% - 10px);
     text-align: center;
     transition: all 0.3s ease;
   }
   .widget-item:hover {
     background: #2d2d2d; /* Slightly lighter on hover */
-    border-color: #bb86fc; /* Purple border on hover */
   }
+
+  /* Broad range of border colors */
+  .border-1 { border: 1px solid #ff5722; } /* Deep orange */
+  .border-2 { border: 1px solid #ffc107; } /* Amber */
+  .border-3 { border: 1px solid #4caf50; } /* Green */
+  .border-4 { border: 1px solid #2196f3; } /* Blue */
+  .border-5 { border: 1px solid #9c27b0; } /* Purple */
+  .border-6 { border: 1px solid #e91e63; } /* Pink */
+  .border-7 { border: 1px solid #00bcd4; } /* Cyan */
+  .border-8 { border: 1px solid #cddc39; } /* Lime */
+  .border-9 { border: 1px solid #ffeb3b; } /* Yellow */
+  .border-10 { border: 1px solid #ff9800; } /* Orange */
+  .border-11 { border: 1px solid #795548; } /* Brown */
+  .border-12 { border: 1px solid #607d8b; } /* Blue Grey */
 </style>
 </head>
 <body>
 <div class="container">
-  <h1 class="text-center my-4">Eco-Village AR Platform - Dark Mode</h1>
+  <h1 class="text-center my-4">Eco-Village AR Platform - Expanded Dark Mode</h1>
   
   <div class="row">
-    <!-- Column 1 -->
-    <div class="col-md-4">
+    <!-- Each widget column -->
+    <div class="col-lg-4">
       <div class="column-widget">
         <div class="header">Eco-Village Network</div>
         <div class="widget-content">
-          <div class="widget-item">Find Resources</div>
-          <div class="widget-item">Community Chat</div>
-          <div class="widget-item">New Projects</div>
-          <div class="widget-item">Sustainability Tips</div>
+          <!-- Widget items with different border colors -->
+          <div class="widget-item border-1">Resource Locator</div>
+          <div class="widget-item border-2">Eco Market</div>
+          <div class="widget-item border-3">Community Board</div>
+          <div class="widget-item border-4">Green Tips</div>
+          <div class="widget-item border-5">Workshops</div>
+          <div class="widget-item border-6">Virtual Tours</div>
+          <div class="widget-item border-7">Donation Drives</div>
+          <div class="widget-item border-8">Eco Challenges</div>
+          <div class="widget-item border-9">News & Updates</div>
         </div>
       </div>
     </div>
     
-    <!-- Column 2 -->
-    <div class="col-md-4">
-      <div class="column-widget">
-        <div class="header">Task Manager</div>
-        <div class="widget-content">
-          <div class="widget-item">Today's Agenda</div>
-          <div class="widget-item">Upcoming Deadlines</div>
-          <div class="widget-item">Collaborative Tasks</div>
-          <div class="widget-item">Progress Tracker</div>
-        </div>
-      </div>
-    </div>
-    
-    <!-- Column 3 -->
-    <div class="col-md-4">
-      <div class="column-widget">
-        <div class="header">Event Planner</div>
-        <div class="widget-content">
-          <div class="widget-item">Local Events</div>
-          <div class="widget-item">Create Event</div>
-          <div class="widget-item">Event Invitations</div>
-          <div class="widget-item">Calendar Sync</div>
-        </div>
-      </div>
-    </div>
+    <!-- Repeat for other columns with different components -->
+    <!-- ... -->
+
   </div>
 </div>
 
