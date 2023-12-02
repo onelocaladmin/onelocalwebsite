@@ -5,28 +5,49 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>AR Gigwork Eco-Village</title>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<link href="https://cdn.lineicons.com/3.0/lineicons.css" rel="stylesheet">
 <style>
+  :root {
+    --start-color: #84fab0; /* Start of gradient */
+    --end-color: #8fd3f4; /* End of gradient */
+  }
+
   body {
     background-color: #262626; /* Dark but not too dark background */
     color: #e0e0e0; /* Light text for contrast */
     font-family: 'Arial', sans-serif;
   }
+
   .widget {
     background: rgba(50, 50, 50, 0.8); /* Dark widget with some opacity */
     border-radius: 8px;
     margin: 10px 0;
     padding: 15px;
-    border: 2px solid; /* Bright colored border, color set in individual widgets */
     transition: all 0.3s ease;
   }
+
   .widget:hover {
     transform: scale(1.02);
   }
+
   .header {
     font-weight: bold;
     margin-bottom: 10px;
     text-align: center;
+    position: relative;
   }
+
+  .header::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(to right, var(--start-color), var(--end-color));
+    border-radius: 2px;
+  }
+
   .widget-item {
     background: #3a3a3a; /* Widget item background */
     padding: 10px;
@@ -34,74 +55,65 @@
     border-radius: 5px;
     border: 1px solid #ccc; /* Light border for contrast */
     transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
   }
+
   .widget-item:hover {
     background: #4a4a4a;
   }
 
-  /* Widget Border Colors */
-  .event-widget { border-color: #FF6347; }
-  .task-widget { border-color: #4682B4; }
-  .org-widget { border-color: #32CD32; }
+  .lni {
+    margin-right: 8px;
+    font-size: 20px;
+    flex-shrink: 0;
+  }
 
-  /* Color Palette for Widgets */
-  .color1 { color: #FF4500; }
-  .color2 { color: #FFD700; }
-  .color3 { color: #90EE90; }
-  .color4 { color: #00BFFF; }
-  .color5 { color: #9932CC; }
-  .color6 { color: #FF69B4; }
-  .color7 { color: #FFA500; }
+  .gradient-text {
+    background: linear-gradient(to left, var(--start-color), var(--end-color));
+    -webkit-background-clip: text;
+    color: transparent;
+  }
 </style>
 </head>
 <body>
 <div class="container my-3">
-  <h1 class="text-center text-light mb-4">AR Gigwork Eco-Village</h1>
+  <h1 class="text-center gradient-text mb-4">AR Gigwork Eco-Village</h1>
   
   <div class="row">
     <!-- Events Column -->
     <div class="col-lg-4">
-      <div class="widget event-widget">
-        <h2 class="header color1">Events</h2>
-        <div class="widget-item color2">Live Concerts</div>
-        <div class="widget-item color3">Art Exhibitions</div>
-        <div class="widget-item color4">Tech Meetups</div>
-        <div class="widget-item color5">Food Festivals</div>
-        <div class="widget-item color6">Workshops</div>
-        <div class="widget-item color7">Community Service</div>
-        <!-- Add more widgets as needed -->
+      <div class="widget">
+        <h2 class="header gradient-text">Events</h2>
+        <div class="widget-item"><i class="lni lni-mic"></i> Live Concerts</div>
+        <div class="widget-item"><i class="lni lni-brush"></i> Art Exhibitions</div>
+        <div class="widget-item"><i class="lni lni-laptop-phone"></i> Tech Meetups</div>
+        <!-- Add more widgets with linear icons as needed -->
       </div>
     </div>
     
     <!-- Tasks Column -->
     <div class="col-lg-4">
-      <div class="widget task-widget">
-        <h2 class="header color4">Tasks</h2>
-        <div class="widget-item color5">Daily Goals</div>
-        <div class="widget-item color6">Project Milestones</div>
-        <div class="widget-item color7">Collaborative Assignments</div>
-        <div class="widget-item color1">Personal Errands</div>
-        <div class="widget-item color2">Fitness Challenges</div>
-        <div class="widget-item color3">Learning Objectives</div>
-        <!-- Add more widgets as needed -->
+      <div class="widget">
+        <h2 class="header gradient-text">Tasks</h2>
+        <div class="widget-item"><i class="lni lni-calendar"></i> Daily Goals</div>
+        <div class="widget-item"><i class="lni lni-target"></i> Project Milestones</div>
+        <!-- Add more widgets with linear icons as needed -->
       </div>
     </div>
     
     <!-- Organizations Column -->
     <div class="col-lg-4">
-      <div class="widget org-widget">
-        <h2 class="header color3">Organizations</h2>
-        <div class="widget-item color4">Non-Profits</div>
-        <div class="widget-item color5">Local Businesses</div>
-        <div class="widget-item color6">Startups</div>
-        <div class="widget-item color7">Clubs</div>
-        <div class="widget-item color1">Social Groups</div>
-        <div class="widget-item color2">Co-ops</div>
-        <!-- Add more widgets as needed -->
+      <div class="widget">
+        <h2 class="header gradient-text">Organizations</h2>
+        <div class="widget-item"><i class="lni lni-world"></i> Non-Profits</div>
+        <div class="widget-item"><i class="lni lni-users"></i> Local Businesses</div>
+        <!-- Add more widgets with linear icons as needed -->
       </div>
     </div>
   </div>
 </div>
+
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
