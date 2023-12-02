@@ -3,97 +3,90 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AR Gigwork Eco-Village - Dark Mode</title>
+<title>AR Gigwork Eco-Village</title>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
 <style>
   body {
-    background-color: #282828; /* Dark background */
-    color: #e0e0e0; /* Light text for contrast */
+    background: #121212; /* Dark background */
     font-family: 'Arial', sans-serif;
   }
   .widget {
-    background: #333; /* Dark widget background */
+    background: rgba(255, 255, 255, 0.05); /* Very dark widgets with a hint of visibility */
     border-radius: 8px;
     margin: 10px 0;
     padding: 15px;
-    border-left: 5px solid; /* Colorful border on the left */
+    border-left: 5px solid; /* Solid color border on the left */
     transition: all 0.3s ease;
   }
   .widget:hover {
-    transform: scale(1.02);
+    background: rgba(255, 255, 255, 0.1); /* Slightly lighter on hover */
   }
   .header {
     font-weight: bold;
     margin-bottom: 10px;
     text-align: center;
+    color: #e0e0e0;
   }
   .widget-item {
-    background: #3a3a3a; /* Widget item background */
+    color: #e0e0e0;
     padding: 10px;
     margin: 5px 0;
     border-radius: 5px;
+    transition: all 0.3s ease;
     display: flex;
     align-items: center;
-    transition: all 0.3s ease;
   }
-  .widget-item:hover {
-    background: #4a4a4a;
-  }
-  .lnr {
-    font-size: 20px;
+  .widget-item i {
     margin-right: 10px;
   }
+  /* Gradient colors for widgets */
+  .event-widget { border-color: #FF6F61; }
+  .task-widget { border-color: #6B5B95; }
+  .org-widget { border-color: #88B04B; }
 
-  /* Gradient Colors for Widgets */
-  .widget:nth-child(1) { border-left-color: #6a1b9a; } /* Deep Purple */
-  .widget:nth-child(2) { border-left-color: #7b1fa2; }
-  .widget:nth-child(3) { border-left-color: #8e24aa; }
-  .widget:nth-child(4) { border-left-color: #9c27b0; }
-  .widget:nth-child(5) { border-left-color: #ab47bc; }
-  .widget:nth-child(6) { border-left-color: #ba68c8; } /* Light Purple */
+  /* Gradient color for widget items */
+  .widget-item:nth-child(odd) { background: #333333; }
+  .widget-item:nth-child(even) { background: #444444; }
 </style>
 </head>
 <body>
 <div class="container my-3">
-  <h1 class="text-center text-light mb-4">AR Gigwork Eco-Village - Dark Mode</h1>
+  <h1 class="text-center text-light mb-4">AR Gigwork Eco-Village</h1>
   
   <div class="row">
-    <!-- Column 1 -->
+    <!-- Events Column -->
     <div class="col-lg-4">
-      <div class="widget">
-        <h2 class="header">Events</h2>
-        <div class="widget-item"><i class="lnr lnr-calendar-full"></i>Live Concerts</div>
-        <div class="widget-item"><i class="lnr lnr-frame-expand"></i>Art Exhibitions</div>
-        <!-- More widgets -->
+      <div class="widget event-widget">
+        <h2 class="header"><i class="fas fa-calendar-alt"></i> Events</h2>
+        <div class="widget-item"><i class="fas fa-music"></i> Live Concerts</div>
+        <div class="widget-item"><i class="fas fa-paint-brush"></i> Art Exhibitions</div>
+        <!-- ... more items ... -->
       </div>
-      <!-- More widgets with different icons and descriptions -->
     </div>
     
-    <!-- Column 2 -->
+    <!-- Tasks Column -->
     <div class="col-lg-4">
-      <div class="widget">
-        <h2 class="header">Tasks</h2>
-        <div class="widget-item"><i class="lnr lnr-list"></i>Today's Agenda</div>
-        <div class="widget-item"><i class="lnr lnr-clock"></i>Upcoming Deadlines</div>
-        <!-- More widgets -->
+      <div class="widget task-widget">
+        <h2 class="header"><i class="fas fa-tasks"></i> Tasks</h2>
+        <div class="widget-item"><i class="fas fa-briefcase"></i> Work Projects</div>
+        <!-- ... more items ... -->
       </div>
-      <!-- More widgets with different icons and descriptions -->
     </div>
     
-    <!-- Column 3 -->
+    <!-- Organizations Column -->
     <div class="col-lg-4">
-      <div class="widget">
-        <h2 class="header">Organizations</h2>
-        <div class="widget-item"><i class="lnr lnr-apartment"></i>Non-Profits</div>
-        <div class="widget-item"><i class="lnr lnr-store"></i>Local Businesses</div>
-        <!-- More widgets -->
+      <div class="widget org-widget">
+        <h2 class="header"><i class="fas fa-users"></i> Organizations</h2>
+        <div class="widget-item"><i class="fas fa-tree"></i> Environmental Groups</div>
+        <!-- ... more items ... -->
       </div>
-      <!-- More widgets with different icons and descriptions -->
     </div>
   </div>
 </div>
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
