@@ -3,20 +3,21 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AR Gigwork Eco-Village</title>
+<title>AR Gigwork Eco-Village - Dark Mode</title>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.min.css">
+<link rel="stylesheet" href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css">
 <style>
   body {
-    background: #121212; /* Dark background */
+    background-color: #282828; /* Dark background */
     color: #e0e0e0; /* Light text for contrast */
     font-family: 'Arial', sans-serif;
   }
   .widget {
-    background: rgba(50, 50, 50, 0.8); /* Semi-transparent dark widget background */
+    background: #333; /* Dark widget background */
     border-radius: 8px;
     margin: 10px 0;
     padding: 15px;
+    border-left: 5px solid; /* Colorful border on the left */
     transition: all 0.3s ease;
   }
   .widget:hover {
@@ -32,66 +33,67 @@
     padding: 10px;
     margin: 5px 0;
     border-radius: 5px;
+    display: flex;
+    align-items: center;
     transition: all 0.3s ease;
   }
   .widget-item:hover {
     background: #4a4a4a;
   }
-  /* Linear Icons */
-  .icon {
-    font-size: 24px;
-    vertical-align: middle;
-    margin-right: 8px;
+  .lnr {
+    font-size: 20px;
+    margin-right: 10px;
   }
 
-  /* Smooth Gradient for Headers */
-  .header-gradient {
-    background: linear-gradient(to right, #ff5e62, #ff9966, #ff5e62);
-    color: #fff;
-    padding: 10px;
-    border-radius: 5px;
-  }
+  /* Gradient Colors for Widgets */
+  .widget:nth-child(1) { border-left-color: #6a1b9a; } /* Deep Purple */
+  .widget:nth-child(2) { border-left-color: #7b1fa2; }
+  .widget:nth-child(3) { border-left-color: #8e24aa; }
+  .widget:nth-child(4) { border-left-color: #9c27b0; }
+  .widget:nth-child(5) { border-left-color: #ab47bc; }
+  .widget:nth-child(6) { border-left-color: #ba68c8; } /* Light Purple */
 </style>
 </head>
 <body>
 <div class="container my-3">
-  <h1 class="text-center text-light mb-4">AR Gigwork Eco-Village</h1>
+  <h1 class="text-center text-light mb-4">AR Gigwork Eco-Village - Dark Mode</h1>
   
   <div class="row">
-    <!-- Events Column -->
+    <!-- Column 1 -->
     <div class="col-lg-4">
       <div class="widget">
-        <div class="header-gradient">Events <i class="icon icon-event"></i></div>
-        <div class="widget-item">Live Concerts</div>
-        <div class="widget-item">Art Exhibitions</div>
-        <!-- Add more widget items -->
+        <h2 class="header">Events</h2>
+        <div class="widget-item"><i class="lnr lnr-calendar-full"></i>Live Concerts</div>
+        <div class="widget-item"><i class="lnr lnr-frame-expand"></i>Art Exhibitions</div>
+        <!-- More widgets -->
       </div>
+      <!-- More widgets with different icons and descriptions -->
     </div>
     
-    <!-- Tasks Column -->
+    <!-- Column 2 -->
     <div class="col-lg-4">
       <div class="widget">
-        <div class="header-gradient">Tasks <i class="icon icon-list"></i></div>
-        <div class="widget-item">Daily Goals</div>
-        <div class="widget-item">Project Milestones</div>
-        <!-- Add more widget items -->
+        <h2 class="header">Tasks</h2>
+        <div class="widget-item"><i class="lnr lnr-list"></i>Today's Agenda</div>
+        <div class="widget-item"><i class="lnr lnr-clock"></i>Upcoming Deadlines</div>
+        <!-- More widgets -->
       </div>
+      <!-- More widgets with different icons and descriptions -->
     </div>
     
-    <!-- Organizations Column -->
+    <!-- Column 3 -->
     <div class="col-lg-4">
       <div class="widget">
-        <div class="header-gradient">Organizations <i class="icon icon-people"></i></div>
-        <div class="widget-item">Non-Profits</div>
-        <div class="widget-item">Local Businesses</div>
-        <!-- Add more widget items -->
+        <h2 class="header">Organizations</h2>
+        <div class="widget-item"><i class="lnr lnr-apartment"></i>Non-Profits</div>
+        <div class="widget-item"><i class="lnr lnr-store"></i>Local Businesses</div>
+        <!-- More widgets -->
       </div>
+      <!-- More widgets with different icons and descriptions -->
     </div>
   </div>
 </div>
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-</body>
-</html>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></
