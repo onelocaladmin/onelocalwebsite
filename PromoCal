@@ -4,7 +4,6 @@
 <title>Calendar Embed</title>
 </head>
 <body>
-
 <iframe src="https://calendar.google.com/calendar/embed?src=eee1ed2e37fb2353ff76fca55d69af14fe977e335090c75a798e15c260b6f1a8%40group.calendar.google.com&ctz=America%2FDenver" style="border: 0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
 </body>
 </html>
