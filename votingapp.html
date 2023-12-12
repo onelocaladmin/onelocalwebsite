@@ -3,54 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Organizational Voting System</title>
-    <!-- Add CSS links here (if any) -->
+    <title>DAO Political Engagement</title>
+    <!-- Add link to CSS file -->
+    <!-- Add link to JavaScript file if necessary -->
 </head>
 <body>
     <header>
-        <img src="path_to_logo.png" alt="Organization Logo">
-        <h1>Vote on Bylaw Amendment - Addition of 'Investor' Stakeholder Class</h1>
-        <div class="user-profile">
-            <!-- User profile and logout functionality here -->
-        </div>
+        <nav>
+            <ul>
+                <li><a href="#home">Indy Dao</a></li>
+                <li><a href="#dao-governance">Dao Governance</a></li>
+                <li><a href="#political-engagement">Political Engagement</a></li>
+            </ul>
+        </nav>
     </header>
 
     <main>
-        <section id="voting-section">
-            <h2>Proposal Summary</h2>
-            <p>Brief description of the proposal...</p>
-
-            <form id="voting-form">
-                <input type="radio" id="yes" name="vote" value="yes">
-                <label for="yes">Yes</label><br>
-
-                <input type="radio" id="no" name="vote" value="no">
-                <label for="no">No</label><br>
-
-                <input type="radio" id="abstain" name="vote" value="abstain">
-                <label for="abstain">Abstain</label><br>
-
-                <button type="submit">Submit Vote</button>
-            </form>
-        </section>
-
-        <section id="information-section">
-            <h2>Detailed Proposal</h2>
-            <p>Full text of the proposed bylaw change...</p>
-            <!-- More content here -->
-        </section>
-
-        <section id="discussion-forum">
-            <h2>Discussion Forum</h2>
-            <!-- Forum content and functionality here -->
+        <section id="proposal">
+            <h1>Policy Proposal</h1>
+            <p>The Non-related per-household limit should be increased to 7 non-related tenants per household.</p>
+            <div id="voting-results">
+                <label for="yes-bar">Yes</label>
+                <progress id="yes-bar" value="70" max="100">70%</progress>
+                <label for="no-bar">No</label>
+                <progress id="no-bar" value="30" max="100">30%</progress>
+            </div>
         </section>
     </main>
 
+    <aside id="discussion">
+        <h2>Discussion Forum</h2>
+        <!-- Discussion forum content will be dynamically generated -->
+    </aside>
+
     <footer>
-        <p>Contact information and links...</p>
-        <!-- More footer content here -->
+        <!-- Footer content: Copyright, legal info, contact links, etc. -->
     </footer>
 
-    <!-- Add JavaScript files here (if any) -->
+    <!-- JavaScript files would be linked here -->
 </body>
 </html>
