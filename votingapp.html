@@ -3,68 +3,58 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DAO Governance</title>
+    <title>Political Engagement</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
+        /* Basic reset and styles */
+        body, h1, h2, ul, li {
             margin: 0;
             padding: 0;
-            display: flex;
-            flex-direction: column;
         }
+        body {
+            font-family: Arial, sans-serif;
+        }
+        /* Top navigation bar styles */
         .top-nav {
             background-color: #f1f1f1;
             padding: 10px;
             display: flex;
             justify-content: space-between;
-            align-items: center;
         }
-        .filter-sidebar {
-            width: 20%;
+        /* Sidebar styles */
+        .sidebar {
+            width: 200px;
+            float: left;
             background-color: #e9ecef;
             padding: 20px;
-            box-sizing: border-box;
         }
-        .proposal-list {
-            width: 80%;
+        .sidebar ul {
+            list-style-type: none;
+        }
+        .sidebar li {
+            padding: 5px 0;
+        }
+        /* Main content styles */
+        .main-content {
+            margin-left: 200px;
             padding: 20px;
-            box-sizing: border-box;
         }
-        .proposal {
+        .main-content section {
+            margin-bottom: 20px;
+            padding: 10px;
             background-color: #fff;
             border: 1px solid #ddd;
-            padding: 10px;
-            margin-bottom: 10px;
         }
-        .proposal-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .proposal-title {
-            font-weight: bold;
-        }
-        .proposal-status {
-            padding: 2px 5px;
-            border-radius: 5px;
-            color: #fff;
-        }
-        .rejected {
-            background-color: #dc3545;
-        }
-        .submit-button {
-            padding: 10px 20px;
-            background-color: #007bff;
+        .main-content button {
+            padding: 5px 10px;
+            background-color: blue;
             color: white;
             border: none;
-            border-radius: 5px;
-            cursor: pointer;
         }
-        /* Responsive design */
-        @media (max-width: 768px) {
-            .filter-sidebar, .proposal-list {
-                width: 100%;
-            }
+        /* Clearfix for the float */
+        .clearfix::after {
+            content: "";
+            clear: both;
+            display: table;
         }
     </style>
 </head>
@@ -74,24 +64,30 @@
         <div>Dao Governance</div>
         <div>Political Engagement</div>
     </div>
-    <div class="container">
-        <aside class="filter-sidebar">
-            <!-- Filter options here -->
+    <div class="clearfix">
+        <aside class="sidebar">
+            <ul>
+                <li>Lean Policy</li>
+                <li>Healthcare</li>
+                <!-- Add other categories here -->
+            </ul>
         </aside>
-        <main class="proposal-list">
-            <!-- Proposals will be listed here -->
-            <div class="proposal">
-                <div class="proposal-header">
-                    <span class="proposal-title">Test Grant Round</span>
-                    <span class="proposal-status rejected">REJECTED</span>
-                </div>
-                <div>GRANTMAKING - Ended Dec 01, 2023</div>
-            </div>
-            <!-- Repeat for each proposal -->
-        </main>
+        <div class="main-content">
+            <section>
+                <h2>Reps</h2>
+                <!-- Representative details go here -->
+            </section>
+            <section>
+                <h2>Individual Candidates</h2>
+                <!-- Candidate details and voting mechanism go here -->
+                <button>Allocate seeds</button>
+            </section>
+            <section>
+                <h2>Issues</h2>
+                <!-- Issues list goes here -->
+            </section>
+            <!-- Additional sections for votes and policies can be added here -->
+        </div>
     </div>
-    <footer>
-        <!-- Footer content here -->
-    </footer>
 </body>
 </html>
