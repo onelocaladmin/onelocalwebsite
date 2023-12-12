@@ -14,68 +14,68 @@
             height: 100vh;
         }
         header, footer {
-            background-color: #f4f4f4;
+            background-color: #f1f1f1;
             padding: 10px;
             text-align: center;
         }
-        .container {
+        .main-content {
             flex: 1;
-            padding: 20px;
             display: flex;
             flex-direction: row;
             justify-content: space-around;
-            flex-wrap: wrap;
+            padding: 20px;
         }
         .column {
-            flex: 1;
+            width: 30%;
             padding: 10px;
-            min-width: 300px;
         }
-        .vote-button {
-            margin-top: 10px;
-        }
-        @media (max-width: 600px) {
-            .container {
+        @media (max-width: 768px) {
+            .main-content {
                 flex-direction: column;
             }
+            .column {
+                width: 100%;
+            }
+        }
+        .vote-button {
+            cursor: pointer;
+            padding: 5px 10px;
+            background-color: blue;
+            color: white;
+            border: none;
+            border-radius: 5px;
         }
     </style>
+    <script>
+        function submitVote() {
+            // Placeholder for submit vote logic
+            alert("Vote submitted!");
+        }
+    </script>
 </head>
 <body>
     <header>
         <h1>Vote on Bylaw Amendment - Addition of 'Investor' Stakeholder Class</h1>
     </header>
-
-    <div class="container">
+    <div class="main-content">
         <div class="column">
-            <h2>Vote</h2>
-            <form id="voteForm">
-                <label><input type="radio" name="vote" value="yes"> Yes</label><br>
-                <label><input type="radio" name="vote" value="no"> No</label><br>
-                <label><input type="radio" name="vote" value="abstain"> Abstain</label><br>
-                <button type="submit" class="vote-button">Submit Vote</button>
-            </form>
+            <h2>Vote Here</h2>
+            <input type="radio" name="vote" id="yes" value="yes"><label for="yes">Yes</label><br>
+            <input type="radio" name="vote" id="no" value="no"><label for="no">No</label><br>
+            <input type="radio" name="vote" id="abstain" value="abstain"><label for="abstain">Abstain</label><br>
+            <button class="vote-button" onclick="submitVote()">Submit Vote</button>
         </div>
         <div class="column">
             <h2>Detailed Proposal</h2>
-            <p>Here is the detailed text of the proposed bylaw change...</p>
+            <p>Here is the detailed text of the proposal...</p>
         </div>
         <div class="column">
             <h2>Discussion Forum</h2>
             <p>Comments and discussions go here...</p>
         </div>
     </div>
-
     <footer>
-        <p>Contact information, FAQ, legal notice...</p>
+        <p>Contact Information | FAQ | Legal Notice</p>
     </footer>
-
-    <script>
-        document.getElementById('voteForm').addEventListener('submit', function(event) {
-            event.preventDefault();
-            alert('Your vote has been submitted!');
-            // Additional JavaScript to handle the voting logic
-        });
-    </script>
 </body>
 </html>
