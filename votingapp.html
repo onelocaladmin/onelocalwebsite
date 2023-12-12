@@ -4,42 +4,65 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DAO Political Engagement</title>
-    <!-- Add link to CSS file -->
-    <!-- Add link to JavaScript file if necessary -->
+    <!-- Replace 'styles.css' with the actual path to your CSS file -->
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+
+    <!-- Header with navigation tabs -->
     <header>
         <nav>
-            <ul>
-                <li><a href="#home">Indy Dao</a></li>
+            <ul id="nav-tabs">
+                <li><a href="#indy-dao">Indy Dao</a></li>
                 <li><a href="#dao-governance">Dao Governance</a></li>
                 <li><a href="#political-engagement">Political Engagement</a></li>
             </ul>
         </nav>
     </header>
 
+    <!-- Main content area with policy proposal and voting results -->
     <main>
-        <section id="proposal">
+        <section id="policy-proposal">
             <h1>Policy Proposal</h1>
             <p>The Non-related per-household limit should be increased to 7 non-related tenants per household.</p>
+            
+            <!-- Voting results with progress bars -->
             <div id="voting-results">
-                <label for="yes-bar">Yes</label>
-                <progress id="yes-bar" value="70" max="100">70%</progress>
-                <label for="no-bar">No</label>
-                <progress id="no-bar" value="30" max="100">30%</progress>
+                <div class="vote">
+                    <label for="yes-bar">Yes</label>
+                    <progress id="yes-bar" value="70" max="100">70%</progress>
+                    <span>70%</span>
+                </div>
+                <div class="vote">
+                    <label for="no-bar">No</label>
+                    <progress id="no-bar" value="30" max="100">30%</progress>
+                    <span>30%</span>
+                </div>
             </div>
         </section>
     </main>
 
-    <aside id="discussion">
+    <!-- Discussion Forum sidebar -->
+    <aside id="discussion-forum">
         <h2>Discussion Forum</h2>
-        <!-- Discussion forum content will be dynamically generated -->
+        <!-- Forum entries would be dynamically populated here -->
+        <div class="forum-entry">
+            <p class="user-comment">User Comment...</p>
+            <!-- Additional comments -->
+        </div>
+        <!-- Add form for new comments -->
+        <form id="new-comment-form">
+            <textarea id="new-comment" name="new-comment" placeholder="Write your comment..."></textarea>
+            <button type="submit">Post Comment</button>
+        </form>
     </aside>
 
+    <!-- Footer -->
     <footer>
-        <!-- Footer content: Copyright, legal info, contact links, etc. -->
+        <p>&copy; 2023 DAO Political Engagement Platform</p>
     </footer>
 
-    <!-- JavaScript files would be linked here -->
+    <!-- Replace 'scripts.js' with the actual path to your JavaScript file -->
+    <script src="scripts.js"></script>
 </body>
 </html>
