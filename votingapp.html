@@ -3,91 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Political Engagement</title>
-    <style>
-        /* Basic reset and styles */
-        body, h1, h2, ul, li {
-            margin: 0;
-            padding: 0;
-        }
-        body {
-            font-family: Arial, sans-serif;
-        }
-        /* Top navigation bar styles */
-        .top-nav {
-            background-color: #f1f1f1;
-            padding: 10px;
-            display: flex;
-            justify-content: space-between;
-        }
-        /* Sidebar styles */
-        .sidebar {
-            width: 200px;
-            float: left;
-            background-color: #e9ecef;
-            padding: 20px;
-        }
-        .sidebar ul {
-            list-style-type: none;
-        }
-        .sidebar li {
-            padding: 5px 0;
-        }
-        /* Main content styles */
-        .main-content {
-            margin-left: 200px;
-            padding: 20px;
-        }
-        .main-content section {
-            margin-bottom: 20px;
-            padding: 10px;
-            background-color: #fff;
-            border: 1px solid #ddd;
-        }
-        .main-content button {
-            padding: 5px 10px;
-            background-color: blue;
-            color: white;
-            border: none;
-        }
-        /* Clearfix for the float */
-        .clearfix::after {
-            content: "";
-            clear: both;
-            display: table;
-        }
-    </style>
+    <title>Organizational Voting System</title>
+    <!-- Add CSS links here (if any) -->
 </head>
 <body>
-    <div class="top-nav">
-        <div>Indy Dao</div>
-        <div>Dao Governance</div>
-        <div>Political Engagement</div>
-    </div>
-    <div class="clearfix">
-        <aside class="sidebar">
-            <ul>
-                <li>Lean Policy</li>
-                <li>Healthcare</li>
-                <!-- Add other categories here -->
-            </ul>
-        </aside>
-        <div class="main-content">
-            <section>
-                <h2>Reps</h2>
-                <!-- Representative details go here -->
-            </section>
-            <section>
-                <h2>Individual Candidates</h2>
-                <!-- Candidate details and voting mechanism go here -->
-                <button>Allocate seeds</button>
-            </section>
-            <section>
-                <h2>Issues</h2>
-                <!-- Issues list goes here -->
-            </section>
-            <!-- Additional sections for votes and policies can be added here -->
+    <header>
+        <img src="path_to_logo.png" alt="Organization Logo">
+        <h1>Vote on Bylaw Amendment - Addition of 'Investor' Stakeholder Class</h1>
+        <div class="user-profile">
+            <!-- User profile and logout functionality here -->
         </div>
-    </div>
+    </header>
+
+    <main>
+        <section id="voting-section">
+            <h2>Proposal Summary</h2>
+            <p>Brief description of the proposal...</p>
+
+            <form id="voting-form">
+                <input type="radio" id="yes" name="vote" value="yes">
+                <label for="yes">Yes</label><br>
+
+                <input type="radio" id="no" name="vote" value="no">
+                <label for="no">No</label><br>
+
+                <input type="radio" id="abstain" name="vote" value="abstain">
+                <label for="abstain">Abstain</label><br>
+
+                <button type="submit">Submit Vote</button>
+            </form>
+        </section>
+
+        <section id="information-section">
+            <h2>Detailed Proposal</h2>
+            <p>Full text of the proposed bylaw change...</p>
+            <!-- More content here -->
+        </section>
+
+        <section id="discussion-forum">
+            <h2>Discussion Forum</h2>
+            <!-- Forum content and functionality here -->
+        </section>
+    </main>
+
+    <footer>
+        <p>Contact information and links...</p>
+        <!-- More footer content here -->
+    </footer>
+
+    <!-- Add JavaScript files here (if any) -->
 </body>
 </html>
