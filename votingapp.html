@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Organizational Voting System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+        header, footer {
+            background-color: #f4f4f4;
+            padding: 10px;
+            text-align: center;
+        }
+        .container {
+            flex: 1;
+            padding: 20px;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+        .column {
+            flex: 1;
+            padding: 10px;
+            min-width: 300px;
+        }
+        .vote-button {
+            margin-top: 10px;
+        }
+        @media (max-width: 600px) {
+            .container {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Vote on Bylaw Amendment - Addition of 'Investor' Stakeholder Class</h1>
+    </header>
+
+    <div class="container">
+        <div class="column">
+            <h2>Vote</h2>
+            <form id="voteForm">
+                <label><input type="radio" name="vote" value="yes"> Yes</label><br>
+                <label><input type="radio" name="vote" value="no"> No</label><br>
+                <label><input type="radio" name="vote" value="abstain"> Abstain</label><br>
+                <button type="submit" class="vote-button">Submit Vote</button>
+            </form>
+        </div>
+        <div class="column">
+            <h2>Detailed Proposal</h2>
+            <p>Here is the detailed text of the proposed bylaw change...</p>
+        </div>
+        <div class="column">
+            <h2>Discussion Forum</h2>
+            <p>Comments and discussions go here...</p>
+        </div>
+    </div>
+
+    <footer>
+        <p>Contact information, FAQ, legal notice...</p>
+    </footer>
+
+    <script>
+        document.getElementById('voteForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            alert('Your vote has been submitted!');
+            // Additional JavaScript to handle the voting logic
+        });
+    </script>
+</body>
+</html>
