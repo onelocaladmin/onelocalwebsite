@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Festive Interface</title>
+<title>Festive Interface with Heavy Snowfall</title>
 <style>
   body {
     font-family: 'Arial', sans-serif;
@@ -20,7 +20,6 @@
     position: fixed;
     opacity: 0.8;
     animation-name: fall;
-    animation-duration: 10s;
     animation-timing-function: linear;
     animation-iteration-count: infinite;
   }
@@ -63,20 +62,21 @@
 <body>
   <!-- Snowflakes -->
   <script>
-    // JavaScript to create snowflakes
+    // JavaScript to create a heavy snow effect
     window.addEventListener('DOMContentLoaded', (event) => {
-      const snowflake = '❄';
-      const numberOfSnowflakes = 50;
+      const snowflakeChar = '❄';
+      const numberOfSnowflakes = 200; // Increase the number of snowflakes for a heavier snow effect
 
       for (let i = 0; i < numberOfSnowflakes; i++) {
         const element = document.createElement('div');
         element.classList.add('snowflake');
-        element.innerHTML = snowflake;
+        element.innerHTML = snowflakeChar;
         document.body.appendChild(element);
         setTimeout(() => {
           element.style.cssText += `left: ${Math.random() * 100}vw;`;
-          element.style.cssText += `animation-duration: ${Math.random() * 3 + 2}s;`;
-          element.style.cssText += `font-size: ${Math.random() * 24 + 10}px;`;
+          element.style.cssText += `animation-duration: ${Math.random() * 5 + 3}s;`; // Varied animation durations
+          element.style.cssText += `font-size: ${Math.random() * 20 + 10}px;`; // Varied sizes for snowflakes
+          element.style.cssText += `opacity: ${Math.random() * 0.5 + 0.3};`; // Varied opacity for more depth
         }, 10);
       }
     });
