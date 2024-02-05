@@ -47,8 +47,8 @@
                 const maxDistance = 50;
 
                 if (distance < maxDistance) {
-                    this.x -= dx / distance;
-                    this.y -= dy / distance;
+                    this.speedX = -this.speedX; // Reverse horizontal speed
+                    this.speedY = -this.speedY; // Reverse vertical speed
                 }
 
                 this.x += this.speedX;
