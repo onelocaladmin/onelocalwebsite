@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Fibonacci Canvas</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: black;
+        }
+        svg {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+<svg id="canvas"></svg>
+<script>
+const svgNS = "http://www.w3.org/2000/svg";
+const colors = ["#FF5733", "#C70039", "#900C3F", "#581845", "#DAF7A6", "#FFC300", "#DAF7A6"];
+const width = window.innerWidth;
+const height = window.innerHeight;
+let canvas = document.getElementById("canvas");
+
+function getRandomColor() {
+    return colors[Math.floor(Math.random() * colors.length)];
+}
+
+function createFibonacciExplosion(x, y) {
+    const numDots = 50; // Number of dots in the burst
+    const phi = (1 + Math.sqrt(5)) / 2; // Golden ratio
+    for (let i = 0; i < numDots; i++) {
+        let distance = Math.sqrt(i) * 4; // Scale the distance for visual effect
+        let angle = i * 2 * Math.PI / phi;
+        let dotX = x + Math.cos(angle) * distance;
+        let dotY = y + Math.sin(angle) * distance;
+        let dot = document.createElementNS(svgNS, "circle");
+        dot.setAttribute("cx", dotX);
+        dot.setAttribute("cy", dotY);
+        dot.setAttribute("r", 2 + (i % 5)); // Varying sizes for aesthetic effect
+        dot.setAttribute("fill", getRandomColor());
+        canvas.appendChild(dot);
+
+        // Animation for flourish: grow and fade out
+        dot.animate([
+            { transform: 'scale(1)', opacity: 1 },
+            { transform: 'scale(2)', opacity: 0 }
+        ], {
+            duration: 1000 + i * 5, // Staggering the animation duration
+            easing: 'ease-out',
+            fill: 'forwards' // Keep the final state
+        });
+    }
+}
+
+canvas.addEventListener("click", (e) => {
+    createFibonacciExplosion(e.clientX, e.clientY);
+});
+
+</script>
+</body>
+</html>
