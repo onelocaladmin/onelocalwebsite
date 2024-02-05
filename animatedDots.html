@@ -32,12 +32,12 @@
 <script>
 // Colors of the dots
 const colors = ["#FCB711", "#F37021", "#CC004C", "#6460AA", "#0089D0", "#0DB14B"];
-const numDots = 100; // Number of dots to generate
+const numDots = 500; // Number of dots to generate
 
 for (let i = 0; i < numDots; i++) {
   const dot = document.createElement('div');
   dot.className = 'dot';
-  const size = Math.random() * 5 + 2; // Random size between 2px and 7px
+  const size = Math.random() * 5 + 3; // Random size between 2px and 7px
   dot.style.width = `${size}px`;
   dot.style.height = `${size}px`;
   dot.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
