@@ -3,67 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dancing Fibonacci and Flower of Life</title>
+    <title>Fibonacci Symphony</title>
     <style>
-        body {
+        body, html {
             margin: 0;
             padding: 0;
             overflow: hidden;
-            background-color: #000;
+            background-color: black;
         }
         svg {
             position: absolute;
-            top: 0;
-            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: visible;
         }
-        .fibonacci-dot {
-            animation: dance 5s infinite alternate;
-            transform-origin: center;
+        .dynamic-dot {
+            animation: drift 20s infinite linear, pulse 2s infinite alternate;
         }
-        @keyframes dance {
-            0% { transform: translateY(0); }
-            100% { transform: translateY(-10px); }
+        @keyframes drift {
+            from { transform: translate(0px, 0px); }
+            to { transform: translate(100vw, 100vh); }
+        }
+        @keyframes pulse {
+            0%, 100% { r: 2px; fill-opacity: 0.6; }
+            50% { r: 8px; fill-opacity: 1; }
+        }
+        .fibonacci-svg {
+            width: auto;
+            height: auto;
+            max-width: 100%;
+            max-height: 100%;
+            transform: translate(50%, 50%) scale(2);
         }
     </style>
 </head>
 <body>
-    <svg id="cosmos" width="87" height="87" viewBox="0 0 87 87" xmlns="http://www.w3.org/2000/svg">
-        <!-- Flower of Life Paths Here -->
-        <!-- ... Your Flower of Life SVG Paths ... -->
-    </svg>
-    <script>
-        const svgNS = "http://www.w3.org/2000/svg";
-
-        function createFibonacciDot(x, y, r, color) {
-            let svg = document.getElementById('cosmos');
-            let dot = document.createElementNS(svgNS, "circle");
-            dot.setAttribute("cx", x);
-            dot.setAttribute("cy", y);
-            dot.setAttribute("r", r);
-            dot.setAttribute("fill", color);
-            dot.setAttribute("stroke", "#000"); // Add a black stroke
-            dot.setAttribute("stroke-width", "1"); // Set the stroke width to 1px
-            dot.setAttribute("class", "fibonacci-dot");
-            svg.appendChild(dot);
-        }
-
-        function generateFibonacciSpiral() {
-            const numDots = 144; // A Fibonacci number
-            let phi = (1 + Math.sqrt(5)) / 2; // Golden ratio
-            for (let i = 0; i < numDots; i++) {
-                let distance = Math.sqrt(i) * 12;
-                let angle = i * phi * Math.PI * 2;
-                let x = window.innerWidth / 2 + Math.cos(angle) * distance;
-                let y = window.innerHeight / 2 + Math.sin(angle) * distance;
-                createFibonacciDot(x, y, Math.max(2 * (i / numDots), 2), getRandomColor()); // Adjusted for more size variation
-            }
-        }
-
-        function getRandomColor() {
-            return "#" + ((1 << 24) * Math.random() | 0).toString(16);
-        }
-
-        generateFibonacciSpiral();
-    </script>
+<svg id="cosmos" viewBox="0 0 87 87" fill="none" xmlns="http://www.w3.org/2000/svg" class="fibonacci-svg">
+    <!-- Fibonacci SVG Paths -->
+    <!-- Insert all the given SVG paths here -->
+</svg>
+<script>
+// Rest of your JavaScript code here
+</script>
 </body>
 </html>
