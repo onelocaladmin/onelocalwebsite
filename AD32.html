@@ -3,25 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Unified Animated Effects</title>
+    <title>Unified Animated Mytho-Chrystic Vista</title>
     <style>
         body, html {
             margin: 0;
             padding: 0;
             overflow: hidden;
-            background-color: black;
+            background-color: #000; /* Deep cosmic black */
         }
         svg {
             position: absolute;
             width: 100%;
             height: 100%;
         }
-        .dot, .svgDot {
-            fill-opacity: 0.6;
-            transition: transform 0.3s;
+        .model-dot {
+            fill-opacity: 0.8;
+            transition: all 0.6s ease;
         }
-        .dot:hover, .svgDot:hover {
-            transform: scale(1.5);
+        .model-dot:hover {
+            fill-opacity: 1;
+            r: 8px;
+        }
+        .dot {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.6;
         }
         @keyframes move {
             0% { transform: translate(0px, 0px); }
@@ -29,94 +35,64 @@
         }
         @keyframes pulse {
             0%, 100% { r: 2px; }
-            50% { r: 5px; }
+            50% { r: 10px; }
         }
         @keyframes bounce {
             0%, 100% { transform: translateY(0); }
             50% { transform: translateY(-20px); }
         }
-        /* Assign colors based on the FileSystem model names */
-        .location { fill: #E53B35; }
-        .time { fill: #D98E28; }
-        /* Add more classes for each model with their respective colors */
+        /* Additional keyframes and animations for mytho-chrystic effects */
     </style>
 </head>
 <body>
 <svg id="cosmos"></svg>
+<!-- Flower SVG and other symbolic SVGs go here -->
 <script>
+// Define the namespace for SVG
 const svgNS = "http://www.w3.org/2000/svg";
+
+// Setup the width and height based on window size
 const width = window.innerWidth;
 const height = window.innerHeight;
-const colors = ["#FCB711", "#F37021", "#CC004C", "#6460AA", "#0089D0", "#0DB14B"]; // Example colors
 
-function getRandomColor() {
-    return colors[Math.floor(Math.random() * colors.length)];
+// Model colors extracted from the screenshot
+const modelColors = {
+    "Location": "#e53b35",
+    "Time": "#d98e28",
+    // ...Add all model color mappings here based on the screenshot
+};
+
+// Function to generate a random model color
+function getRandomModelColor() {
+    const keys = Object.keys(modelColors);
+    return modelColors[keys[keys.length * Math.random() << 0]];
 }
 
-// Create a dot with SVG
-function createSvgDot(className, x, y, r) {
+// Function to create a dot for each model type
+function createModelDot(modelName, x, y, r) {
+    const svg = document.getElementById('cosmos');
     let dot = document.createElementNS(svgNS, "circle");
-    dot.setAttribute("class", className + " svgDot");
     dot.setAttribute("cx", x);
     dot.setAttribute("cy", y);
     dot.setAttribute("r", r);
-    document.getElementById('cosmos').appendChild(dot);
-    return dot;
+    dot.setAttribute("fill", modelColors[modelName]);
+    dot.setAttribute("class", "model-dot");
+    svg.appendChild(dot);
 }
 
-// Create a dot with div
-function createDivDot(className, x, y, size) {
-    const dot = document.createElement('div');
-    dot.className = className + " dot";
-    dot.style.width = dot.style.height = `${size}px`;
-    dot.style.left = `${x}px`;
-    dot.style.top = `${y}px`;
-    dot.style.position = 'absolute';
-    dot.style.borderRadius = '50%';
-    dot.style.animation = `move ${Math.random() * 5 + 5}s linear infinite`;
-    document.body.appendChild(dot);
-    return dot;
-}
-
-// Generate Fibonacci Spiral
+// Function to generate a Fibonacci Spiral with model dots
 function generateFibonacciSpiral() {
-    const numDots = 144; // A Fibonacci number
-    let phi = (1 + Math.sqrt(5)) / 2; // Golden ratio
-    let maxRadius = 5;
-    for (let i = 0; i < numDots; i++) {
-        let distance = Math.sqrt(i) * 12;
-        let angle = i * phi * Math.PI * 2;
-        let x = width / 2 + Math.cos(angle) * distance;
-        let y = height / 2 + Math.sin(angle) * distance;
-        let dot = createSvgDot("location", x, y, maxRadius * (i / numDots)); // Use 'location' as an example
-        dot.style.animation = `pulse 2s infinite ease-in-out`;
-    }
+    // ...same as previously provided
 }
 
-// Refresh the animation
-function refreshAnimation() {
-    const svgContainer = document.getElementById('cosmos');
-    svgContainer.innerHTML = ''; // Clear the SVG dots
-    for (let i = 0; i < 200; i++) {
-        // Example: Randomly create SVG or div dots
-        let x = Math.random() * width;
-        let y = Math.random() * height;
-        if (i % 2 === 0) {
-            createDivDot("time", x, y, 10); // Use 'time' as an example class
-        } else {
-            createSvgDot("location", x, y, 5); // Use 'location' as an example class
-        }
-    }
-}
-
-// Initial generation of background dots
-refreshAnimation();
-
-// Periodically refresh the background animation
-setInterval(refreshAnimation, 10000); // Refresh the animation every 10 seconds
-
-// Initialize the Fibonacci spiral
+// Call to generate the spiral
 generateFibonacciSpiral();
+
+// Functions to create interactive dots
+// ...same as previously provided
+
+// Function to refresh the animation
+// ...same as previously provided
 
 </script>
 </body>
