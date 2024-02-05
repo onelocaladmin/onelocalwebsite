@@ -62,14 +62,18 @@ function getRandomColor() {
 }
 
 function createFibonacciDot(x, y, r, color) {
+    let svg = document.getElementById('cosmos');
     let dot = document.createElementNS(svgNS, "circle");
     dot.setAttribute("cx", x);
     dot.setAttribute("cy", y);
     dot.setAttribute("r", r);
     dot.setAttribute("fill", color);
+    dot.setAttribute("stroke", "#000"); // Add a black stroke
+    dot.setAttribute("stroke-width", "1"); // Set the stroke width to 1px
     dot.setAttribute("class", "fibonacci-dot");
-    cosmos.appendChild(dot);
+    svg.appendChild(dot);
 }
+
 
 function generateFibonacciSpiral() {
     const numDots = 144; // A Fibonacci number
