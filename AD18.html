@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Unified Animated Symphony</title>
+    <title>Web Waltz: A Symphony of Animation</title>
     <style>
         body, html {
             margin: 0;
@@ -11,30 +11,34 @@
             overflow: hidden;
             background-color: black;
         }
+        .dot, .svg-dot {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.6;
+        }
         svg {
             position: absolute;
             width: 100%;
             height: 100%;
         }
-        .animated-dot {
-            animation: drift 10s infinite linear, pulse 5s infinite ease-in-out;
-        }
-        @keyframes drift {
-            from { transform: translate(0px, 0px); }
-            to { transform: translate(calc(100vw - 100%), calc(100vh - 100%)); }
-        }
-        @keyframes pulse {
-            0%, 100% { r: 5px; }
-            50% { r: 10px; }
-        }
-        .moving-dot {
-            position: absolute;
-            border-radius: 50%;
-            animation: move 10s infinite linear;
-        }
         @keyframes move {
             0% { transform: translate(0px, 0px); }
             100% { transform: translate(calc(100vw - 100%), calc(100vh - 100%)); }
+        }
+        @keyframes pulse {
+            0%, 100% { r: 2px; }
+            50% { r: 10px; }
+        }
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+        @keyframes waltz {
+            0% { transform: rotate(0deg); }
+            25% { transform: rotate(90deg); }
+            50% { transform: rotate(180deg); }
+            75% { transform: rotate(270deg); }
+            100% { transform: rotate(360deg); }
         }
     </style>
 </head>
@@ -44,48 +48,62 @@ const svgNS = "http://www.w3.org/2000/svg";
 const colors = ["#FCB711", "#F37021", "#CC004C", "#6460AA", "#0089D0", "#0DB14B"];
 const width = window.innerWidth;
 const height = window.innerHeight;
-let svg = document.createElementNS(svgNS, "svg");
-document.body.appendChild(svg);
+document.body.innerHTML = '<svg></svg>'; // Initialize SVG container
+let svg = document.querySelector('svg');
 
 function getRandomColor() {
     return colors[Math.floor(Math.random() * colors.length)];
 }
 
-// Create SVG Dots with Varied Sizes and Animations
-function createSvgDot() {
-    let dot = document.createElementNS(svgNS, "circle");
-    dot.setAttribute("class", "animated-dot");
-    dot.setAttribute("fill", getRandomColor());
-    let size = Math.random() * 10 + 5; // Random size between 5px and 15px for more variation
-    dot.setAttribute("r", size);
-    dot.setAttribute("cx", Math.random() * width);
-    dot.setAttribute("cy", Math.random() * height);
-    svg.appendChild(dot);
-}
-
-// Create Moving Div Dots with Varied Sizes
-function createMovingDot() {
+function createDivDot() {
     const dot = document.createElement('div');
-    dot.className = 'moving-dot';
-    let size = Math.random() * 20 + 5; // Increased size range for more variation
-    dot.style.width = `${size}px`;
-    dot.style.height = `${size}px`;
+    dot.className = 'dot';
+    const size = Math.random() * 20 + 5; // Enlarged range for more variability
+    dot.style.width = dot.style.height = `${size}px`;
     dot.style.backgroundColor = getRandomColor();
-    dot.style.top = `${Math.random() * 100}vh`;
-    dot.style.left = `${Math.random() * 100}vw`;
+    dot.style.top = `${Math.random() * height}px`;
+    dot.style.left = `${Math.random() * width}px`;
+    dot.style.animation = `move ${Math.random() * 5 + 5}s linear infinite, pulse 2s infinite ease-in-out`;
     document.body.insertBefore(dot, svg);
 }
 
-// Populate the Scene with Both SVG and Div Dots
-function populateScene() {
-    const totalDots = 500; // Combined total of SVG and Div dots
+function createSvgDot() {
+    let dot = document.createElementNS(svgNS, "circle");
+    dot.setAttribute("class", "svg-dot");
+    dot.setAttribute("fill", getRandomColor());
+    dot.setAttribute("cx", Math.random() * width);
+    dot.setAttribute("cy", Math.random() * height);
+    dot.setAttribute("r", Math.random() * 20 + 5); // Enlarged range for more variability
+    dot.style.animation = `bounce ${Math.random() * 5 + 5}s infinite ease-in-out, waltz ${Math.random() * 10 + 10}s infinite linear`;
+    svg.appendChild(dot);
+}
+
+function refreshAnimation() {
+    document.body.innerHTML = '<svg></svg>'; // Clear and recreate the SVG container for refresh
+    svg = document.querySelector('svg');
+
+    const totalDots = 300; // Adjusted total dots for visual density
     for (let i = 0; i < totalDots; i++) {
-        if (i % 2 === 0) createSvgDot(); // Alternate between creating SVG and Div dots
-        else createMovingDot();
+        if (i % 2 === 0) createDivDot(); // Alternate between div and SVG dots
+        else createSvgDot();
     }
 }
 
-populateScene();
+document.addEventListener('mousemove', (e) => {
+    const mouseX = e.clientX;
+    const mouseY = e.clientY;
+    svg.childNodes.forEach(dot => {
+        const dotX = dot.cx.baseVal.value;
+        const dotY = dot.cy.baseVal.value;
+        const distance = Math.sqrt(Math.pow(mouseX - dotX, 2) + Math.pow(mouseY - dotY, 2));
+        if (distance < 100) { // React to mouse proximity within 100 pixels
+            dot.setAttribute("r", parseFloat(dot.getAttribute("r")) + 0.2); // Slightly enlarge dot radius
+        }
+    });
+});
+
+refreshAnimation();
+setInterval(refreshAnimation, 150000); // Extended interval for viewing before refresh
 </script>
 </body>
 </html>
