@@ -3,64 +3,120 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Social Coordination FileSystem Promo</title>
+    <title>Mytho-Chrystic Cyberpunk Vista</title>
     <style>
         body, html {
             margin: 0;
             padding: 0;
             overflow: hidden;
-            background-color: #1E1E1E; /* Use a dark theme for cyberpunk feel */
-        }
-        /* Extracted colors from the screenshot will be named after the models */
-        :root {
-            --location-color: #E53B35; /* Example color, replace with actual */
-            --time-color: #D98E28; /* Example color, replace with actual */
-            /* Define other model colors here */
+            background-color: #000; /* Deep cosmic black */
         }
         svg {
             position: absolute;
             width: 100%;
             height: 100%;
         }
-        .dot, .svgDot {
-            /* Dynamic color application */
-            fill: var(--location-color);
-            /* Include more colors with specific classes */
+        .fibonacci-dot, .dynamic-dot {
+            fill-opacity: 0.8;
+            transition: all 0.6s ease;
         }
-        /* Rest of your styles for animations */
+        .fibonacci-dot:hover, .dynamic-dot:hover {
+            fill-opacity: 1;
+            r: 8px;
+        }
+        .dot {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.6;
+        }
+        @keyframes move {
+            0% { transform: translate(0px, 0px); }
+            100% { transform: translate(calc(100vw - 100%), calc(100vh - 100%)); }
+        }
+        @keyframes pulse {
+            0%, 100% { r: 2px; }
+            50% { r: 10px; }
+        }
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
     </style>
 </head>
 <body>
 <svg id="cosmos"></svg>
-<!-- Insert your SVG flower and other elements here -->
+<svg id="flower" width="100%" height="100%" viewBox="0 0 87 87" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <!-- Flower of Life SVG paths here -->
+</svg>
 <script>
 const svgNS = "http://www.w3.org/2000/svg";
 const width = window.innerWidth;
 const height = window.innerHeight;
+// Expanded color palette
+const colors = ["#FF0000", "#FFA500", "#FFD700", "#FFFF00", "#008000", "#40E0D0", "#00BFFF", "#4B0082", "#EE82EE", "#800080", "#FFC0CB", "#B22222"];
 
-function getModelColor(modelName) {
-    // Function to get model color by its name
-    const modelColors = {
-        'Location': '--location-color',
-        'Time': '--time-color',
-        // Add all model color mappings here
-    };
-    return getComputedStyle(document.documentElement).getPropertyValue(modelColors[modelName]);
+function getRandomColor() {
+    return colors[Math.floor(Math.random() * colors.length)];
 }
 
-function createModelDot(modelName, x, y, r) {
+// Create Fibonacci Dots
+function createFibonacciDot(x, y, r, color) {
     const svg = document.getElementById('cosmos');
     let dot = document.createElementNS(svgNS, "circle");
     dot.setAttribute("cx", x);
     dot.setAttribute("cy", y);
     dot.setAttribute("r", r);
-    dot.setAttribute("fill", getModelColor(modelName));
-    dot.setAttribute("class", "dot " + modelName.toLowerCase() + "-dot"); // Class name based on model
+    dot.setAttribute("fill", color);
+    dot.setAttribute("class", "fibonacci-dot");
     svg.appendChild(dot);
+
+    // Add hover effect
+    dot.addEventListener('mouseenter', () => {
+        dot.setAttribute("r", "8");
+    });
+
+    dot.addEventListener('mouseleave', () => {
+        dot.setAttribute("r", r);
+    });
 }
 
-// Your function to generate Fibonacci Spiral using the createModelDot function
-// Rest of your script to animate and refresh the dots
+function generateFibonacciSpiral() {
+    const numDots = 144; // A Fibonacci number for thematic consistency
+    let phi = (1 + Math.sqrt(5)) / 2; // Golden ratio
+    for (let i = 0; i < numDots; i++) {
+        let distance = Math.sqrt(i) * 12; // Adjusted for visual spacing
+        let angle = i * phi * Math.PI * 2;
+        let x = width / 2 + Math.cos(angle) * distance;
+        let y = height / 2 + Math.sin(angle) * distance;
+        createFibonacciDot(x, y, Math.max(2 * (i / numDots), 2), getRandomColor());
+    }
+}
+
+// Dynamic background dots
+function refreshAnimation() {
+    // Clear previous animations
+    document.querySelectorAll('.dynamic-dot').forEach(dot => dot.remove());
+
+    const totalDots = 400; // Number of dynamic dots
+    for (let i = 0; i < totalDots; i++) {
+        let dot = document.createElementNS(svgNS, "circle");
+        dot.setAttribute("cx", Math.random() * width);
+        dot.setAttribute("cy", Math.random() * height);
+        dot.setAttribute("r", Math.random() * 10 + 2);
+        dot.setAttribute("fill", getRandomColor());
+        dot.setAttribute("class", "dynamic-dot");
+        document.getElementById('cosmos').appendChild(dot);
+    }
+}
+
+// Initial generation of background dots
+refreshAnimation();
+
+// Periodically refresh the background animation
+setInterval(refreshAnimation, 10000); // Refresh the animation every 10 seconds
+
+// Initialize the Fibonacci spiral
+generateFibonacciSpiral();
 
 </script>
 </body>
