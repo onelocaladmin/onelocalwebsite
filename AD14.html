@@ -117,7 +117,7 @@
             createParticles(e.clientX, e.clientY);
         });
 
-        animateParticles(0, 0); // Initialize with mouseX=0, mouseY=0
+        animateParticles(canvas.width / 2, canvas.height / 2); // Initialize with mouseX=center, mouseY=center
 
         // Add click event listener for shockwave
         canvas.addEventListener("click", (e) => {
