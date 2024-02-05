@@ -3,13 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Digital Symphony</title>
+    <title>Interactive Animated Symphony</title>
     <style>
-        body, html {
+        body {
             margin: 0;
             padding: 0;
             overflow: hidden;
-            background-color: black;
+            background-color: #000;
+        }
+        svg {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+        .dot {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.6;
+        }
+        @keyframes move {
+            0% { transform: translate(0px, 0px); }
+            100% { transform: translate(calc(100vw - 100%), calc(100vh - 100%)); }
+        }
+        @keyframes pulse {
+            0%, 100% { r: 2px; }
+            50% { r: 10px; }
+        }
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
         }
         canvas {
             position: absolute;
@@ -92,6 +114,97 @@
         });
 
         animateParticles();
+    </script>
+    <script>
+        const svgNS = "http://www.w3.org/2000/svg";
+        const colors = ["#FCB711", "#F37021", "#CC004C", "#6460AA", "#0089D0", "#0DB14B"];
+        const width = window.innerWidth;
+        const height = window.innerHeight;
+        let svg = document.createElementNS(svgNS, "svg");
+        document.body.appendChild(svg);
+
+        function getRandomColor() {
+            return colors[Math.floor(Math.random() * colors.length)];
+        }
+
+        function createDivDot() {
+            const dot = document.createElement('div');
+            dot.className = 'dot';
+            dot.style.width = dot.style.height = `${Math.random() * 10 + 2}px`;
+            dot.style.backgroundColor = getRandomColor();
+            dot.style.top = `${Math.random() * height}px`;
+            dot.style.left = `${Math.random() * width}px`;
+            dot.style.animation = `move ${Math.random() * 5 + 5}s linear infinite`;
+
+            // Add mouse interaction to push other dots away
+            dot.addEventListener('mousemove', (e) => {
+                const mouseX = e.clientX;
+                const mouseY = e.clientY;
+                const dotX = parseFloat(dot.style.left);
+                const dotY = parseFloat(dot.style.top);
+
+                const deltaX = mouseX - dotX;
+                const deltaY = mouseY - dotY;
+                const distance = Math.sqrt(deltaX ** 2 + deltaY ** 2);
+
+                if (distance < 50) {
+                    const angle = Math.atan2(deltaY, deltaX);
+                    const newX = dotX - 20 * Math.cos(angle);
+                    const newY = dotY - 20 * Math.sin(angle);
+
+                    dot.style.left = `${newX}px`;
+                    dot.style.top = `${newY}px`;
+                }
+            });
+
+            document.body.insertBefore(dot, svg);
+        }
+
+        function createSvgDot() {
+            let dot = document.createElementNS(svgNS, "circle");
+            dot.setAttribute("fill", getRandomColor());
+            dot.setAttribute("cx", Math.random() * width);
+            dot.setAttribute("cy", Math.random() * height);
+            dot.setAttribute("r", Math.random() * 10 + 2);
+            svg.appendChild(dot);
+            animateSvgDot(dot);
+        }
+
+        function animateSvgDot(dot) {
+            let animationType = Math.floor(Math.random() * 2); // 0 for pulse, 1 for bounce
+            if (animationType === 0) {
+                dot.setAttribute("class", "pulse");
+                dot.style.animation = `pulse 2s infinite ease-in-out`;
+            } else {
+                let dx = (Math.random() - 0.5) * 2;
+                let dy = (Math.random() - 0.5) * 2;
+                function move() {
+                    let cx = parseFloat(dot.getAttribute("cx")) + dx;
+                    let cy = parseFloat(dot.getAttribute("cy")) + dy;
+                    if (cx <= 0 || cx >= width) dx = -dx;
+                    if (cy <= 0 || cy >= height) dy = -dy;
+                    dot.setAttribute("cx", cx);
+                    dot.setAttribute("cy", cy);
+                    requestAnimationFrame(move);
+                }
+                move();
+            }
+        }
+
+        function refreshAnimation() {
+            svg.innerHTML = ''; // Clear the existing dots
+            svg = document.createElementNS(svgNS, "svg"); // Recreate the SVG container
+            document.body.appendChild(svg);
+
+            const totalDots = 400;
+            for (let i = 0; i < totalDots; i++) {
+                if (i % 2 === 0) createDivDot(); // Create half as div dots
+                else createSvgDot(); // Create the other half as SVG dots
+            }
+        }
+
+        refreshAnimation();
+        setInterval(refreshAnimation, 10000); // Refresh the animation every 10 seconds
     </script>
 </body>
 </html>
