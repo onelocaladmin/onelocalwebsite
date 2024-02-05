@@ -148,7 +148,7 @@
             let y = Math.random() * height;
             let dx = (Math.random() - 0.5) * 2;
             let dy = (Math.random() - 0.5) * 2;
-            let r = Math.random() * 15 + 5; // Adjusted for smaller dots
+            let r = Math.random() * 2 + 1; // Adjusted for smaller dots
     
             function move() {
                 if (x + dx + r > width || x + dx - r < 0) dx *= -1;
@@ -164,6 +164,12 @@
             dot.setAttribute("cx", x);
             dot.setAttribute("cy", y);
             dot.setAttribute("r", r);
+    
+            // Add pulsing animation
+            dot.style.animation = "pulse 2s infinite";
+            dot.style.transformOrigin = "center";
+            dot.style.animationTimingFunction = "ease-in-out";
+    
             return dot;
         }
     
@@ -176,6 +182,7 @@
     
         addDots(numDots);
     </script>
+
 
 </body>
 </html>
