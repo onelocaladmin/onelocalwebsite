@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Unified Animated Effects</title>
+    <title>Crossfade Animated Effects</title>
     <style>
         body, html {
             margin: 0;
@@ -11,73 +11,64 @@
             overflow: hidden;
             background-color: black;
         }
-
+        .animated-dot {
+            position: absolute;
+            border-radius: 50%;
+            animation: crossfadeAnimation 20s infinite;
+        }
         svg {
             position: absolute;
             width: 100%;
             height: 100%;
         }
 
-        .dot {
-            position: absolute;
-            border-radius: 50%;
-            animation: move linear infinite, fadeInOut 5s infinite;
-        }
-
-        @keyframes move {
-            from { transform: translate(0px, 0px); }
-            to { transform: translate(calc(100vw - 100%), calc(100vh - 100%)); }
-        }
-
-        @keyframes fadeInOut {
-            0%, 100% { opacity: 0; }
-            50% { opacity: 1; }
-        }
-
-        @keyframes pulse {
-            0%, 100% { r: 2px; }
-            50% { r: 10px; }
-        }
-
-        .bouncing-dot, .ellipse {
-            animation: bounce 2s infinite, pulse 2s infinite, fadeInOut 5s infinite;
-        }
-
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-20px); }
+        /* Crossfade animation keyframes */
+        @keyframes crossfadeAnimation {
+            0%, 20% {
+                opacity: 1; /* Fully visible */
+            }
+            25%, 45% {
+                opacity: 0; /* Fully transparent */
+            }
+            50%, 70% {
+                opacity: 1; /* Transition back to visible */
+            }
+            75%, 95% {
+                opacity: 0; /* Transition back to transparent */
+            }
+            100% {
+                opacity: 1;
+            }
         }
     </style>
 </head>
 <body>
 <script>
-const svgNS = "http://www.w3.org/2000/svg";
-const width = window.innerWidth;
-const height = window.innerHeight;
 const colors = ["#FCB711", "#F37021", "#CC004C", "#6460AA", "#0089D0", "#0DB14B"];
+const numDots = 200; // Total number of dots
+const svgNS = "http://www.w3.org/2000/svg";
+let svg = document.createElementNS(svgNS, "svg");
+document.body.appendChild(svg);
 
 function getRandomColor() {
     return colors[Math.floor(Math.random() * colors.length)];
 }
 
-function createSVGDot() {
-    let dot = document.createElementNS(svgNS, "circle");
-    dot.setAttribute("fill", getRandomColor());
-    let x = Math.random() * width;
-    let y = Math.random() * height;
-    let size = Math.random() * 8 + 2; // Size between 2px and 10px
-    dot.setAttribute("cx", x);
-    dot.setAttribute("cy", y);
-    dot.setAttribute("r", size);
-    dot.setAttribute("class", size > 5 ? "bouncing-dot" : "ellipse"); // Differentiate for animation
-    animateDot(dot, x, y);
-    document.body.appendChild(dot);
+// Create a mixture of SVG and div dots to showcase different animations
+function createMixedDots() {
+    for (let i = 0; i < numDots; i++) {
+        if (i % 2 === 0) {
+            createDivDot();
+        } else {
+            createSvgDot();
+        }
+    }
 }
 
 function createDivDot() {
     const dot = document.createElement('div');
-    dot.className = 'dot';
-    const size = Math.random() * 10 + 2;
+    dot.className = 'animated-dot';
+    const size = Math.random() * 20 + 5; // Random size between 5px and 25px
     dot.style.width = `${size}px`;
     dot.style.height = `${size}px`;
     dot.style.backgroundColor = getRandomColor();
@@ -86,38 +77,19 @@ function createDivDot() {
     document.body.appendChild(dot);
 }
 
-function animateDot(dot, x, y) {
-    let dx = (Math.random() - 0.5) * 2;
-    let dy = (Math.random() - 0.5) * 2;
-
-    function move() {
-        if (x + dx > width || x + dx < 0) dx = -dx;
-        if (y + dy > height || y + dy < 0) dy = -dy;
-
-        x += dx;
-        y += dy;
-
-        dot.setAttribute("cx", x);
-        dot.setAttribute("cy", y);
-
-        requestAnimationFrame(move);
-    }
-
-    move();
+function createSvgDot() {
+    let dot = document.createElementNS(svgNS, "circle");
+    dot.setAttribute("fill", getRandomColor());
+    let x = Math.random() * window.innerWidth;
+    let y = Math.random() * window.innerHeight;
+    let r = Math.random() * 20 + 5; // Random radius between 5px and 25px
+    dot.setAttribute("cx", x);
+    dot.setAttribute("cy", y);
+    dot.setAttribute("r", r);
+    svg.appendChild(dot);
 }
 
-function initDots() {
-    const numSVG = 200; // Number of SVG dots
-    const numDiv = 300; // Number of div-based dots
-    for (let i = 0; i < numSVG; i++) {
-        createSVGDot();
-    }
-    for (let i = 0; i < numDiv; i++) {
-        createDivDot();
-    }
-}
-
-initDots();
+createMixedDots();
 </script>
 </body>
 </html>
