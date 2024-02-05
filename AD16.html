@@ -117,7 +117,7 @@
             createShockwave(e.clientX, e.clientY);
         });
 
-        animateParticles();
+        animateParticles(canvas.width / 2, canvas.height / 2);
 
         function createShockwave(x, y) {
             for (let i = 0; i < particles.length; i++) {
@@ -203,6 +203,7 @@
             } else {
                 let dx = (Math.random() - 0.5) * 2;
                 let dy = (Math.random() - 0.5) * 2;
+
                 function move() {
                     let cx = parseFloat(dot.getAttribute("cx")) + dx;
                     let cy = parseFloat(dot.getAttribute("cy")) + dy;
@@ -212,6 +213,7 @@
                     dot.setAttribute("cy", cy);
                     requestAnimationFrame(move);
                 }
+
                 move();
             }
         }
