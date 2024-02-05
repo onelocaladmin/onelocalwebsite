@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unified Animated Symphony</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: black;
+        }
+        svg {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+        .dynamic-dot, .fibonacci-dot {
+            animation: drift 10s infinite linear;
+        }
+        @keyframes drift {
+            from { transform: translate(0px, 0px); }
+            to { transform: translate(100vw, 100vh); }
+        }
+        @keyframes pulse {
+            0%, 100% { r: 2px; }
+            50% { r: 8px; /* Increased size variation */ }
+        }
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-30px); /* Enhanced bounce height */ }
+        }
+    </style>
+</head>
+<body>
+<svg id="cosmos"></svg>
+<script>
+const svgNS = "http://www.w3.org/2000/svg";
+const width = window.innerWidth;
+const height = window.innerHeight;
+const colors = ["#FCB711", "#F37021", "#CC004C", "#6460AA", "#0089D0", "#0DB14B"];
+
+function getRandomColor() {
+    return colors[Math.floor(Math.random() * colors.length)];
+}
+
+// Div-based dynamic dots
+function createDivDot() {
+    const dot = document.createElement('div');
+    dot.className = 'dynamic-dot';
+    const size = Math.random() * 10 + 5; // Enhanced size variation
+    dot.style.width = `${size}px`;
+    dot.style.height = `${size}px`;
+    dot.style.backgroundColor = getRandomColor();
+    dot.style.borderRadius = '50%';
+    dot.style.position = 'absolute';
+    dot.style.top = `${Math.random() * height}px`;
+    dot.style.left = `${Math.random() * width}px`;
+    document.body.appendChild(dot);
+}
+
+// SVG-based dots with pulsing and bouncing animations
+function createSvgDot() {
+    let svg = document.getElementById('cosmos');
+    let dot = document.createElementNS(svgNS, "circle");
+    dot.setAttribute("fill", getRandomColor());
+    let r = Math.random() * 8 + 2; // Further enhanced size variation
+    dot.setAttribute("r", r);
+    let x = Math.random() * width;
+    let y = Math.random() * height;
+    dot.setAttribute("cx", x);
+    dot.setAttribute("cy", y);
+    svg.appendChild(dot);
+    dot.style.animation = `pulse 2s infinite ease-in-out`; // Apply pulsing animation
+}
+
+// Fibonacci Spiral Dots
+function createFibonacciDot(x, y, r, color) {
+    let svg = document.getElementById('cosmos');
+    let dot = document.createElementNS(svgNS, "circle");
+    dot.setAttribute("cx", x);
+    dot.setAttribute("cy", y);
+    dot.setAttribute("r", r);
+    dot.setAttribute("fill", color);
+    dot.setAttribute("class", "fibonacci-dot");
+    svg.appendChild(dot);
+}
+
+function generateFibonacciSpiral() {
+    const numDots = 144; // A Fibonacci number
+    let phi = (1 + Math.sqrt(5)) / 2; // Golden ratio
+    for (let i = 0; i < numDots; i++) {
+        let distance = Math.sqrt(i) * 12;
+        let angle = i * phi * Math.PI * 2;
+        let x = width / 2 + Math.cos(angle) * distance;
+        let y = height / 2 + Math.sin(angle) * distance;
+        createFibonacciDot(x, y, Math.max(2 * (i / numDots), 2), getRandomColor()); // Adjusted for more size variation
+    }
+}
+
+// Initialization
+function init() {
+    document.getElementById('cosmos').innerHTML = ''; // Clear SVG for fresh start
+    for (let i = 0; i < 200; i++) {
+        createDivDot(); // Create div-based dots
+        if (i % 2 === 0) createSvgDot(); // Create SVG-based dots alternatively
+    }
+    generateFibonacciSpiral(); // Generate the Fibonacci Spiral
+}
+
+init();
+
+// Periodically refresh the animation setup
+setInterval(init, 15000); // Refresh every 15 seconds
+
+</script>
+</body>
+</html>
