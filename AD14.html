@@ -11,10 +11,10 @@
             overflow: hidden;
             background-color: #000;
         }
-        svg {
+        canvas, svg {
             position: absolute;
-            width: 100%;
-            height: 100%;
+            top: 0;
+            left: 0;
         }
         .dot {
             position: absolute;
@@ -32,12 +32,6 @@
         @keyframes bounce {
             0%, 100% { transform: translateY(0); }
             50% { transform: translateY(-20px); }
-        }
-        canvas {
-            position: absolute;
-            top: 0;
-            left: 0;
-            z-index: -1;
         }
     </style>
 </head>
@@ -113,115 +107,24 @@
             createParticles(e.clientX, e.clientY);
         });
 
+        animateParticles(0, 0); // Initialize with mouseX=0, mouseY=0
+
+        // Add click event listener for shockwave
         canvas.addEventListener("click", (e) => {
-            // Calculate mouse position
-            const mouseX = e.clientX;
-            const mouseY = e.clientY;
-
-            // Apply a force to all particles
-            for (let i = 0; i < particles.length; i++) {
-                const dx = mouseX - particles[i].x;
-                const dy = mouseY - particles[i].y;
-                const distance = Math.sqrt(dx * dx + dy * dy);
-                const force = 5000 / (distance * distance);
-
-                particles[i].speedX += dx * force;
-                particles[i].speedY += dy * force;
-            }
+            createShockwave(e.clientX, e.clientY);
         });
 
-        animateParticles();
-    </script>
-    <script>
-        const svgNS = "http://www.w3.org/2000/svg";
-        const colors = ["#FCB711", "#F37021", "#CC004C", "#6460AA", "#0089D0", "#0DB14B"];
-        const width = window.innerWidth;
-        const height = window.innerHeight;
-        let svg = document.createElementNS(svgNS, "svg");
-        document.body.appendChild(svg);
-
-        function getRandomColor() {
-            return colors[Math.floor(Math.random() * colors.length)];
-        }
-
-        function createDivDot() {
-            const dot = document.createElement('div');
-            dot.className = 'dot';
-            dot.style.width = dot.style.height = `${Math.random() * 10 + 2}px`;
-            dot.style.backgroundColor = getRandomColor();
-            dot.style.top = `${Math.random() * height}px`;
-            dot.style.left = `${Math.random() * width}px`;
-            dot.style.animation = `move ${Math.random() * 5 + 5}s linear infinite`;
-
-            // Add mouse interaction to push other dots away
-            dot.addEventListener('mousemove', (e) => {
-                const mouseX = e.clientX;
-                const mouseY = e.clientY;
-                const dotX = parseFloat(dot.style.left);
-                const dotY = parseFloat(dot.style.top);
-
-                const deltaX = mouseX - dotX;
-                const deltaY = mouseY - dotY;
-                const distance = Math.sqrt(deltaX ** 2 + deltaY ** 2);
-
-                if (distance < 50) {
-                    const angle = Math.atan2(deltaY, deltaX);
-                    const newX = dotX - 20 * Math.cos(angle);
-                    const newY = dotY - 20 * Math.sin(angle);
-
-                    dot.style.left = `${newX}px`;
-                    dot.style.top = `${newY}px`;
-                }
-            });
-
-            document.body.insertBefore(dot, svg);
-        }
-
-        function createSvgDot() {
-            let dot = document.createElementNS(svgNS, "circle");
-            dot.setAttribute("fill", getRandomColor());
-            dot.setAttribute("cx", Math.random() * width);
-            dot.setAttribute("cy", Math.random() * height);
-            dot.setAttribute("r", Math.random() * 10 + 2);
-            svg.appendChild(dot);
-            animateSvgDot(dot);
-        }
-
-        function animateSvgDot(dot) {
-            let animationType = Math.floor(Math.random() * 2); // 0 for pulse, 1 for bounce
-            if (animationType === 0) {
-                dot.setAttribute("class", "pulse");
-                dot.style.animation = `pulse 2s infinite ease-in-out`;
-            } else {
-                let dx = (Math.random() - 0.5) * 2;
-                let dy = (Math.random() - 0.5) * 2;
-                function move() {
-                    let cx = parseFloat(dot.getAttribute("cx")) + dx;
-                    let cy = parseFloat(dot.getAttribute("cy")) + dy;
-                    if (cx <= 0 || cx >= width) dx = -dx;
-                    if (cy <= 0 || cy >= height) dy = -dy;
-                    dot.setAttribute("cx", cx);
-                    dot.setAttribute("cy", cy);
-                    requestAnimationFrame(move);
-                }
-                move();
+        function createShockwave(x, y) {
+            for (let i = 0; i < particles.length; i++) {
+                let dx = particles[i].x - x;
+                let dy = particles[i].y - y;
+                let distance = Math.sqrt(dx * dx + dy * dy);
+                let angle = Math.atan2(dy, dx);
+                let speed = 10 / distance;
+                particles[i].speedX = Math.cos(angle) * speed * 10;
+                particles[i].speedY = Math.sin(angle) * speed * 10;
             }
         }
-
-        function refreshAnimation() {
-            document.body.innerHTML = ''; // Clear the existing dots
-            svg = document.createElementNS(svgNS, "svg"); // Recreate the SVG container
-            document.body.appendChild(svg);
-
-            const totalDots = 400;
-            for (let i = 0; i < totalDots; i++) {
-                if (i % 2 === 0) createDivDot(); // Create half as div dots
-                else createSvgDot(); // Create the other half as SVG dots
-            }
-        }
-
-        refreshAnimation();
-        setInterval(refreshAnimation, 10000); // Refresh the animation every 10 seconds
     </script>
 </body>
 </html>
