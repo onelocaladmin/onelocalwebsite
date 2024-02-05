@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crossfading Animated Effects</title>
+    <title>Unified Animated Effects</title>
     <style>
         body, html {
             margin: 0;
@@ -11,114 +11,124 @@
             overflow: hidden;
             background-color: black;
         }
-
         svg {
             position: absolute;
             width: 100%;
             height: 100%;
         }
-
-        .fade-in {
-            animation: fadeIn 3s forwards;
+        .dot, .svgDot {
+            fill-opacity: 0.6;
         }
-
-        .fade-out {
-            animation: fadeOut 3s forwards;
+        @keyframes move {
+            0% {
+                transform: translate(0px, 0px);
+            }
+            100% {
+                transform: translate(calc(100vw - 100%), calc(100vh - 100%));
+            }
         }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+        @keyframes pulse {
+            0%, 100% {
+                r: 2px;
+            }
+            50% {
+                r: 5px;
+            }
         }
-
-        @keyframes fadeOut {
-            from { opacity: 1; }
-            to { opacity: 0; }
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
         }
     </style>
 </head>
 <body>
 <script>
 const svgNS = "http://www.w3.org/2000/svg";
-const colors = ["#FCB711", "#F37021", "#CC004C", "#6460AA", "#0089D0", "#0DB14B"];
 const width = window.innerWidth;
 const height = window.innerHeight;
-let currentAnimationIndex = 0;
-let svgContainer;
+const colors = ["#FCB711", "#F37021", "#CC004C", "#6460AA", "#0089D0", "#0DB14B"];
+let svg = document.createElementNS(svgNS, "svg");
+document.body.appendChild(svg);
 
 function getRandomColor() {
     return colors[Math.floor(Math.random() * colors.length)];
 }
 
-function clearSvg() {
-    if (svgContainer) {
-        svgContainer.remove();
-    }
-    svgContainer = document.createElementNS(svgNS, "svg");
-    svgContainer.style.opacity = 0; // Start invisible to fade in
-    document.body.appendChild(svgContainer);
+// Div-based moving dots
+function createMovingDot() {
+    const dot = document.createElement('div');
+    dot.className = 'dot';
+    const size = Math.random() * 5 + 3; // Between 3px and 8px
+    dot.style.width = `${size}px`;
+    dot.style.height = `${size}px`;
+    dot.style.backgroundColor = getRandomColor();
+    dot.style.position = 'absolute';
+    dot.style.borderRadius = '50%';
+    dot.style.animation = `move ${Math.random() * 5 + 5}s linear infinite`;
+    dot.style.top = `${Math.random() * 100}vh`;
+    dot.style.left = `${Math.random() * 100}vw`;
+    document.body.appendChild(dot);
 }
 
-function createDot(type) {
+// SVG dots with pulsing and bouncing effects
+function createSvgDot() {
     let dot = document.createElementNS(svgNS, "circle");
+    dot.setAttribute("class", "svgDot");
     dot.setAttribute("fill", getRandomColor());
+    let r = Math.random() * 5 + 2; // Between 2px and 7px
+    dot.setAttribute("r", r);
     let x = Math.random() * width;
     let y = Math.random() * height;
-    let size;
-    switch (type) {
-        case 'bouncing':
-            size = Math.random() * 8 + 2; // Bouncing dots size
-            animateBouncingDot(dot, x, y, size);
-            break;
-        case 'pulsing':
-            size = 2; // Starting size for pulsing dots
-            animatePulsingDot(dot, x, y);
-            break;
-        default:
-            size = Math.random() * 10 + 2; // Default size for other dots
-            animateMovingDot(dot, x, y); // Move dot if not bouncing or pulsing
-    }
     dot.setAttribute("cx", x);
     dot.setAttribute("cy", y);
-    dot.setAttribute("r", size);
-    svgContainer.appendChild(dot);
+
+    svg.appendChild(dot);
+    
+    animateSvgDot(dot, r);
 }
 
-function animateMovingDot(dot, x, y) {
-    // Simplified move logic for brevity
-}
+function animateSvgDot(dot, initialRadius) {
+    let dx = (Math.random() - 0.5) * 2;
+    let dy = (Math.random() - 0.5) * 2;
+    let dr = Math.random() * 0.2; // For pulsing effect
 
-function animatePulsingDot(dot, x, y) {
-    // Simplified pulsing logic for brevity
-}
+    function move() {
+        let x = parseFloat(dot.getAttribute("cx")) + dx;
+        let y = parseFloat(dot.getAttribute("cy")) + dy;
+        if (x < 0 || x > width) dx = -dx;
+        if (y < 0 || y > height) dy = -dy;
 
-function animateBouncingDot(dot, x, y, size) {
-    // Simplified bouncing logic for brevity
-}
+        dot.setAttribute("cx", x);
+        dot.setAttribute("cy", y);
 
-function addDots(num, type) {
-    clearSvg();
-    for (let i = 0; i < num; i++) {
-        createDot(type);
+        // Pulsing effect
+        let r = parseFloat(dot.getAttribute("r")) + dr;
+        if (r < initialRadius || r > initialRadius + 3) dr = -dr; // Reverse direction
+        dot.setAttribute("r", r);
+
+        requestAnimationFrame(move);
     }
-    svgContainer.classList.add('fade-in');
+    move();
 }
 
-function transitionEffects() {
-    const effects = ['default', 'bouncing', 'pulsing']; // Add more types as needed
-    const type = effects[currentAnimationIndex % effects.length];
-    addDots(200, type); // Adjust number of dots as needed
-
-    setTimeout(() => {
-        svgContainer.classList.replace('fade-in', 'fade-out');
-        setTimeout(() => {
-            currentAnimationIndex++;
-            transitionEffects(); // Loop to next effect
-        }, 3000); // Match fadeOut duration
-    }, 10000); // Duration before fading out and transitioning
+function refreshDots() {
+    document.body.innerHTML = ''; // Clear existing dots
+    document.body.appendChild(svg); // Re-add the SVG container
+    for (let i = 0; i < 200; i++) { // Adjust the number of dots as needed
+        if (i % 2 === 0) createMovingDot(); // Half are moving div dots
+        else createSvgDot(); // Half are SVG dots
+    }
 }
 
-transitionEffects();
+// Initial creation
+refreshDots();
+
+// Refresh the dots to crossfade between animations every 10 seconds
+setInterval(refreshDots, 10000);
 </script>
 </body>
 </html>
