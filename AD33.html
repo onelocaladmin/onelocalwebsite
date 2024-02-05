@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rapid Fibonacci Universe</title>
+    <title>Ultra Rapid Fibonacci Universe</title>
     <style>
         body, html {
             margin: 0;
@@ -17,7 +17,7 @@
             height: 100%;
         }
         .fibonacci-dot {
-            fill-opacity: 0.8; 
+            fill-opacity: 0.8;
         }
         .fibonacci-dot:hover {
             fill-opacity: 1;
@@ -48,46 +48,45 @@ function generateFibonacciSpiral() {
         svg.removeChild(svg.firstChild); // Clear previous dots
     }
     
-    const numDots = 500;
+    const numDots = 100; // Reduced for faster rendering
     let phi = (1 + Math.sqrt(5)) / 2; // Golden ratio
     for (let i = 0; i < numDots; i++) {
-        let distance = Math.sqrt(i) * 20;
+        let distance = Math.sqrt(i) * 10;
         let angle = i * phi * Math.PI * 2;
         let x = width / 2 + Math.cos(angle) * distance;
         let y = height / 2 + Math.sin(angle) * distance;
         let dot = document.createElementNS(svgNS, "circle");
         dot.setAttribute("cx", x);
         dot.setAttribute("cy", y);
-        dot.setAttribute("r", Math.max(10 * (i / numDots), 5));
+        dot.setAttribute("r", Math.max(5 * (i / numDots), 2)); // Smaller, lighter dots for faster refresh
         dot.setAttribute("fill", getRandomColor());
         dot.setAttribute("class", "fibonacci-dot");
         svg.appendChild(dot);
     }
 }
 
+// Clears dots before creating new ones for performance improvement
+function clearDynamicDots() {
+    document.querySelectorAll('.dot').forEach(dot => dot.remove());
+}
+
 function createDynamicDots() {
-    const totalDots = 400;
+    clearDynamicDots(); // Clear existing dots for a fresh start
+    const totalDots = 200; // Reduced number for performance
     for (let i = 0; i < totalDots; i++) {
         const dot = document.createElement('div');
         dot.className = 'dot';
-        dot.style.width = dot.style.height = `${Math.random() * 10 + 2}px`;
+        dot.style.width = dot.style.height = `${Math.random() * 5 + 1}px`; // Smaller dots
         dot.style.backgroundColor = getRandomColor();
         dot.style.top = `${Math.random() * height}px`;
         dot.style.left = `${Math.random() * width}px`;
-        // Random start position and infinite loop
         document.body.insertBefore(dot, document.querySelector('svg'));
     }
 }
 
 function initiateAnimations() {
-    generateFibonacciSpiral(); // Initially create Fibonacci spiral
-    // Adjust timings here for rapid refresh (e.g., every 5000ms for Fibonacci and 4000ms for dots)
-    setInterval(generateFibonacciSpiral, 5000); // Rapid refresh of Fibonacci spiral every 5 seconds
-    
-    setTimeout(() => {
-        createDynamicDots(); // Start creating dynamic dots shortly after first Fibonacci spiral
-        setInterval(createDynamicDots, 4000); // Continue refreshing dots every 4 seconds
-    }, 1000); // Delay the first round of dynamic dots to not immediately overlap with first spiral
+    setInterval(generateFibonacciSpiral, 2000); // Rapid refresh of Fibonacci spiral every 2 seconds
+    setInterval(createDynamicDots, 2000); // Refresh dynamic dots every 2 seconds
 }
 
 initiateAnimations();
