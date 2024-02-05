@@ -16,41 +16,50 @@
             width: 100%;
             height: 100%;
         }
-        .fibonacci-dot {
+        .fibonacci-dot, .dynamic-dot {
             fill-opacity: 0.8;
             transition: all 0.6s ease;
         }
-        .fibonacci-dot:hover {
+        .fibonacci-dot:hover, .dynamic-dot:hover {
             fill-opacity: 1;
-            r: 8px; /* Ensure this is dynamically updated in JavaScript for interaction */
+            r: 8px;
         }
-        /* Additional keyframes for animations */
-        @keyframes rotate {
-            from {transform: rotate(0deg);}
-            to {transform: rotate(360deg);}
+        .dot {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.6;
         }
-        .flower-life {
-            animation: rotate 60s linear infinite;
+        @keyframes move {
+            0% { transform: translate(0px, 0px); }
+            100% { transform: translate(calc(100vw - 100%), calc(100vh - 100%)); }
+        }
+        @keyframes pulse {
+            0%, 100% { r: 2px; }
+            50% { r: 10px; }
+        }
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
         }
     </style>
 </head>
 <body>
-<svg id="cosmos"></svg> <!-- Fibonacci Spiral -->
-<svg id="flower-life" width="100%" height="100%" viewBox="0 0 87 87" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <!-- Flower of Life SVG omitted for brevity -->
+<svg id="cosmos"></svg>
+<svg id="flower" width="100%" height="100%" viewBox="0 0 87 87" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <!-- Flower of Life SVG paths here -->
 </svg>
 <script>
 const svgNS = "http://www.w3.org/2000/svg";
 const width = window.innerWidth;
 const height = window.innerHeight;
-// Expanded color palette with 12 specified colors and additional ones from your FileSystem screenshot
-const colors = ["#FCB711", "#F37021", "#CC004C", "#6460AA", "#0089D0", "#0DB14B", "#DAA520", /* Gold */ "#40E0D0", /* Turquoise */ "#0000FF", /* Light Blue */ "#4B0082", /* Indigo */ "#EE82EE", /* Violet */ "#800080", /* Purple */ "#FFC0CB", /* Pink */ "#B22222" /* Brick */];
+// Expanded color palette
+const colors = ["#FF0000", "#FFA500", "#FFD700", "#FFFF00", "#008000", "#40E0D0", "#00BFFF", "#4B0082", "#EE82EE", "#800080", "#FFC0CB", "#B22222"];
 
 function getRandomColor() {
     return colors[Math.floor(Math.random() * colors.length)];
 }
 
-// Revised createFibonacciDot function to dynamically update 'r' on hover
+// Create Fibonacci Dots
 function createFibonacciDot(x, y, r, color) {
     const svg = document.getElementById('cosmos');
     let dot = document.createElementNS(svgNS, "circle");
@@ -59,27 +68,56 @@ function createFibonacciDot(x, y, r, color) {
     dot.setAttribute("r", r);
     dot.setAttribute("fill", color);
     dot.setAttribute("class", "fibonacci-dot");
-    // Event listeners for interactivity
-    dot.addEventListener('mouseover', () => dot.setAttribute("r", 8));
-    dot.addEventListener('mouseout', () => dot.setAttribute("r", r));
     svg.appendChild(dot);
+
+    // Add hover effect
+    dot.addEventListener('mouseenter', () => {
+        dot.setAttribute("r", "8");
+    });
+
+    dot.addEventListener('mouseleave', () => {
+        dot.setAttribute("r", r);
+    });
 }
 
 function generateFibonacciSpiral() {
-    const numDots = 500; // Adjusted number of dots
+    const numDots = 144; // A Fibonacci number for thematic consistency
     let phi = (1 + Math.sqrt(5)) / 2; // Golden ratio
     for (let i = 0; i < numDots; i++) {
-        let distance = Math.sqrt(i) * 20; // Adjusted spacing
+        let distance = Math.sqrt(i) * 12; // Adjusted for visual spacing
         let angle = i * phi * Math.PI * 2;
         let x = width / 2 + Math.cos(angle) * distance;
         let y = height / 2 + Math.sin(angle) * distance;
-        createFibonacciDot(x, y, Math.max(10 * (i / numDots), 5), getRandomColor());
+        createFibonacciDot(x, y, Math.max(2 * (i / numDots), 2), getRandomColor());
     }
 }
 
+// Dynamic background dots
+function refreshAnimation() {
+    // Clear previous animations
+    document.querySelectorAll('.dynamic-dot').forEach(dot => dot.remove());
+
+    const totalDots = 400; // Number of dynamic dots
+    for (let i = 0; i < totalDots; i++) {
+        let dot = document.createElementNS(svgNS, "circle");
+        dot.setAttribute("cx", Math.random() * width);
+        dot.setAttribute("cy", Math.random() * height);
+        dot.setAttribute("r", Math.random() * 10 + 2);
+        dot.setAttribute("fill", getRandomColor());
+        dot.setAttribute("class", "dynamic-dot");
+        document.getElementById('cosmos').appendChild(dot);
+    }
+}
+
+// Initial generation of background dots
+refreshAnimation();
+
+// Periodically refresh the background animation
+setInterval(refreshAnimation, 10000); // Refresh the animation every 10 seconds
+
+// Initialize the Fibonacci spiral
 generateFibonacciSpiral();
 
-// Functionality for dynamic background dots and interactive symphony omitted for brevity
 </script>
 </body>
 </html>
