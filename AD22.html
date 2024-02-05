@@ -1,9 +1,37 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
+
+Skip to content
+
+    onelocaladmin
+    /
+    onelocalwebsite
+
+Code
+Issues
+Pull requests
+Actions
+Projects
+Wiki
+Security
+Insights
+
+    Settings
+
+Commit
+Update AD22.html
+
+    main 
+
+@onelocaladmin
+onelocaladmin committed Feb 5, 2024
+1 parent 14192f3 commit a97bcc4
+Showing 1 changed file with 15 additions and 77 deletions.
+
+92 changes: 15 additions & 77 deletions 92
+AD22.html
+@@ -4,83 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fibonacci Dance with Flower of Life</title>
+    <title>Fibonacci Symphony</title>
     <style>
         body, html {
             margin: 0;
@@ -15,22 +43,75 @@
             position: absolute;
             width: 100%;
             height: 100%;
+            overflow: visible;
         }
-        .fibonacci-dot {
-            animation: pulse 2s infinite ease-in-out;
+        .dynamic-dot {
+            animation: drift 20s infinite linear, pulse 2s infinite alternate;
+        }
+        @keyframes drift {
+            from { transform: translate(0px, 0px); }
+            to { transform: translate(100vw, 100vh); }
         }
         @keyframes pulse {
-            0%, 100% {
-                r: 2px;
-            }
-            50% {
-                r: 5px; /* Increased size for visual emphasis */
-            }
+            0%, 100% { r: 2px; fill-opacity: 0.6; }
+            50% { r: 8px; fill-opacity: 1; }
+        }
+        .fibonacci-svg {
+            width: auto;
+            height: auto;
+            max-width: 100%;
+            max-height: 100%;
+            transform: translate(50%, 50%) scale(2);
         }
     </style>
 </head>
 <body>
-  <svg width="87" height="87" viewBox="0 0 87 87" fill="none" xmlns="http://www.w3.org/2000/svg">
+<svg id="cosmos" viewBox="0 0 87 87" fill="none" xmlns="http://www.w3.org/2000/svg" class="fibonacci-svg">
+    <!-- Fibonacci SVG Paths -->
+    <!-- Insert all the given SVG paths here -->
+</svg>
+<script>
+const svgNS = "http://www.w3.org/2000/svg";
+const colors = ["#FCB711", "#F37021", "#CC004C", "#6460AA", "#0089D0", "#0DB14B"];
+const width = window.innerWidth;
+const height = window.innerHeight;
+let svg = document.getElementById("cosmos");
+
+function getRandomColor() {
+    return colors[Math.floor(Math.random() * colors.length)];
+}
+
+function createDynamicDot() {
+    let dot = document.createElementNS(svgNS, "circle");
+    dot.setAttribute("class", "dynamic-dot");
+    dot.setAttribute("fill", getRandomColor());
+    let r = Math.random() * 5 + 2; // Varying sizes for more visual interest
+    dot.setAttribute("r", r);
+    dot.setAttribute("cx", Math.random() * width);
+    dot.setAttribute("cy", Math.random() * height);
+    svg.appendChild(dot);
+}
+
+// Populate the scene with dynamic dots
+function populateDots(num) {
+    for (let i = 0; i < num; i++) {
+        createDynamicDot();
+    }
+}
+
+populateDots(200); // Adjust the number of dots as needed
+
+// Refresh the dynamic dots to maintain performance
+setInterval(() => {
+    // Clear existing dynamic dots
+    let dynamicDots = svg.querySelectorAll('.dynamic-dot');
+    dynamicDots.forEach(dot => dot.remove());
+    // Repopulate dynamic dots
+    populateDots(200);
+}, 10000); // Refresh every 10 seconds
+</script>
+</body>
+    <svg width="87" height="87" viewBox="0 0 87 87" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path d="M52.858 46.8364C41.1636 45.8516 32.482 35.5729 33.4668 23.8786C34.4516 12.1843 44.7303 3.50261 56.4246 4.48743C68.1189 5.47224 76.8006 15.7508 75.8158 27.4451C74.8308 39.1396 64.5525 47.8213 52.858 46.8364Z" stroke="#BF1E2D" stroke-width="1.5" stroke-miterlimit="10"/>
     <path d="M62.9605 65.1968C51.2662 64.212 42.5845 53.9333 43.5693 42.239C44.5543 30.5446 54.8328 21.863 66.5271 22.8478C78.2215 23.8326 86.9032 34.1113 85.9183 45.8054C84.9335 57.4999 74.655 66.1816 62.9605 65.1968Z" stroke="#F15A29" stroke-width="1.5" stroke-miterlimit="10"/>
     <path d="M20.5202 64.3169C8.82591 63.3321 0.144068 53.0536 1.12889 41.3592C2.11387 29.6649 12.3924 20.9831 24.0867 21.9681C35.7811 22.9529 44.4627 33.2314 43.4781 44.9257C42.4931 56.6201 32.2146 65.3017 20.5202 64.3169Z" stroke="#2A3890" stroke-width="1.5" stroke-miterlimit="10"/>
@@ -44,44 +125,5 @@
     <path d="M32.0225 82.5934C22.1643 76.2259 19.3346 63.0727 25.702 53.2144C32.0693 43.3563 45.2229 40.5263 55.081 46.8938C64.9392 53.2613 67.769 66.4147 61.4017 76.273C55.0342 86.1309 41.8808 88.9609 32.0225 82.5934Z" stroke="#FBB03F" stroke-width="1.5" stroke-miterlimit="10"/>
     <path d="M31.4552 40.1085C21.5969 33.741 18.7673 20.5876 25.1346 10.7294C31.5019 0.871267 44.6555 -1.95853 54.5136 4.40881C64.3719 10.7763 67.2017 23.9297 60.8342 33.788C54.4668 43.6461 41.3133 46.476 31.4552 40.1085Z" stroke="#662C91" stroke-width="1.5" stroke-miterlimit="10"/>
     </svg>
-<script>
-const svgNS = "http://www.w3.org/2000/svg";
-const cosmos = document.getElementById("cosmos");
-const width = cosmos.viewBox.baseVal.width;
-const height = cosmos.viewBox.baseVal.height;
-const colors = ["#FCB711", "#F37021", "#CC004C", "#6460AA", "#0089D0", "#0DB14B"];
-
-function getRandomColor() {
-    return colors[Math.floor(Math.random() * colors.length)];
-}
-
-function createFibonacciDot(x, y, r, color) {
-    let svg = document.getElementById('cosmos');
-    let dot = document.createElementNS(svgNS, "circle");
-    dot.setAttribute("cx", x);
-    dot.setAttribute("cy", y);
-    dot.setAttribute("r", r);
-    dot.setAttribute("fill", color);
-    dot.setAttribute("stroke", "#000"); // Add a black stroke
-    dot.setAttribute("stroke-width", "1"); // Set the stroke width to 1px
-    dot.setAttribute("class", "fibonacci-dot");
-    svg.appendChild(dot);
-}
-
-
-function generateFibonacciSpiral() {
-    const numDots = 144; // A Fibonacci number
-    let phi = (1 + Math.sqrt(5)) / 2; // Golden ratio
-    for (let i = 0; i < numDots; i++) {
-        let distance = Math.sqrt(i) * 2; // Adjusted for SVG size
-        let angle = i * phi * Math.PI * 2;
-        let x = width / 2 + Math.cos(angle) * distance;
-        let y = height / 2 + Math.sin(angle) * distance;
-        createFibonacciDot(x, y, Math.max(2 * (i / numDots), 0.5), getRandomColor()); // Adjusted size for SVG viewbox
-    }
-}
-
-generateFibonacciSpiral();
-</script>
 </body>
 </html>
