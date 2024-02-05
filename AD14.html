@@ -73,6 +73,14 @@
                 this.y += this.speedY;
 
                 if (this.size > 0.2) this.size -= 0.1;
+
+                // Bounce off canvas edges
+                if (this.x - this.size < 0 || this.x + this.size > canvas.width) {
+                    this.speedX = -this.speedX;
+                }
+                if (this.y - this.size < 0 || this.y + this.size > canvas.height) {
+                    this.speedY = -this.speedY;
+                }
             }
 
             draw() {
