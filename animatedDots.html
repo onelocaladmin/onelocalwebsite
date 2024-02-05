@@ -1,51 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Animated Bouncing and Pulsing Dots</title>
-<style>
-  body, html {
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    background-color: black;
-  }
-  svg {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-  }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Combined Animated Effects</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: black;
+        }
+        svg {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+    </style>
 </head>
 <body>
 <script>
 const svgNS = "http://www.w3.org/2000/svg";
 const width = window.innerWidth;
 const height = window.innerHeight;
-const numDots = 200; // Number of dots
+const colors = ["#FCB711", "#F37021", "#CC004C", "#6460AA", "#0089D0", "#0DB14B"];
+let svg = document.createElementNS(svgNS, "svg");
+
+function getRandomColor() {
+    return colors[Math.floor(Math.random() * colors.length)];
+}
 
 function createDot() {
     let dot = document.createElementNS(svgNS, "circle");
     dot.setAttribute("fill", getRandomColor());
     let x = Math.random() * width;
     let y = Math.random() * height;
+    let size = Math.random() * 8 + 2; // Random size between 2px and 10px
     dot.setAttribute("cx", x);
     dot.setAttribute("cy", y);
-    dot.setAttribute("r", 2); // Initial size of the dot
-
-    animateDot(dot, x, y);
-    return dot;
+    dot.setAttribute("r", size);
+    animateDot(dot, x, y, size);
+    svg.appendChild(dot);
 }
 
-function animateDot(dot, x, y) {
+function animateDot(dot, x, y, size) {
     let dx = (Math.random() - 0.5) * 2;
     let dy = (Math.random() - 0.5) * 2;
-    let dr = Math.random() * 0.2; // Change in radius for pulsing
+    let dr = Math.random() * 0.2 - 0.1; // Change in radius for pulsing
 
     function move() {
-        if (x < 0 || x > width) dx = -dx; // Reverse direction on horizontal edges
-        if (y < 0 || y > height) dy = -dy; // Reverse direction on vertical edges
+        if (x + dx > width - size || x + dx < size) dx = -dx;
+        if (y + dy > height - size || y + dy < size) dy = -dy;
 
         x += dx;
         y += dy;
@@ -53,11 +58,11 @@ function animateDot(dot, x, y) {
         // Pulse effect by changing the radius
         let currentRadius = parseFloat(dot.getAttribute("r"));
         let newRadius = currentRadius + dr;
-        if (newRadius < 2 || newRadius > 5) dr = -dr; // Reverse pulsing direction
+        if (newRadius < 2 || newRadius > 10) dr = -dr; // Reverse pulsing direction
 
         dot.setAttribute("cx", x);
         dot.setAttribute("cy", y);
-        dot.setAttribute("r", currentRadius + dr);
+        dot.setAttribute("r", newRadius);
 
         requestAnimationFrame(move);
     }
@@ -65,20 +70,16 @@ function animateDot(dot, x, y) {
     move();
 }
 
-function getRandomColor() {
-    const colors = ["#FCB711", "#F37021", "#CC004C", "#6460AA", "#0089D0", "#0DB14B"];
-    return colors[Math.floor(Math.random() * colors.length)];
-}
-
-function addDots() {
-    let svg = document.createElementNS(svgNS, "svg");
-    for (let i = 0; i < numDots; i++) {
-        svg.appendChild(createDot());
+function addDots(num) {
+    for (let i = 0; i < num; i++) {
+        createDot();
     }
     document.body.appendChild(svg);
 }
 
-addDots();
+// Initialize the dots with combined bouncing and pulsing effects
+addDots(200); // Adjust the number of dots as needed
+
 </script>
 </body>
 </html>
