@@ -2,98 +2,100 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Comprehensive Animated Effects</title>
+    <meta viewport="width=device-width, initial-scale=1.0">
+    <title>Mytho-Digital Symphony</title>
     <style>
         body, html {
             margin: 0;
             padding: 0;
             overflow: hidden;
-            background-color: black;
-        }
-        .dot {
-            position: absolute;
-            border-radius: 50%;
-            opacity: 0.6;
+            background-color: #000020; /* Deep cosmic blue */
         }
         svg {
             position: absolute;
             width: 100%;
             height: 100%;
         }
-        @keyframes move {
-            0% { transform: translate(0px, 0px); }
-            100% { transform: translate(calc(100vw - 100%), calc(100vh - 100%)); }
+        .dynamic-dot {
+            animation: drift 20s infinite linear;
+        }
+        @keyframes drift {
+            from { transform: translate(0px, 0px); }
+            to { transform: translate(100vw, 100vh); }
         }
         @keyframes pulse {
-            0%, 100% { r: 2px; }
-            50% { r: 10px; }
+            0%, 100% { r: 2px; fill-opacity: 0.5; }
+            50% { r: 5px; fill-opacity: 1; }
         }
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-20px); }
+        @keyframes glow {
+            0%, 100% { stroke-width: 2; stroke-opacity: 0.3; }
+            50% { stroke-width: 5; stroke-opacity: 0.7; }
         }
     </style>
 </head>
 <body>
+<svg id="cosmos"></svg>
 <script>
 const svgNS = "http://www.w3.org/2000/svg";
-const colors = ["#FCB711", "#F37021", "#CC004C", "#6460AA", "#0089D0", "#0DB14B"];
+const colors = ["#FF5733", "#C70039", "#900C3F", "#581845", "#DAF7A6"]; // Palette inspired by cosmic nebulas
 const width = window.innerWidth;
 const height = window.innerHeight;
-let svg = document.createElementNS(svgNS, "svg");
-document.body.appendChild(svg);
+let svg = document.getElementById("cosmos");
 
 function getRandomColor() {
     return colors[Math.floor(Math.random() * colors.length)];
 }
 
-function createDivDot() {
-    const dot = document.createElement('div');
-    dot.className = 'dot';
-    dot.style.width = dot.style.height = `${Math.random() * 10 + 2}px`;
-    dot.style.backgroundColor = getRandomColor();
-    dot.style.top = `${Math.random() * height}px`;
-    dot.style.left = `${Math.random() * width}px`;
-    dot.style.animation = `move ${Math.random() * 5 + 5}s linear infinite`;
-    document.body.insertBefore(dot, svg);
-}
-
-function createSvgDot() {
+function createDynamicDot() {
     let dot = document.createElementNS(svgNS, "circle");
+    dot.setAttribute("class", "dynamic-dot");
     dot.setAttribute("fill", getRandomColor());
+    let r = Math.random() * 3 + 2; // Radius between 2 and 5
+    dot.setAttribute("r", r);
     dot.setAttribute("cx", Math.random() * width);
     dot.setAttribute("cy", Math.random() * height);
-    dot.setAttribute("r", Math.random() * 10 + 2);
     svg.appendChild(dot);
-    animateSvgDot(dot);
+    animateDot(dot);
 }
 
-function animateSvgDot(dot) {
-    let animationType = Math.floor(Math.random() * 3); // 0 for pulse, 1 for bounce, 2 for no animation
-    if (animationType === 0) {
-        dot.setAttribute("class", "pulse");
-        dot.style.animation = `pulse 2s infinite ease-in-out`;
-    } else if (animationType === 1) {
-        dot.setAttribute("class", "bounce");
-        dot.style.animation = `bounce 2s infinite ease-in-out`;
+function animateDot(dot) {
+    dot.style.animation = `pulse 5s infinite ease-in-out, glow 5s infinite ease-in-out`;
+    dot.setAttribute("stroke", getRandomColor());
+}
+
+function generateFibonacciSpiral() {
+    const numDots = 144; // A Fibonacci number
+    let phi = (1 + Math.sqrt(5)) / 2; // Golden ratio
+    for (let i = 0; i < numDots; i++) {
+        let distance = Math.sqrt(i) * 12;
+        let angle = i * phi * Math.PI * 2;
+        let x = width / 2 + Math.cos(angle) * distance;
+        let y = height / 2 + Math.sin(angle) * distance;
+        createFibonacciDot(x, y, Math.max(5 * (i / numDots), 2), getRandomColor());
     }
 }
 
-function refreshAnimation() {
-    document.body.innerHTML = ''; // Clear the existing dots
-    svg = document.createElementNS(svgNS, "svg"); // Recreate the SVG container
-    document.body.appendChild(svg);
+function createFibonacciDot(x, y, r, color) {
+    let dot = document.createElementNS(svgNS, "circle");
+    dot.setAttribute("cx", x);
+    dot.setAttribute("cy", y);
+    dot.setAttribute("r", r);
+    dot.setAttribute("fill", color);
+    dot.setAttribute("class", "fibonacci-dot");
+    svg.appendChild(dot);
+}
 
-    const totalDots = 400;
-    for (let i = 0; i < totalDots; i++) {
-        if (i % 2 === 0) createDivDot(); // Create half as div dots
-        else createSvgDot(); // Create the other half as SVG dots
+// Refresh to combine the animations and create a symphony of effects
+function refreshAnimation() {
+    svg.innerHTML = ''; // Clear the existing canvas
+    generateFibonacciSpiral();
+    for (let i = 0; i < 200; i++) { // Dynamic dots for a layer of complexity
+        createDynamicDot();
     }
 }
 
 refreshAnimation();
-setInterval(refreshAnimation, 10000); // Refresh the animation every 10 seconds
+setInterval(refreshAnimation, 20000); // Refresh the animation every 20 seconds for continuous dynamism
 
 </script>
 </body>
