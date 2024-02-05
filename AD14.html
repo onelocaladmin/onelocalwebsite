@@ -63,8 +63,10 @@
                 const maxDistance = 50;
 
                 if (distance < maxDistance) {
-                    this.speedX = -this.speedX; // Reverse horizontal speed
-                    this.speedY = -this.speedY; // Reverse vertical speed
+                    const angle = Math.atan2(dy, dx);
+                    const speed = (maxDistance - distance) / maxDistance * 10;
+                    this.speedX = Math.cos(angle) * speed;
+                    this.speedY = Math.sin(angle) * speed;
                 }
 
                 this.x += this.speedX;
