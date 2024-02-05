@@ -1,53 +1,54 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Animated Dots</title>
-<style>
-  body, html {
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    background-color: black;
-  }
-  .dot {
-    position: absolute;
-    border-radius: 50%;
-    opacity: 0.6;
-    animation: move linear infinite;
-  }
-  @keyframes move {
-    from {
-      transform: translate(0px, 0px);
-    }
-    to {
-      transform: translate(calc(100vw - 100%), calc(100vh - 100%));
-    }
-  }
-</style>
+    <title>Dots Animation</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: black;
+        }
+        svg {
+            position: absolute;
+        }
+    </style>
 </head>
 <body>
+    <script>
+        const width = window.innerWidth;
+        const height = window.innerHeight;
 
-<script>
-// Colors of the dots
-const colors = ["#FCB711", "#F37021", "#CC004C", "#6460AA", "#0089D0", "#0DB14B"];
-const numDots = 100; // Number of dots to generate
+        function createDot() {
+            const svgNS = "http://www.w3.org/2000/svg";
+            let dot = document.createElementNS(svgNS, "circle");
+            dot.setAttribute("fill", getRandomColor());
+            dot.setAttribute("cx", Math.random() * width);
+            dot.setAttribute("cy", Math.random() * height);
+            dot.setAttribute("r", Math.random() * 5 + 2); // Small radius for dots
+            return dot;
+        }
 
-for (let i = 0; i < numDots; i++) {
-  const dot = document.createElement('div');
-  dot.className = 'dot';
-  const size = Math.random() * 5 + 2; // Random size between 2px and 7px
-  dot.style.width = `${size}px`;
-  dot.style.height = `${size}px`;
-  dot.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-  dot.style.top = `${Math.random() * 100}vh`;
-  dot.style.left = `${Math.random() * 100}vw`;
-  dot.style.animationDuration = `${Math.random() * 5 + 5}s`; // Random animation duration between 5s and 10s
-  dot.style.animationDelay = `-${Math.random() * 5}s`; // Random animation start delay to desynchronize animations
-  document.body.appendChild(dot);
-}
-</script>
+        function getRandomColor() {
+            const colors = ["#FCB711", "#F37021", "#CC004C", "#6460AA", "#0089D0", "#0DB14B"];
+            return colors[Math.floor(Math.random() * colors.length)];
+        }
 
+        function addDots(num) {
+            const svgNS = "http://www.w3.org/2000/svg";
+            let svg = document.createElementNS(svgNS, "svg");
+            svg.setAttribute("width", width);
+            svg.setAttribute("height", height);
+            for (let i = 0; i < num; i++) {
+                svg.appendChild(createDot());
+            }
+            document.body.appendChild(svg);
+        }
+
+        // Example: Adding 200 dots
+        addDots(200);
+
+        // Optional: Add animation or more dots dynamically here
+    </script>
 </body>
 </html>
