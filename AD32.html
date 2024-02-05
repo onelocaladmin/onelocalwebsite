@@ -3,13 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Interactive Animated Symphony</title>
+    <title>Mytho-Chrystic Cyberpunk Vista</title>
     <style>
         body {
             margin: 0;
             padding: 0;
             overflow: hidden;
-            background-color: #000;
         }
         svg {
             position: absolute;
@@ -20,6 +19,14 @@
             position: absolute;
             border-radius: 50%;
             opacity: 0.6;
+        }
+        .fibonacci-dot {
+            fill-opacity: 0.8;
+            transition: all 0.6s ease;
+        }
+        .fibonacci-dot:hover {
+            fill-opacity: 1;
+            r: 8px;
         }
         @keyframes move {
             0% { transform: translate(0px, 0px); }
@@ -32,17 +39,53 @@
     </style>
 </head>
 <body>
-<svg id="symphony"></svg>
+<!-- Mytho-Chrystic Cyberpunk Vista -->
+<svg id="cosmos"></svg>
+<svg id="flower" width="87" height="87" viewBox="0 0 87 87" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <!-- Flower SVG path data here... -->
+</svg>
 <script>
 const svgNS = "http://www.w3.org/2000/svg";
 const width = window.innerWidth;
 const height = window.innerHeight;
-const colors = ["red", "orange", "yellow", "green", "blue", "indigo", "violet"];
+const colors = ["red", "orange", "yellow", "green", "blue", "indigo", "violet"]; // Rainbow colors
 
 function getRandomColor() {
     return colors[Math.floor(Math.random() * colors.length)];
 }
 
+function createFibonacciDot(x, y, r, color) {
+    const svg = document.getElementById('cosmos');
+    let dot = document.createElementNS(svgNS, "circle");
+    dot.setAttribute("cx", x);
+    dot.setAttribute("cy", y);
+    dot.setAttribute("r", r);
+    dot.setAttribute("fill", color);
+    dot.setAttribute("class", "fibonacci-dot");
+    svg.appendChild(dot);
+}
+
+function generateFibonacciSpiral() {
+    const numDots = 500; // Increase the number of dots for a larger spiral
+    let phi = (1 + Math.sqrt(5)) / 2; // Golden ratio
+    for (let i = 0; i < numDots; i++) {
+        let distance = Math.sqrt(i) * 20; // Increase the distance
+        let angle = i * phi * Math.PI * 2;
+        let x = width / 2 + Math.cos(angle) * distance;
+        let y = height / 2 + Math.sin(angle) * distance;
+        createFibonacciDot(x, y, Math.max(10 * (i / numDots), 5), getRandomColor()); // Adjust the minimum and maximum radius as needed
+    }
+}
+
+generateFibonacciSpiral();
+
+// Rest of your background dots code here...
+
+</script>
+
+<!-- Interactive Animated Symphony -->
+<svg id="symphony"></svg>
+<script>
 function createDot(x, y, r, color) {
     const svg = document.getElementById('symphony');
     let dot = document.createElementNS(svgNS, "circle");
@@ -69,5 +112,14 @@ generateDots();
 // Rest of your animated symphony code here...
 
 </script>
+
+<!-- Minimalist Portfolio -->
+<div class="container">
+    <div class="portfolio">
+        <h1>Minimalist Portfolio</h1>
+        <p>Welcome to my minimalist portfolio website. Here, you'll find a collection of my work and projects.</p>
+        <!-- Add your portfolio content here... -->
+    </div>
+</div>
 </body>
 </html>
