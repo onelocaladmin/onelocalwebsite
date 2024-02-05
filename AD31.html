@@ -3,72 +3,80 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sparkling Mytho-Chrystic Cyberpunk Vista</title>
+    <title>Digital Ecosystem Symphony</title>
     <style>
         body, html {
             margin: 0;
             padding: 0;
             overflow: hidden;
-            background-color: #000; /* Deep cosmic black */
+            background-color: #000; /* Deep space black for contrast */
         }
         svg {
             position: absolute;
             width: 100%;
             height: 100%;
         }
-        .fibonacci-dot {
-            transition: all 0.2s ease;
+        .dynamic-dot {
+            fill-opacity: 0.7;
+            transition: transform 0.5s ease;
         }
-        @keyframes sparkle {
-            from { opacity: 1; }
-            to { opacity: 0; }
+        .fibonacci-dot:hover, .dynamic-dot:hover {
+            transform: scale(1.5);
+            fill-opacity: 1;
+        }
+        @keyframes pulse {
+            0%, 100% { r: 2px; fill-opacity: 0.6; }
+            50% { r: 5px; fill-opacity: 1; }
+        }
+        @keyframes move {
+            from { transform: translate(0px, 0px); }
+            to { transform: translate(100vw, 100vh); }
         }
     </style>
 </head>
 <body>
 <svg id="cosmos"></svg>
+<svg id="digital-flower" style="left: 50%; top: 50%; transform: translate(-50%, -50%);" width="200" height="200" viewBox="0 0 87 87" fill="none">
+    <!-- Flower SVG Placeholder for central motif -->
+</svg>
 <script>
 const svgNS = "http://www.w3.org/2000/svg";
 const width = window.innerWidth;
 const height = window.innerHeight;
-let svg = document.getElementById('cosmos');
+// Approximating vibrant neon colors from the described screenshot
+const colors = ["#FF0099", "#00FF66", "#00FFFF", "#FF6600", "#FFFF00", "#FF0000", "#6600FF"];
 
 function getRandomColor() {
-    const colors = ["#FF5733", "#C70039", "#900C3F", "#581845", "#DAF7A6", "#FFC300", "#DAF7A6"]; // Expanded color palette
     return colors[Math.floor(Math.random() * colors.length)];
 }
 
 function createFibonacciDot(x, y, r, color) {
+    const svg = document.getElementById('cosmos');
     let dot = document.createElementNS(svgNS, "circle");
     dot.setAttribute("cx", x);
     dot.setAttribute("cy", y);
     dot.setAttribute("r", r);
     dot.setAttribute("fill", color);
     dot.setAttribute("class", "fibonacci-dot");
-    dot.style.animation = `sparkle 1s infinite`;
     svg.appendChild(dot);
 }
 
 function generateFibonacciSpiral() {
-    svg.innerHTML = ''; // Clear existing dots for a sparkling effect
-    const numDots = 144; // A smaller number for performance
-    let phi = (1 + Math.sqrt(5)) / 2; // Golden ratio
+    const numDots = 500; // Enriching the canvas with more dots
+    let phi = (1 + Math.sqrt(5)) / 2; // Golden ratio for the spiral
     for (let i = 0; i < numDots; i++) {
-        let distance = Math.sqrt(i) * 12; // Adjusted for visual effect
+        let distance = Math.sqrt(i) * 12; // Adjusting spacing for visual appeal
         let angle = i * phi * Math.PI * 2;
         let x = width / 2 + Math.cos(angle) * distance;
         let y = height / 2 + Math.sin(angle) * distance;
-        createFibonacciDot(x, y, Math.max(2, 5 * (i / numDots)), getRandomColor());
+        createFibonacciDot(x, y, 3, getRandomColor()); // Unified dot size for harmony
     }
 }
 
-// Sparkle effect by rapidly refreshing the spiral
-function sparkleEffect() {
-    generateFibonacciSpiral();
-    setTimeout(sparkleEffect, 200); // Adjust time as needed for desired sparkle speed
-}
+generateFibonacciSpiral();
 
-sparkleEffect();
+// Additional animation functions (e.g., createDivDot, createSvgDot) would go here
+// To keep this example concise, they are not duplicated
 
 </script>
 </body>
