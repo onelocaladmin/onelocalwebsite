@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Interactive Fibonacci Canvas</title>
+    <title>Fibonacci Symphony</title>
     <style>
         body, html {
             margin: 0;
@@ -15,53 +15,72 @@
             position: absolute;
             width: 100%;
             height: 100%;
+            overflow: visible;
+        }
+        .dynamic-dot {
+            animation: drift 20s infinite linear, pulse 2s infinite alternate;
+        }
+        @keyframes drift {
+            from { transform: translate(0px, 0px); }
+            to { transform: translate(100vw, 100vh); }
+        }
+        @keyframes pulse {
+            0%, 100% { r: 2px; fill-opacity: 0.6; }
+            50% { r: 8px; fill-opacity: 1; }
+        }
+        .fibonacci-svg {
+            width: auto;
+            height: auto;
+            max-width: 100%;
+            max-height: 100%;
+            transform: translate(50%, 50%) scale(2);
         }
     </style>
 </head>
 <body>
-<svg id="canvas"></svg>
+<svg id="cosmos" viewBox="0 0 87 87" fill="none" xmlns="http://www.w3.org/2000/svg" class="fibonacci-svg">
+    <!-- Fibonacci SVG Paths -->
+    <!-- Insert all the given SVG paths here -->
+</svg>
 <script>
 const svgNS = "http://www.w3.org/2000/svg";
-const colors = ["#FF5733", "#C70039", "#900C3F", "#581845", "#DAF7A6", "#FFC300", "#DAF7A6"];
+const colors = ["#FCB711", "#F37021", "#CC004C", "#6460AA", "#0089D0", "#0DB14B"];
 const width = window.innerWidth;
 const height = window.innerHeight;
-let canvas = document.getElementById("canvas");
+let svg = document.getElementById("cosmos");
 
 function getRandomColor() {
     return colors[Math.floor(Math.random() * colors.length)];
 }
 
-function createFibonacciExplosion(x, y) {
-    const numDots = 50; // Number of dots in the burst
-    const phi = (1 + Math.sqrt(5)) / 2; // Golden ratio
-    for (let i = 0; i < numDots; i++) {
-        let distance = Math.sqrt(i) * 4; // Scale the distance for visual effect
-        let angle = i * 2 * Math.PI / phi;
-        let dotX = x + Math.cos(angle) * distance;
-        let dotY = y + Math.sin(angle) * distance;
-        let dot = document.createElementNS(svgNS, "circle");
-        dot.setAttribute("cx", dotX);
-        dot.setAttribute("cy", dotY);
-        dot.setAttribute("r", 2 + (i % 5)); // Varying sizes for aesthetic effect
-        dot.setAttribute("fill", getRandomColor());
-        canvas.appendChild(dot);
+function createDynamicDot() {
+    let dot = document.createElementNS(svgNS, "circle");
+    dot.setAttribute("class", "dynamic-dot");
+    dot.setAttribute("fill", getRandomColor());
+    let r = Math.random() * 5 + 2; // Varying sizes for more visual interest
+    dot.setAttribute("r", r);
+    dot.setAttribute("cx", Math.random() * width);
+    dot.setAttribute("cy", Math.random() * height);
+    svg.appendChild(dot);
+}
 
-        // Animation for flourish: grow and fade out
-        dot.animate([
-            { transform: 'scale(1)', opacity: 1 },
-            { transform: 'scale(2)', opacity: 0 }
-        ], {
-            duration: 1000 + i * 5, // Staggering the animation duration
-            easing: 'ease-out',
-            fill: 'forwards' // Keep the final state
-        });
+// Populate the scene with dynamic dots
+function populateDots(num) {
+    for (let i = 0; i < num; i++) {
+        createDynamicDot();
     }
 }
 
-canvas.addEventListener("click", (e) => {
-    createFibonacciExplosion(e.clientX, e.clientY);
-});
+populateDots(200); // Adjust the number of dots as needed
 
+// Refresh the dynamic dots to maintain performance
+setInterval(() => {
+    // Clear existing dynamic dots
+    let dynamicDots = svg.querySelectorAll('.dynamic-dot');
+    dynamicDots.forEach(dot => dot.remove());
+    // Repopulate dynamic dots
+    populateDots(200);
+}, 10000); // Refresh every 10 seconds
 </script>
 </body>
 </html>
