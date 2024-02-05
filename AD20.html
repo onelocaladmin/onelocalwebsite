@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unified Mytho-Digital Symphony</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #000; /* Cosmic Black */
+        }
+        svg {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+        .dot {
+            opacity: 0.6;
+        }
+        @keyframes move {
+            from { transform: translate(0, 0); }
+            to { transform: translate(calc(100vw - 100%), calc(100vh - 100%)); }
+        }
+        @keyframes pulse {
+            0%, 100% { r: 2px; }
+            50% { r: 10px; }
+        }
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+        .moving { animation: move 10s linear infinite; }
+        .pulsing { animation: pulse 2s infinite; }
+        .bouncing { animation: bounce 2s infinite; }
+    </style>
+</head>
+<body>
+<svg id="cosmos"></svg>
+<script>
+const svgNS = "http://www.w3.org/2000/svg";
+const width = window.innerWidth;
+const height = window.innerHeight;
+const colors = ["#FCB711", "#F37021", "#CC004C", "#6460AA", "#0089D0", "#0DB14B"];
+let svg = document.getElementById('cosmos');
+
+function getRandomColor() {
+    return colors[Math.floor(Math.random() * colors.length)];
+}
+
+function createDot(options) {
+    let dot;
+    if (options.type === 'svg') {
+        dot = document.createElementNS(svgNS, "circle");
+        dot.setAttribute("cx", options.x || Math.random() * width);
+        dot.setAttribute("cy", options.y || Math.random() * height);
+        dot.setAttribute("r", options.size || Math.random() * 8 + 2);
+        dot.setAttribute("fill", options.color || getRandomColor());
+        if (options.class) dot.setAttribute("class", options.class);
+        svg.appendChild(dot);
+    } else { // 'div'
+        dot = document.createElement('div');
+        dot.style.width = dot.style.height = `${options.size || Math.random() * 20 + 5}px`;
+        dot.style.backgroundColor = options.color || getRandomColor();
+        dot.style.borderRadius = '50%';
+        dot.style.position = 'absolute';
+        dot.style.left = `${options.x || Math.random() * width}px`;
+        dot.style.top = `${options.y || Math.random() * height}px`;
+        if (options.class) dot.className = options.class;
+        document.body.insertBefore(dot, svg);
+    }
+    return dot;
+}
+
+function animateDot(dot, type) {
+    // Additional animation logic can be applied here if needed
+}
+
+function addDots() {
+    document.body.innerHTML = ''; // Reset
+    svg = document.createElementNS(svgNS, "svg"); // Recreate SVG
+    document.body.appendChild(svg);
+
+    const totalDots = 500;
+    for (let i = 0; i < totalDots; i++) {
+        const isSvg = i % 4 === 0 || i % 4 === 1; // Alternate between SVG and div
+        const dotType = isSvg ? 'svg' : 'div';
+        const animationClass = i % 4 === 0 ? 'moving' : i % 4 === 1 ? 'pulsing' : 'bouncing';
+        createDot({
+            type: dotType,
+            size: Math.random() * (isSvg ? 10 : 20) + 5, // Larger range for div dots
+            class: animationClass
+        });
+    }
+}
+
+addDots();
+
+// Refresh every 15 seconds to introduce new dots and animations
+setInterval(addDots, 15000);
+</script>
+</body>
+</html>
