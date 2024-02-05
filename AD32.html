@@ -3,26 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Unified Animated Mytho-Chrystic Vista</title>
+    <title>Interactive Animated Symphony</title>
     <style>
-        body, html {
+        body {
             margin: 0;
             padding: 0;
             overflow: hidden;
-            background-color: #000; /* Deep cosmic black */
+            background-color: #000;
         }
         svg {
             position: absolute;
             width: 100%;
             height: 100%;
-        }
-        .model-dot {
-            fill-opacity: 0.8;
-            transition: all 0.6s ease;
-        }
-        .model-dot:hover {
-            fill-opacity: 1;
-            r: 8px;
         }
         .dot {
             position: absolute;
@@ -35,64 +27,46 @@
         }
         @keyframes pulse {
             0%, 100% { r: 2px; }
-            50% { r: 10px; }
+             50% { r: 10px; }
         }
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-20px); }
-        }
-        /* Additional keyframes and animations for mytho-chrystic effects */
     </style>
 </head>
 <body>
-<svg id="cosmos"></svg>
-<!-- Flower SVG and other symbolic SVGs go here -->
+<svg id="symphony"></svg>
 <script>
-// Define the namespace for SVG
 const svgNS = "http://www.w3.org/2000/svg";
-
-// Setup the width and height based on window size
 const width = window.innerWidth;
 const height = window.innerHeight;
+const colors = ["red", "orange", "yellow", "green", "blue", "indigo", "violet"];
 
-// Model colors extracted from the screenshot
-const modelColors = {
-    "Location": "#e53b35",
-    "Time": "#d98e28",
-    // ...Add all model color mappings here based on the screenshot
-};
-
-// Function to generate a random model color
-function getRandomModelColor() {
-    const keys = Object.keys(modelColors);
-    return modelColors[keys[keys.length * Math.random() << 0]];
+function getRandomColor() {
+    return colors[Math.floor(Math.random() * colors.length)];
 }
 
-// Function to create a dot for each model type
-function createModelDot(modelName, x, y, r) {
-    const svg = document.getElementById('cosmos');
+function createDot(x, y, r, color) {
+    const svg = document.getElementById('symphony');
     let dot = document.createElementNS(svgNS, "circle");
     dot.setAttribute("cx", x);
     dot.setAttribute("cy", y);
     dot.setAttribute("r", r);
-    dot.setAttribute("fill", modelColors[modelName]);
-    dot.setAttribute("class", "model-dot");
+    dot.setAttribute("fill", color);
     svg.appendChild(dot);
 }
 
-// Function to generate a Fibonacci Spiral with model dots
-function generateFibonacciSpiral() {
-    // ...same as previously provided
+function generateDots() {
+    const numDots = 500;
+    for (let i = 0; i < numDots; i++) {
+        let x = Math.random() * width;
+        let y = Math.random() * height;
+        let r = Math.random() * 10 + 2;
+        let color = getRandomColor();
+        createDot(x, y, r, color);
+    }
 }
 
-// Call to generate the spiral
-generateFibonacciSpiral();
+generateDots();
 
-// Functions to create interactive dots
-// ...same as previously provided
-
-// Function to refresh the animation
-// ...same as previously provided
+// Rest of your animated symphony code here...
 
 </script>
 </body>
