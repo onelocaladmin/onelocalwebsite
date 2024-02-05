@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Social Coordination FileSystem Promo</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #1E1E1E; /* Use a dark theme for cyberpunk feel */
+        }
+        /* Extracted colors from the screenshot will be named after the models */
+        :root {
+            --location-color: #E53B35; /* Example color, replace with actual */
+            --time-color: #D98E28; /* Example color, replace with actual */
+            /* Define other model colors here */
+        }
+        svg {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+        .dot, .svgDot {
+            /* Dynamic color application */
+            fill: var(--location-color);
+            /* Include more colors with specific classes */
+        }
+        /* Rest of your styles for animations */
+    </style>
+</head>
+<body>
+<svg id="cosmos"></svg>
+<!-- Insert your SVG flower and other elements here -->
+<script>
+const svgNS = "http://www.w3.org/2000/svg";
+const width = window.innerWidth;
+const height = window.innerHeight;
+
+function getModelColor(modelName) {
+    // Function to get model color by its name
+    const modelColors = {
+        'Location': '--location-color',
+        'Time': '--time-color',
+        // Add all model color mappings here
+    };
+    return getComputedStyle(document.documentElement).getPropertyValue(modelColors[modelName]);
+}
+
+function createModelDot(modelName, x, y, r) {
+    const svg = document.getElementById('cosmos');
+    let dot = document.createElementNS(svgNS, "circle");
+    dot.setAttribute("cx", x);
+    dot.setAttribute("cy", y);
+    dot.setAttribute("r", r);
+    dot.setAttribute("fill", getModelColor(modelName));
+    dot.setAttribute("class", "dot " + modelName.toLowerCase() + "-dot"); // Class name based on model
+    svg.appendChild(dot);
+}
+
+// Your function to generate Fibonacci Spiral using the createModelDot function
+// Rest of your script to animate and refresh the dots
+
+</script>
+</body>
+</html>
