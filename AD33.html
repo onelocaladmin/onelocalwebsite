@@ -82,7 +82,7 @@ function generateFibonacciSpiral() {
 
 // Adds sophistication to dynamic dot creation and interaction
 function createDynamicDots() {
-    const totalDots = 400;
+    const totalDots = 700;
     for (let i = 0; i < totalDots; i++) {
         const dot = document.createElement('div');
         dot.className = 'dot';
@@ -97,7 +97,7 @@ function createDynamicDots() {
 
 function initiateAnimations() {
     generateFibonacciSpiral(); // Starts with Fibonnaci spiral
-    setTimeout(createDynamicDots, 5000); // Wait 5 seconds then display dynamic dots
+    setTimeout(createDynamicDots, 100); // Wait 5 seconds then display dynamic dots
     setInterval(() => {
         // Clear previous scene
         document.querySelectorAll('.dot').forEach(e => e.remove());
