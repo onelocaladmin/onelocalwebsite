@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crossfaded Animated Effects</title>
+    <title>Crossfade Animated Dots</title>
     <style>
         body, html {
             margin: 0;
@@ -11,55 +11,101 @@
             overflow: hidden;
             background-color: black;
         }
-        .dot, circle {
-            opacity: 0.6; /* Adjust based on the desired visibility */
-        }
-        svg {
+        .container {
             position: absolute;
             width: 100%;
             height: 100%;
+            opacity: 1;
+            transition: opacity 2s ease-in-out;
         }
-        /* Additional keyframes and styles from previous examples can be added here */
+        .hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+        svg, .dot {
+            position: absolute;
+        }
+        .dot {
+            border-radius: 50%;
+            animation: move 10s linear infinite;
+        }
+        @keyframes move {
+            from {
+                transform: translate(0px, 0px);
+            }
+            to {
+                transform: translate(calc(100vw - 100%), calc(100vh - 100%));
+            }
+        }
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% {
+                r: 2px;
+            }
+            50% {
+                r: 10px;
+            }
+        }
     </style>
 </head>
 <body>
-<script>
-const svgNS = "http://www.w3.org/2000/svg";
-const colors = ["#FCB711", "#F37021", "#CC004C", "#6460AA", "#0089D0", "#0DB14B"];
-const width = window.innerWidth;
-const height = window.innerHeight;
+    <div id="dotContainer" class="container"></div>
+    <svg id="svgContainer" class="container hidden"></svg>
 
-// Function to create dots with SVG and div elements
-function createDot(isSVG = true) {
-    let dot;
-    if (isSVG) {
-        dot = document.createElementNS(svgNS, "circle");
-        dot.setAttribute("cx", Math.random() * width);
-        dot.setAttribute("cy", Math.random() * height);
-        dot.setAttribute("r", Math.random() * 8 + 2); // Random size
-        document.querySelector("svg").appendChild(dot);
-    } else {
-        dot = document.createElement('div');
-        dot.className = 'dot';
-        dot.style.width = dot.style.height = Math.random() * 10 + 2 + 'px'; // Random size
-        dot.style.top = `${Math.random() * 100}vh`;
-        dot.style.left = `${Math.random() * 100}vw`;
-        document.body.appendChild(dot);
-    }
-    dot.setAttribute("fill", colors[Math.floor(Math.random() * colors.length)]);
-    // Additional properties and animations can be added here
-}
+    <script>
+        const colors = ["#FCB711", "#F37021", "#CC004C", "#6460AA", "#0089D0", "#0DB14B"];
+        const svgNS = "http://www.w3.org/2000/svg";
+        let currentContainer = document.getElementById("dotContainer");
+        let nextContainer = document.getElementById("svgContainer");
 
-// Initialize SVG container for SVG dots
-let svg = document.createElementNS(svgNS, "svg");
-document.body.appendChild(svg);
+        function switchContainers() {
+            currentContainer.classList.add("hidden");
+            nextContainer.classList.remove("hidden");
+            let temp = currentContainer;
+            currentContainer = nextContainer;
+            nextContainer = temp;
+            currentContainer.innerHTML = ''; // Clear the container for fresh animation
+            animateDots();
+        }
 
-// Example: Create a mix of SVG and div dots
-for (let i = 0; i < 100; i++) createDot(true); // SVG dots
-for (let i = 0; i < 100; i++) createDot(false); // Div dots
+        function getRandomColor() {
+            return colors[Math.floor(Math.random() * colors.length)];
+        }
 
-// Implement crossfade transitions between animation styles here
-// This is a simplified example. Actual implementation would require dynamic style and animation adjustments
-</script>
+        function animateDots() {
+            if (currentContainer.tagName === "DIV") {
+                // Animate using div elements
+                for (let i = 0; i < 500; i++) {
+                    let dot = document.createElement('div');
+                    dot.className = 'dot';
+                    dot.style.width = `${Math.random() * 10 + 2}px`;
+                    dot.style.height = dot.style.width;
+                    dot.style.backgroundColor = getRandomColor();
+                    dot.style.left = `${Math.random() * 100}vw`;
+                    dot.style.top = `${Math.random() * 100}vh`;
+                    currentContainer.appendChild(dot);
+                }
+            } else if (currentContainer.tagName === "svg".toUpperCase()) {
+                // Animate using SVG elements
+                for (let i = 0; i < 200; i++) {
+                    let dot = document.createElementNS(svgNS, "circle");
+                    dot.setAttribute("class", "pulse");
+                    dot.setAttribute("fill", getRandomColor());
+                    dot.setAttribute("cx", Math.random() * window.innerWidth);
+                    dot.setAttribute("cy", Math.random() * window.innerHeight);
+                    dot.setAttribute("r", 2);
+                    currentContainer.appendChild(dot);
+                }
+            }
+        }
+
+        animateDots(); // Initialize animation
+
+        setInterval(() => {
+            switchContainers(); // Switch every 10 seconds
+        }, 10000);
+    </script>
 </body>
 </html>
