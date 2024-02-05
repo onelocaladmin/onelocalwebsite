@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Comprehensive Animated Effects</title>
+    <title>Digital Symphony</title>
     <style>
         body, html {
             margin: 0;
@@ -11,100 +11,77 @@
             overflow: hidden;
             background-color: black;
         }
-        .dot {
+        canvas {
             position: absolute;
-            border-radius: 50%;
-            opacity: 0.6;
-        }
-        svg {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-        }
-        @keyframes move {
-            0% { transform: translate(0px, 0px); }
-            100% { transform: translate(calc(100vw - 100%), calc(100vh - 100%)); }
-        }
-        @keyframes pulse {
-            0%, 100% { r: 2px; }
-            50% { r: 10px; }
-        }
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-20px); }
+            top: 0;
+            left: 0;
+            z-index: -1;
         }
     </style>
 </head>
 <body>
-<script>
-const svgNS = "http://www.w3.org/2000/svg";
-const colors = ["#FCB711", "#F37021", "#CC004C", "#6460AA", "#0089D0", "#0DB14B"];
-const width = window.innerWidth;
-const height = window.innerHeight;
-let svg = document.createElementNS(svgNS, "svg");
-document.body.appendChild(svg);
+    <canvas id="canvas"></canvas>
+    <script>
+        const canvas = document.getElementById("canvas");
+        const ctx = canvas.getContext("2d");
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
 
-function getRandomColor() {
-    return colors[Math.floor(Math.random() * colors.length)];
-}
+        const colors = ["#FF0000", "#00FF00", "#0000FF", "#FFFF00", "#FF00FF"];
+        const particles = [];
 
-function createDivDot() {
-    const dot = document.createElement('div');
-    dot.className = 'dot';
-    dot.style.width = dot.style.height = `${Math.random() * 10 + 2}px`;
-    dot.style.backgroundColor = getRandomColor();
-    dot.style.top = `${Math.random() * height}px`;
-    dot.style.left = `${Math.random() * width}px`;
-    dot.style.animation = `move ${Math.random() * 5 + 5}s linear infinite`;
-    document.body.insertBefore(dot, svg);
-}
+        class Particle {
+            constructor(x, y, size, color, speedX, speedY) {
+                this.x = x;
+                this.y = y;
+                this.size = size;
+                this.color = color;
+                this.speedX = speedX;
+                this.speedY = speedY;
+            }
 
-function createSvgDot() {
-    let dot = document.createElementNS(svgNS, "circle");
-    dot.setAttribute("fill", getRandomColor());
-    dot.setAttribute("cx", Math.random() * width);
-    dot.setAttribute("cy", Math.random() * height);
-    dot.setAttribute("r", Math.random() * 10 + 2);
-    svg.appendChild(dot);
-    animateSvgDot(dot);
-}
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
 
-function animateSvgDot(dot) {
-    let animationType = Math.floor(Math.random() * 2); // 0 for pulse, 1 for bounce
-    if (animationType === 0) {
-        dot.setAttribute("class", "pulse");
-        dot.style.animation = `pulse 2s infinite ease-in-out`;
-    } else {
-        let dx = (Math.random() - 0.5) * 2;
-        let dy = (Math.random() - 0.5) * 2;
-        function move() {
-            let cx = parseFloat(dot.getAttribute("cx")) + dx;
-            let cy = parseFloat(dot.getAttribute("cy")) + dy;
-            if (cx <= 0 || cx >= width) dx = -dx;
-            if (cy <= 0 || cy >= height) dy = -dy;
-            dot.setAttribute("cx", cx);
-            dot.setAttribute("cy", cy);
-            requestAnimationFrame(move);
+                if (this.size > 0.2) this.size -= 0.1;
+            }
+
+            draw() {
+                ctx.fillStyle = this.color;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
         }
-        move();
-    }
-}
 
-function refreshAnimation() {
-    document.body.innerHTML = ''; // Clear the existing dots
-    svg = document.createElementNS(svgNS, "svg"); // Recreate the SVG container
-    document.body.appendChild(svg);
+        function createParticles(x, y) {
+            const speedX = (Math.random() - 0.5) * 3;
+            const speedY = (Math.random() - 0.5) * 3;
+            const size = Math.random() * 10 + 2;
+            const color = colors[Math.floor(Math.random() * colors.length)];
+            particles.push(new Particle(x, y, size, color, speedX, speedY));
+        }
 
-    const totalDots = 400;
-    for (let i = 0; i < totalDots; i++) {
-        if (i % 2 === 0) createDivDot(); // Create half as div dots
-        else createSvgDot(); // Create the other half as SVG dots
-    }
-}
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            for (let i = 0; i < particles.length; i++) {
+                particles[i].update();
+                particles[i].draw();
 
-refreshAnimation();
-setInterval(refreshAnimation, 10000); // Refresh the animation every 10 seconds
+                if (particles[i].size <= 0.3) {
+                    particles.splice(i, 1);
+                    i--;
+                }
+            }
+            requestAnimationFrame(animateParticles);
+        }
 
-</script>
+        canvas.addEventListener("mousemove", (e) => {
+            createParticles(e.clientX, e.clientY);
+        });
+
+        animateParticles();
+    </script>
 </body>
 </html>
