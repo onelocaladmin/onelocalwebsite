@@ -17,7 +17,7 @@
     height: 100%;
   }
   .dot {
-    animation: pulse 2s infinite;
+    fill-opacity: 0.6;
   }
   @keyframes pulse {
     0%, 100% {
@@ -31,51 +31,51 @@
 </head>
 <body>
 <script>
-  const svgNS = "http://www.w3.org/2000/svg";
-  const colors = ["#FCB711", "#F37021", "#CC004C", "#6460AA", "#0089D0", "#0DB14B"];
-  const numDots = 500; // Adjust the number of dots here for your screen size and performance
-  const width = window.innerWidth;
-  const height = window.innerHeight;
-  let svg = document.createElementNS(svgNS, "svg");
-  document.body.appendChild(svg);
+const svgNS = "http://www.w3.org/2000/svg";
+const colors = ["#FCB711", "#F37021", "#CC004C", "#6460AA", "#0089D0", "#0DB14B"];
+const numDots = 500; // Total number of dots
+const width = window.innerWidth;
+const height = window.innerHeight;
+let svg = document.createElementNS(svgNS, "svg");
 
-  function createDot() {
-    let dot = document.createElementNS(svgNS, "circle");
-    dot.setAttribute("class", "dot");
-    dot.setAttribute("fill", colors[Math.floor(Math.random() * colors.length)]);
-    let x = Math.random() * width;
-    let y = Math.random() * height;
-    let dx = (Math.random() - 0.5) * 2;
-    let dy = (Math.random() - 0.5) * 2;
-    let r = Math.random() * 3 + 2; // Radius between 2 and 5
+function createDot() {
+  let dot = document.createElementNS(svgNS, "circle");
+  dot.setAttribute("class", "dot");
+  dot.setAttribute("fill", colors[Math.floor(Math.random() * colors.length)]);
+  let x = Math.random() * width;
+  let y = Math.random() * height;
+  let dx = (Math.random() - 0.5) * 2;
+  let dy = (Math.random() - 0.5) * 2;
+  let r = Math.random() * 3 + 2; // Random radius between 2 and 5
 
-    function move() {
-      if (x + dx > width - r || x + dx < r) dx *= -1;
-      if (y + dy > height - r || y + dy < r) dy *= -1;
-      x += dx;
-      y += dy;
+  dot.setAttribute("cx", x);
+  dot.setAttribute("cy", y);
+  dot.setAttribute("r", r);
+  dot.style.animation = "pulse 2s infinite";
 
-      dot.setAttribute("cx", x);
-      dot.setAttribute("cy", y);
-
-      requestAnimationFrame(move);
-    }
-
-    move();
+  function move() {
+    if (x + dx > width - r || x + dx < r) dx *= -1;
+    if (y + dy > height - r || y + dy < r) dy *= -1;
+    x += dx;
+    y += dy;
 
     dot.setAttribute("cx", x);
     dot.setAttribute("cy", y);
-    dot.setAttribute("r", r);
-    return dot;
+    requestAnimationFrame(move);
   }
+  move();
 
-  function addDots(num) {
-    for (let i = 0; i < num; i++) {
-      svg.appendChild(createDot());
-    }
+  return dot;
+}
+
+function addDots(num) {
+  for (let i = 0; i < num; i++) {
+    svg.appendChild(createDot());
   }
+  document.body.appendChild(svg);
+}
 
-  addDots(numDots);
+addDots(numDots);
 </script>
 </body>
 </html>
