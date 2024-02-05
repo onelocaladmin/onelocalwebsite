@@ -3,24 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Interactive HTML Symphony</title>
+    <title>Interactive Animated Symphony</title>
     <style>
-        body, html {
+        body {
             margin: 0;
             padding: 0;
             overflow: hidden;
-            background-color: black;
-        }
-        .dot {
-            position: absolute;
-            border-radius: 50%;
-            opacity: 0.6;
-            transition: all 0.3s ease; /* Added transition for smoother movement */
+            background-color: #000;
         }
         svg {
             position: absolute;
             width: 100%;
             height: 100%;
+        }
+        .dot {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.6;
         }
         @keyframes move {
             0% { transform: translate(0px, 0px); }
@@ -44,46 +43,73 @@ const width = window.innerWidth;
 const height = window.innerHeight;
 let svg = document.createElementNS(svgNS, "svg");
 document.body.appendChild(svg);
-let mousePos = { x: 0, y: 0 };
 
 function getRandomColor() {
     return colors[Math.floor(Math.random() * colors.length)];
 }
 
-function createDivDot(x, y) {
+function createDivDot() {
     const dot = document.createElement('div');
     dot.className = 'dot';
     dot.style.width = dot.style.height = `${Math.random() * 10 + 2}px`;
     dot.style.backgroundColor = getRandomColor();
-    dot.style.top = `${y}px`;
-    dot.style.left = `${x}px`;
+    dot.style.top = `${Math.random() * height}px`;
+    dot.style.left = `${Math.random() * width}px`;
     dot.style.animation = `move ${Math.random() * 5 + 5}s linear infinite`;
+    
+    // Add mouse interaction to push other dots away
+    dot.addEventListener('mousemove', (e) => {
+        const mouseX = e.clientX;
+        const mouseY = e.clientY;
+        const dotX = parseFloat(dot.style.left);
+        const dotY = parseFloat(dot.style.top);
+        
+        const deltaX = mouseX - dotX;
+        const deltaY = mouseY - dotY;
+        const distance = Math.sqrt(deltaX ** 2 + deltaY ** 2);
+
+        if (distance < 50) {
+            const angle = Math.atan2(deltaY, deltaX);
+            const newX = dotX - 20 * Math.cos(angle);
+            const newY = dotY - 20 * Math.sin(angle);
+            
+            dot.style.left = `${newX}px`;
+            dot.style.top = `${newY}px`;
+        }
+    });
+    
     document.body.insertBefore(dot, svg);
 }
 
-function createSvgDot(x, y) {
+function createSvgDot() {
     let dot = document.createElementNS(svgNS, "circle");
     dot.setAttribute("fill", getRandomColor());
-    dot.setAttribute("cx", x);
-    dot.setAttribute("cy", y);
+    dot.setAttribute("cx", Math.random() * width);
+    dot.setAttribute("cy", Math.random() * height);
     dot.setAttribute("r", Math.random() * 10 + 2);
     svg.appendChild(dot);
     animateSvgDot(dot);
 }
 
 function animateSvgDot(dot) {
-    let dx = (Math.random() - 0.5) * 2;
-    let dy = (Math.random() - 0.5) * 2;
-    function move() {
-        let cx = parseFloat(dot.getAttribute("cx")) + dx;
-        let cy = parseFloat(dot.getAttribute("cy")) + dy;
-        if (cx <= 0 || cx >= width) dx = -dx;
-        if (cy <= 0 || cy >= height) dy = -dy;
-        dot.setAttribute("cx", cx);
-        dot.setAttribute("cy", cy);
-        requestAnimationFrame(move);
+    let animationType = Math.floor(Math.random() * 2); // 0 for pulse, 1 for bounce
+    if (animationType === 0) {
+        dot.setAttribute("class", "pulse");
+        dot.style.animation = `pulse 2s infinite ease-in-out`;
+    } else {
+        let dx = (Math.random() - 0.5) * 2;
+        let dy = (Math.random() - 0.5) * 2;
+        function move() {
+            let cx = parseFloat(dot.getAttribute("cx")) + dx;
+            let cy = parseFloat(dot.getAttribute("cy")) + dy;
+            if (cx <= 0 || cx >= width) dx = -dx;
+            if (cy <= 0 || cy >= height) dy = -dy;
+            dot.setAttribute("cx", cx);
+            dot.setAttribute("cy", cy);
+            requestAnimationFrame(move);
+        }
+        move();
     }
-    move();
 }
 
 function refreshAnimation() {
@@ -93,18 +119,14 @@ function refreshAnimation() {
     
     const totalDots = 400;
     for (let i = 0; i < totalDots; i++) {
-        if (i % 2 === 0) createDivDot(mousePos.x, mousePos.y); // Create half as div dots around the mouse position
-        else createSvgDot(Math.random() * width, Math.random() * height); // Create the other half as SVG dots
+        if (i % 2 === 0) createDivDot(); // Create half as div dots
+        else createSvgDot(); // Create the other half as SVG dots
     }
 }
 
 refreshAnimation();
 setInterval(refreshAnimation, 10000); // Refresh the animation every 10 seconds
 
-document.addEventListener("mousemove", (e) => {
-    mousePos.x = e.clientX;
-    mousePos.y = e.clientY;
-});
 </script>
 </body>
 </html>
