@@ -113,6 +113,23 @@
             createParticles(e.clientX, e.clientY);
         });
 
+        canvas.addEventListener("click", (e) => {
+            // Calculate mouse position
+            const mouseX = e.clientX;
+            const mouseY = e.clientY;
+
+            // Apply a force to all particles
+            for (let i = 0; i < particles.length; i++) {
+                const dx = mouseX - particles[i].x;
+                const dy = mouseY - particles[i].y;
+                const distance = Math.sqrt(dx * dx + dy * dy);
+                const force = 5000 / (distance * distance);
+
+                particles[i].speedX += dx * force;
+                particles[i].speedY += dy * force;
+            }
+        });
+
         animateParticles();
     </script>
     <script>
@@ -192,7 +209,7 @@
         }
 
         function refreshAnimation() {
-            svg.innerHTML = ''; // Clear the existing dots
+            document.body.innerHTML = ''; // Clear the existing dots
             svg = document.createElementNS(svgNS, "svg"); // Recreate the SVG container
             document.body.appendChild(svg);
 
