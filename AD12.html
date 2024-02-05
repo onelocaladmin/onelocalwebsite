@@ -94,7 +94,7 @@ function refreshAnimation() {
     document.body.innerHTML = ''; // Clear the existing dots
     svg = document.createElementNS(svgNS, "svg"); // Recreate the SVG container
     document.body.appendChild(svg);
-    
+
     const totalDots = 400;
     for (let i = 0; i < totalDots; i++) {
         if (i % 2 === 0) createDivDot(); // Create half as div dots
@@ -108,4 +108,3 @@ setInterval(refreshAnimation, 10000); // Refresh the animation every 10 seconds
 </script>
 </body>
 </html>
-
