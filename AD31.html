@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mytho-Chrystic Cyberpunk Vista</title>
+    <title>Sparkling Mytho-Chrystic Vista</title>
     <style>
         body, html {
             margin: 0;
@@ -17,24 +17,15 @@
             height: 100%;
         }
         .fibonacci-dot {
-            fill-opacity: 0.6;
-            transition: fill-opacity 0.6s ease, r 0.3s ease;
+            fill-opacity: 0.8;
         }
-        .fibonacci-dot:hover {
-            fill-opacity: 1;
-            r: 8px;
+        @keyframes fade {
+            from { fill-opacity: 0; }
+            to { fill-opacity: 0.8; }
         }
-        @keyframes move {
-            0% { transform: translate(0px, 0px); }
-            100% { transform: translate(calc(100vw - 100%), calc(100vh - 100%)); }
-        }
-        @keyframes pulse {
+        @keyframes sparkle {
             0%, 100% { r: 2px; }
-            50% { r: 10px; }
-        }
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-20px); }
+            50% { r: 5px; }
         }
     </style>
 </head>
@@ -44,21 +35,7 @@
 const svgNS = "http://www.w3.org/2000/svg";
 const width = window.innerWidth;
 const height = window.innerHeight;
-// Expanded color palette to include 12 colors as requested
-const colors = [
-    "#FF0000", // red
-    "#FFA500", // orange
-    "#FFD700", // gold
-    "#FFFF00", // yellow
-    "#008000", // green
-    "#40E0D0", // turquoise
-    "#00BFFF", // light blue
-    "#4B0082", // indigo
-    "#EE82EE", // violet
-    "#800080", // purple
-    "#FFC0CB", // pink
-    "#B22222"  // brick
-];
+const colors = ["#FF5733", "#C70039", "#900C3F", "#581845", "#DAF7A6", "#FFC300", "#DAF7A6"]; // Expanded color palette
 
 function getRandomColor() {
     return colors[Math.floor(Math.random() * colors.length)];
@@ -72,35 +49,29 @@ function createFibonacciDot(x, y, r, color) {
     dot.setAttribute("r", r);
     dot.setAttribute("fill", color);
     dot.setAttribute("class", "fibonacci-dot");
+    dot.style.animation = `fade 0.5s ease-out, sparkle 1s infinite ease-in-out`;
     svg.appendChild(dot);
 }
 
 function generateFibonacciSpiral() {
-    const numDots = 144; // A Fibonacci number for thematic consistency
+    // Clear existing dots to "refresh" and create sparkle effect
+    document.getElementById('cosmos').innerHTML = '';
+    const numDots = 100; // Reduced for quicker refresh
     let phi = (1 + Math.sqrt(5)) / 2; // Golden ratio
     for (let i = 0; i < numDots; i++) {
-        let distance = Math.sqrt(i) * 12; // Adjusted for visual spacing
+        let distance = Math.sqrt(i) * 12; // Adjust for desired density
         let angle = i * phi * Math.PI * 2;
         let x = width / 2 + Math.cos(angle) * distance;
         let y = height / 2 + Math.sin(angle) * distance;
-        let color = getRandomColor(); // Color chosen from the expanded palette
-        createFibonacciDot(x, y, Math.max(5 * (i / numDots), 2), color);
+        createFibonacciDot(x, y, Math.max(5 * (i / numDots), 2), getRandomColor());
     }
 }
 
+// Initial generation
 generateFibonacciSpiral();
 
-// Additional code to integrate animations from previous examples
-function createAnimatedDots() {
-    // This function could integrate the moving, pulsing, and bouncing animations
-    // for both SVG and div-based dots, similar to previous examples.
-}
-
-createAnimatedDots();
-
-// Consider adding interactive elements or transformations here
-// to further blend the Fibonacci spirals with dynamic animations,
-// creating a living canvas that responds to user interaction.
+// Refresh to sparkle
+setInterval(generateFibonacciSpiral, 1000); // Adjust time as needed for rapid refresh
 
 </script>
 </body>
