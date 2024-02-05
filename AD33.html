@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All-in-One Dynamic Universe</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #000; /* Deep cosmos black */
+        }
+        .dot {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.6;
+        }
+        .fibonacci-dot {
+            fill-opacity: 0.8; 
+        }
+        .fibonacci-dot:hover {
+            fill-opacity: 1;
+            r: 8px;
+        }
+        svg {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+        @keyframes move {
+            0% { transform: translate(0px, 0px); }
+            100% { transform: translate(calc(100vw - 100%), calc(100vh - 100%)); }
+        }
+        @keyframes pulse {
+            0%, 100% { r: 2px; }
+            50% { r: 10px; }
+        }
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+    </style>
+</head>
+<body>
+<svg id="cosmos">
+    <!-- Flower SVG omitted for brevity, insert <svg> content if necessary -->
+</svg>
+<script>
+const svgNS = "http://www.w3.org/2000/svg";
+const width = window.innerWidth;
+const height = window.innerHeight;
+const colors = ["#FCB711", "#F37021", "#CC004C", "#6460AA", "#0089D0", "#0DB14B"]; // Enhanced color palette
+
+function getRandomColor() {
+    return colors[Math.floor(Math.random() * colors.length)];
+}
+
+// Modified to integrate Fibonacci Spiral Generation into the cyclic animation
+function generateFibonacciSpiral() {
+    const svg = document.getElementById('cosmos');
+    while (svg.firstChild) {
+        svg.removeChild(svg.firstChild); // Clear previous dots to refresh the scene
+    }
+    
+    const numDots = 500;
+    let phi = (1 + Math.sqrt(5)) / 2; // Golden ratio
+    for (let i = 0; i < numDots; i++) {
+        let distance = Math.sqrt(i) * 20;
+        let angle = i * phi * Math.PI * 2;
+        let x = width / 2 + Math.cos(angle) * distance;
+        let y = height / 2 + Math.sin(angle) * distance;
+        let dot = document.createElementNS(svgNS, "circle");
+        dot.setAttribute("cx", x);
+        dot.setAttribute("cy", y);
+        dot.setAttribute("r", Math.max(10 * (i / numDots), 5));
+        dot.setAttribute("fill", getRandomColor());
+        dot.setAttribute("class", "fibonacci-dot");
+        svg.appendChild(dot);
+    }
+}
+
+// Adds sophistication to dynamic dot creation and interaction
+function createDynamicDots() {
+    const totalDots = 400;
+    for (let i = 0; i < totalDots; i++) {
+        const dot = document.createElement('div');
+        dot.className = 'dot';
+        dot.style.width = dot.style.height = `${Math.random() * 10 + 2}px`;
+        dot.style.backgroundColor = getRandomColor();
+        dot.style.top = `${Math.random() * height}px`;
+        dot.style.left = `${Math.random() * width}px`;
+        dot.style.animation = `move ${Math.random() * 5 + 5}s linear infinite`;
+        document.body.insertBefore(dot, document.querySelector('svg'));
+    }
+}
+
+function initiateAnimations() {
+    generateFibonacciSpiral(); // Starts with Fibonnaci spiral
+    setTimeout(createDynamicDots, 5000); // Wait 5 seconds then display dynamic dots
+    setInterval(() => {
+        // Clear previous scene
+        document.querySelectorAll('.dot').forEach(e => e.remove());
+        generateFibonacciSpiral(); // Re-generate Fibonacci spiral
+        setTimeout(createDynamicDots, 5000); // Wait again before re-displaying dynamic dots
+    }, 20000); // Refresh cycle every 20 seconds for a new scene
+}
+
+initiateAnimations();
+</script>
+</body>
+</html>
