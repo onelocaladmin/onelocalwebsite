@@ -3,111 +3,95 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Waltzing Cosmos</title>
+    <title>Web Waltz: A Symphony of Animation</title>
     <style>
-        body {
+        body, html {
             margin: 0;
             padding: 0;
             overflow: hidden;
             background-color: black;
-            font-family: Arial, sans-serif;
-        }
-        #waltz-container {
-            position: relative;
-            width: 100vw;
-            height: 100vh;
         }
         .dot {
             position: absolute;
             border-radius: 50%;
             opacity: 0.6;
-            transform: translate(-50%, -50%);
         }
-        .waltz-note {
+        svg {
             position: absolute;
-            color: white;
-            font-size: 24px;
-            transform: translate(-50%, -50%);
+            width: 100%;
+            height: 100%;
+        }
+        @keyframes move {
+            0% { transform: translate(0px, 0px); }
+            100% { transform: translate(calc(100vw - 100%), calc(100vh - 100%)); }
+        }
+        @keyframes pulse {
+            0%, 100% { r: 2px; }
+            50% { r: 10px; }
+        }
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+        @keyframes waltz {
+            0% { transform: rotate(0deg); }
+            25% { transform: rotate(90deg); }
+            50% { transform: rotate(180deg); }
+            75% { transform: rotate(270deg); }
+            100% { transform: rotate(360deg); }
         }
     </style>
 </head>
 <body>
-    <div id="waltz-container">
-        <!-- Dots will waltz around the screen -->
-    </div>
-    <audio id="waltz-music" src="your-waltz-music.mp3" autoplay loop></audio>
+<script>
+const svgNS = "http://www.w3.org/2000/svg";
+const colors = ["#FCB711", "#F37021", "#CC004C", "#6460AA", "#0089D0", "#0DB14B"];
+const width = window.innerWidth;
+const height = window.innerHeight;
+let svg = document.createElementNS(svgNS, "svg");
+document.body.appendChild(svg);
 
-    <script>
-        const container = document.getElementById('waltz-container');
-        const music = document.getElementById('waltz-music');
+function getRandomColor() {
+    return colors[Math.floor(Math.random() * colors.length)];
+}
 
-        const colors = ["#FCB711", "#F37021", "#CC004C", "#6460AA", "#0089D0", "#0DB14B"];
-        const width = window.innerWidth;
-        const height = window.innerHeight;
-        const numDots = 100; // Number of dots to waltz
-        const waltzSpeed = 5; // Speed of the waltz
+function createDivDot() {
+    const dot = document.createElement('div');
+    dot.className = 'dot';
+    dot.style.width = dot.style.height = `${Math.random() * 10 + 2}px`;
+    dot.style.backgroundColor = getRandomColor();
+    dot.style.top = `${Math.random() * height}px`;
+    dot.style.left = `${Math.random() * width}px`;
+    dot.style.animation = `move ${Math.random() * 5 + 5}s linear infinite`;
+    dot.style.animationTimingFunction = 'cubic-bezier(0.25, 0.45, 0.45, 0.95)';
+    document.body.insertBefore(dot, svg);
+}
 
-        function getRandomColor() {
-            return colors[Math.floor(Math.random() * colors.length)];
-        }
+function createSvgDot() {
+    let dot = document.createElementNS(svgNS, "circle");
+    dot.setAttribute("fill", getRandomColor());
+    dot.setAttribute("cx", Math.random() * width);
+    dot.setAttribute("cy", Math.random() * height);
+    dot.setAttribute("r", Math.random() * 10 + 2);
+    dot.style.animation = `waltz ${Math.random() * 10 + 5}s linear infinite`;
+    svg.appendChild(dot);
+}
 
-        function createDot() {
-            const dot = document.createElement('div');
-            dot.className = 'dot';
-            dot.style.backgroundColor = getRandomColor();
-            dot.style.width = dot.style.height = `${Math.random() * 20 + 10}px`;
-            dot.style.top = `${Math.random() * height}px`;
-            dot.style.left = `${Math.random() * width}px`;
-            container.appendChild(dot);
-            return dot;
-        }
+function refreshAnimation() {
+    document.body.innerHTML = ''; // Clear the existing dots
+    svg = document.createElementNS(svgNS, "svg"); // Recreate the SVG container
+    document.body.appendChild(svg);
 
-        function createWaltzNote() {
-            const note = document.createElement('div');
-            note.className = 'waltz-note';
-            note.textContent = '1-2-3, 1-2-3...';
-            note.style.top = `${Math.random() * height}px`;
-            note.style.left = `${Math.random() * width}px`;
-            container.appendChild(note);
-            return note;
-        }
+    const totalDots = 300;
+    for (let i = 0; i < totalDots; i++) {
+        if (i % 2 === 0) createDivDot(); // Create half as div dots
+        else createSvgDot(); // Create the other half as SVG dots
+    }
+}
 
-        function animateDot(dot) {
-            const angle = Math.random() * 360;
-            const radius = Math.random() * 200 + 100;
-            const startX = width / 2 + radius * Math.cos(angle);
-            const startY = height / 2 + radius * Math.sin(angle);
+refreshAnimation();
+setInterval(refreshAnimation, 150000); // Refresh the animation every 150 seconds
 
-            dot.style.transform = `translate(${startX}px, ${startY}px)`;
-
-            const endX = width / 2 + radius * Math.cos(angle + 180);
-            const endY = height / 2 + radius * Math.sin(angle + 180);
-
-            dot.animate(
-                [
-                    { transform: `translate(${startX}px, ${startY}px)` },
-                    { transform: `translate(${endX}px, ${endY}px)` },
-                ],
-                {
-                    duration: waltzSpeed * 1000,
-                    iterations: Infinity,
-                }
-            );
-        }
-
-        function startWaltz() {
-            for (let i = 0; i < numDots; i++) {
-                const dot = createDot();
-                animateDot(dot);
-            }
-            setInterval(() => {
-                createWaltzNote();
-            }, 3000); // Create waltz notes every 3 seconds
-        }
-
-        music.addEventListener('play', () => {
-            startWaltz();
-        });
-    </script>
+</script>
 </body>
 </html>
