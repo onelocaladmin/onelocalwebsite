@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sparkling Mytho-Chrystic Vista</title>
+    <title>Sparkling Mytho-Chrystic Cyberpunk Vista</title>
     <style>
         body, html {
             margin: 0;
@@ -17,15 +17,11 @@
             height: 100%;
         }
         .fibonacci-dot {
-            fill-opacity: 0.8;
-        }
-        @keyframes fade {
-            from { fill-opacity: 0; }
-            to { fill-opacity: 0.8; }
+            transition: all 0.2s ease;
         }
         @keyframes sparkle {
-            0%, 100% { r: 2px; }
-            50% { r: 5px; }
+            from { opacity: 1; }
+            to { opacity: 0; }
         }
     </style>
 </head>
@@ -35,43 +31,44 @@
 const svgNS = "http://www.w3.org/2000/svg";
 const width = window.innerWidth;
 const height = window.innerHeight;
-const colors = ["#FF5733", "#C70039", "#900C3F", "#581845", "#DAF7A6", "#FFC300", "#DAF7A6"]; // Expanded color palette
+let svg = document.getElementById('cosmos');
 
 function getRandomColor() {
+    const colors = ["#FF5733", "#C70039", "#900C3F", "#581845", "#DAF7A6", "#FFC300", "#DAF7A6"]; // Expanded color palette
     return colors[Math.floor(Math.random() * colors.length)];
 }
 
 function createFibonacciDot(x, y, r, color) {
-    const svg = document.getElementById('cosmos');
     let dot = document.createElementNS(svgNS, "circle");
     dot.setAttribute("cx", x);
     dot.setAttribute("cy", y);
     dot.setAttribute("r", r);
     dot.setAttribute("fill", color);
     dot.setAttribute("class", "fibonacci-dot");
-    dot.style.animation = `fade 0.5s ease-out, sparkle 1s infinite ease-in-out`;
+    dot.style.animation = `sparkle 1s infinite`;
     svg.appendChild(dot);
 }
 
 function generateFibonacciSpiral() {
-    // Clear existing dots to "refresh" and create sparkle effect
-    document.getElementById('cosmos').innerHTML = '';
-    const numDots = 100; // Reduced for quicker refresh
+    svg.innerHTML = ''; // Clear existing dots for a sparkling effect
+    const numDots = 144; // A smaller number for performance
     let phi = (1 + Math.sqrt(5)) / 2; // Golden ratio
     for (let i = 0; i < numDots; i++) {
-        let distance = Math.sqrt(i) * 12; // Adjust for desired density
+        let distance = Math.sqrt(i) * 12; // Adjusted for visual effect
         let angle = i * phi * Math.PI * 2;
         let x = width / 2 + Math.cos(angle) * distance;
         let y = height / 2 + Math.sin(angle) * distance;
-        createFibonacciDot(x, y, Math.max(5 * (i / numDots), 2), getRandomColor());
+        createFibonacciDot(x, y, Math.max(2, 5 * (i / numDots)), getRandomColor());
     }
 }
 
-// Initial generation
-generateFibonacciSpiral();
+// Sparkle effect by rapidly refreshing the spiral
+function sparkleEffect() {
+    generateFibonacciSpiral();
+    setTimeout(sparkleEffect, 200); // Adjust time as needed for desired sparkle speed
+}
 
-// Refresh to sparkle
-setInterval(generateFibonacciSpiral, 1000); // Adjust time as needed for rapid refresh
+sparkleEffect();
 
 </script>
 </body>
