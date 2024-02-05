@@ -68,19 +68,27 @@ function createFibonacciDot(x, y, r, color) {
     svg.appendChild(dot);
 }
 
-function generateFibonacciSpiral() {
+function generateFibonacciSpiralAroundFlower() {
     const numDots = 500; // Increase the number of dots for a larger spiral
+    const flowerCenterX = width / 2;
+    const flowerCenterY = height / 2;
+    const flowerRadius = 87 / 2; // Half of the flower size
+
     let phi = (1 + Math.sqrt(5)) / 2; // Golden ratio
     for (let i = 0; i < numDots; i++) {
         let distance = Math.sqrt(i) * 20; // Increase the distance
         let angle = i * phi * Math.PI * 2;
-        let x = width / 2 + Math.cos(angle) * distance;
-        let y = height / 2 + Math.sin(angle) * distance;
-        createFibonacciDot(x, y, Math.max(5 * (i / numDots), 2), getRandomColor());
+        let x = flowerCenterX + Math.cos(angle) * distance;
+        let y = flowerCenterY + Math.sin(angle) * distance;
+
+        // Check if the dot is outside the flower's radius and create it
+        if (distance > flowerRadius) {
+            createFibonacciDot(x, y, Math.max(5 * (i / numDots), 2), getRandomColor());
+        }
     }
 }
 
-generateFibonacciSpiral();
+generateFibonacciSpiralAroundFlower();
 
 </script>
 </body>
