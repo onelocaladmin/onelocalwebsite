@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Waltz: A Symphony of Animation</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: black;
+        }
+        .dot {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.6;
+            transition: transform 0.5s ease;
+        }
+        svg {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+        @keyframes move {
+            0% { transform: translate(0px, 0px); }
+            100% { transform: translate(calc(100vw - 100%), calc(100vh - 100%)); }
+        }
+        @keyframes pulse {
+            0%, 100% { r: 2px; }
+            50% { r: 10px; }
+        }
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+        @keyframes waltz {
+            0% { transform: rotate(0deg); }
+            25% { transform: rotate(90deg); }
+            50% { transform: rotate(180deg); }
+            75% { transform: rotate(270deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+<script>
+const svgNS = "http://www.w3.org/2000/svg";
+const colors = ["#FCB711", "#F37021", "#CC004C", "#6460AA", "#0089D0", "#0DB14B"];
+const width = window.innerWidth;
+const height = window.innerHeight;
+document.body.innerHTML = '<svg></svg>'; // Initialize SVG container
+let svg = document.querySelector('svg');
+
+function getRandomColor() {
+    return colors[Math.floor(Math.random() * colors.length)];
+}
+
+function createDivDot() {
+    const dot = document.createElement('div');
+    dot.className = 'dot';
+    const size = Math.random() * 10 + 2; // Random size
+    dot.style.width = dot.style.height = `${size}px`;
+    dot.style.backgroundColor = getRandomColor();
+    dot.style.top = `${Math.random() * height}px`;
+    dot.style.left = `${Math.random() * width}px`;
+    dot.style.animation = `move ${Math.random() * 5 + 5}s linear infinite`;
+    document.body.appendChild(dot);
+}
+
+function createSvgDot() {
+    let dot = document.createElementNS(svgNS, "circle");
+    dot.setAttribute("fill", getRandomColor());
+    dot.setAttribute("cx", Math.random() * width);
+    dot.setAttribute("cy", Math.random() * height);
+    dot.setAttribute("r", Math.random() * 10 + 2);
+    svg.appendChild(dot);
+}
+
+function refreshAnimation() {
+    svg.innerHTML = ''; // Clear SVG dots for refresh
+    const divDots = document.querySelectorAll('.dot');
+    divDots.forEach(dot => dot.remove()); // Clear div dots
+
+    const totalDots = 300;
+    for (let i = 0; i < totalDots; i++) {
+        if (i % 2 === 0) createDivDot();
+        else createSvgDot();
+    }
+}
+
+document.addEventListener('mousemove', (e) => {
+    const mouseX = e.clientX;
+    const mouseY = e.clientY;
+    document.querySelectorAll('.dot, circle').forEach(dot => {
+        const dotX = dot.tagName === 'DIV' ? dot.offsetLeft : parseInt(dot.getAttribute('cx'));
+        const dotY = dot.tagName === 'DIV' ? dot.offsetTop : parseInt(dot.getAttribute('cy'));
+        const distance = Math.sqrt(Math.pow(mouseX - dotX, 2) + Math.pow(mouseY - dotY, 2));
+        if (distance < 150) { // Affect dots within 150px radius
+            const scale = Math.max(1.5 - distance / 150, 1);
+            if (dot.tagName === 'DIV') {
+                dot.style.transform = `scale(${scale})`;
+            } else {
+                dot.setAttribute('r', parseFloat(dot.getAttribute('r')) * scale);
+            }
+        }
+    });
+});
+
+refreshAnimation();
+setInterval(refreshAnimation, 15000); // Refresh the animation more frequently, every 15 seconds
+</script>
+</body>
+</html>
