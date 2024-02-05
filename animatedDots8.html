@@ -3,130 +3,69 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dynamic Crossfade Animations</title>
+    <title>Social Coordination Platform Promo</title>
     <style>
         body, html {
             margin: 0;
             padding: 0;
             overflow: hidden;
-            background-color: black;
+            background-color: #000; /* Black background as a base */
         }
-        .dot, .svgDot {
+        .animated-dot {
             position: absolute;
             border-radius: 50%;
+            opacity: 0.6;
         }
-        svg {
-            position: absolute;
-            width: 100%;
-            height: 100%;
+        @keyframes move {
+            0% { transform: translate(0px, 0px); }
+            100% { transform: translate(calc(100vw - 100%), calc(100vh - 100%)); }
+        }
+        @keyframes pulse {
+            0%, 100% { r: 2px; }
+            50% { r: 10px; }
+        }
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
         }
     </style>
 </head>
 <body>
-    <svg id="svgContainer"></svg>
-</body>
+<svg id="animationContainer"></svg>
 
 <script>
     const svgNS = "http://www.w3.org/2000/svg";
-    const colors = ["#FCB711", "#F37021", "#CC004C", "#6460AA", "#0089D0", "#0DB14B"];
+    // Extract colors from the uploaded screenshot and use them in the animation
+    const colors = ["#ExtractedColor1", "#ExtractedColor2", "#ExtractedColor3", /* ... add all colors ... */];
     const width = window.innerWidth;
     const height = window.innerHeight;
-    const svgContainer = document.getElementById("svgContainer");
     
-    let animationPhase = 0;
-    const totalPhases = 4;
-    const dots = [];
-    
+    // Function to return a random color from the colors array
     function getRandomColor() {
         return colors[Math.floor(Math.random() * colors.length)];
     }
     
-    function clearDots() {
-        while (svgContainer.firstChild) {
-            svgContainer.removeChild(svgContainer.firstChild);
-        }
-        const divDots = document.querySelectorAll('.dot');
-        divDots.forEach(dot => dot.remove());
+    // Create animated dots with SVG and CSS animations
+    function createAnimatedDot() {
+        let dot = document.createElementNS(svgNS, "circle");
+        dot.setAttribute("cx", Math.random() * width);
+        dot.setAttribute("cy", Math.random() * height);
+        dot.setAttribute("r", 5);
+        dot.setAttribute("fill", getRandomColor());
+        dot.setAttribute("class", "animated-dot");
+        
+        // Randomly apply one of the animation effects
+        const animationTypes = ['move', 'pulse', 'bounce'];
+        const animation = animationTypes[Math.floor(Math.random() * animationTypes.length)];
+        dot.style.animation = `${animation} ${Math.random() * 5 + 5}s infinite`;
+
+        document.getElementById('animationContainer').appendChild(dot);
     }
     
-    function createMovingDivDots(num) {
-        for (let i = 0; i < num; i++) {
-            const dot = document.createElement('div');
-            dot.className = 'dot';
-            const size = Math.random() * 10 + 5;
-            dot.style.width = `${size}px`;
-            dot.style.height = `${size}px`;
-            dot.style.backgroundColor = getRandomColor();
-            dot.style.left = `${Math.random() * 100}vw`;
-            dot.style.top = `${Math.random() * 100}vh`;
-            dot.style.position = 'absolute';
-            document.body.appendChild(dot);
-        }
+    // Create multiple animated dots
+    for (let i = 0; i < 50; i++) {
+        createAnimatedDot();
     }
-    
-    function createSVGDots(num, effect) {
-        for (let i = 0; i < num; i++) {
-            const dot = document.createElementNS(svgNS, "circle");
-            const r = Math.random() * 5 + 3;
-            dot.setAttribute("cx", Math.random() * width);
-            dot.setAttribute("cy", Math.random() * height);
-            dot.setAttribute("r", r);
-            dot.setAttribute("fill", getRandomColor());
-            svgContainer.appendChild(dot);
-            if (effect === 'pulse') {
-                pulseDot(dot);
-            } else if (effect === 'bounce') {
-                bounceDot(dot, r);
-            }
-        }
-    }
-    
-    function pulseDot(dot) {
-        const pulse = () => {
-            let r = parseFloat(dot.getAttribute("r"));
-            r = r > 10 ? 3 : r + 0.1;
-            dot.setAttribute("r", r);
-            requestAnimationFrame(pulse);
-        };
-        pulse();
-    }
-    
-    function bounceDot(dot, initialR) {
-        let dx = (Math.random() - 0.5) * 2;
-        let dy = (Math.random() - 0.5) * 2;
-        const move = () => {
-            let x = parseFloat(dot.getAttribute("cx")) + dx;
-            let y = parseFloat(dot.getAttribute("cy")) + dy;
-            if (x < 0 || x > width) dx = -dx;
-            if (y < 0 || y > height) dy = -dy;
-            dot.setAttribute("cx", x);
-            dot.setAttribute("cy", y);
-            requestAnimationFrame(move);
-        };
-        move();
-    }
-    
-    function changeAnimationPhase() {
-        clearDots();
-        switch (animationPhase) {
-            case 0:
-                createMovingDivDots(200);
-                break;
-            case 1:
-                createSVGDots(200, 'pulse');
-                break;
-            case 2:
-                createSVGDots(200, 'bounce');
-                break;
-            case 3:
-                createMovingDivDots(100);
-                createSVGDots(100, 'bounce');
-                break;
-        }
-        animationPhase = (animationPhase + 1) % totalPhases;
-        setTimeout(changeAnimationPhase, 10000); // Change the phase every 10 seconds
-    }
-    
-    changeAnimationPhase();
- </script>
+</script>
+</body>
 </html>
