@@ -17,22 +17,12 @@
             height: 100%;
         }
         .fibonacci-dot {
-            animation: glow 4s infinite alternate;
+            fill-opacity: 0.8;
+            transition: all 0.6s ease;
         }
-        @keyframes glow {
-            0% { fill-opacity: 0.5; }
-            50% { fill-opacity: 1; }
-            100% { fill-opacity: 0.5; }
-        }
-        .constellation-line {
-            stroke: #07A0C3;
-            stroke-width: 1;
-            stroke-dasharray: 5, 5;
-            animation: drawLines 2s infinite;
-        }
-        @keyframes drawLines {
-            0% { stroke-dashoffset: 0; }
-            100% { stroke-dashoffset: 10; }
+        .fibonacci-dot:hover {
+            fill-opacity: 1;
+            r: 8px;
         }
     </style>
 </head>
@@ -42,7 +32,7 @@
 const svgNS = "http://www.w3.org/2000/svg";
 const width = window.innerWidth;
 const height = window.innerHeight;
-const colors = ["#E73C7E", "#07A0C3", "#9B26AF", "#FCEE21", "#FCB711", "#F37021"];
+const colors = ["#FFD700", "#4B0082", "#00FF00", "#00BFFF", "#FF69B4"]; // Gold, Indigo, Lime, DeepSkyBlue, HotPink
 
 function getRandomColor() {
     return colors[Math.floor(Math.random() * colors.length)];
@@ -59,45 +49,20 @@ function createFibonacciDot(x, y, r, color) {
     svg.appendChild(dot);
 }
 
-function drawConstellationLines() {
-    const svg = document.getElementById('cosmos');
-    for (let i = 0; i < 5; i++) { // Create 5 lines
-        let line = document.createElementNS(svgNS, "line");
-        line.setAttribute("x1", Math.random() * width);
-        line.setAttribute("y1", Math.random() * height);
-        line.setAttribute("x2", Math.random() * width);
-        line.setAttribute("y2", Math.random() * height);
-        line.setAttribute("class", "constellation-line");
-        svg.appendChild(line);
-    }
-}
-
 function generateFibonacciSpiral() {
     const numDots = 144; // A Fibonacci number
     let phi = (1 + Math.sqrt(5)) / 2; // Golden ratio
-    let maxRadius = 5;
     for (let i = 0; i < numDots; i++) {
         let distance = Math.sqrt(i) * 12;
         let angle = i * phi * Math.PI * 2;
         let x = width / 2 + Math.cos(angle) * distance;
         let y = height / 2 + Math.sin(angle) * distance;
-        createFibonacciDot(x, y, maxRadius * (i / numDots), getRandomColor());
+        createFibonacciDot(x, y, Math.max(5 * (i / numDots), 2), getRandomColor());
     }
 }
 
-function refreshAnimation() {
-    document.getElementById('cosmos').innerHTML = ''; // Clear the canvas
-    generateFibonacciSpiral();
-    drawConstellationLines();
-}
-
-// Initial creation
-refreshAnimation();
-
-// Refresh the animation every 15 seconds to redraw the constellations and Fibonacci dots
-setInterval(refreshAnimation, 15000);
+generateFibonacciSpiral();
 
 </script>
 </body>
 </html>
-
