@@ -12,19 +12,16 @@
             background-color: black;
         }
 
-        .dot, .ellipse, .bouncing-dot {
-            animation: fadeInOut 5s infinite;
-        }
-
-        @keyframes fadeInOut {
-            0%, 100% { opacity: 0; }
-            50% { opacity: 1; }
-        }
-
         svg {
             position: absolute;
             width: 100%;
             height: 100%;
+        }
+
+        .dot {
+            position: absolute;
+            border-radius: 50%;
+            animation: move linear infinite, fadeInOut 5s infinite;
         }
 
         @keyframes move {
@@ -36,6 +33,11 @@
             }
         }
 
+        @keyframes fadeInOut {
+            0%, 100% { opacity: 0; }
+            50% { opacity: 1; }
+        }
+
         @keyframes pulse {
             0%, 100% {
                 r: 2px;
@@ -43,6 +45,10 @@
             50% {
                 r: 10px;
             }
+        }
+
+        .bouncing-dot, .ellipse {
+            animation: bounce 2s infinite, pulse 2s infinite, fadeInOut 5s infinite;
         }
 
         @keyframes bounce {
@@ -66,44 +72,39 @@ function getRandomColor() {
     return colors[Math.floor(Math.random() * colors.length)];
 }
 
-// Create SVG dots with bouncing, pulsing, and fading effects
 function createSVGDot() {
     let dot = document.createElementNS(svgNS, "circle");
     dot.setAttribute("fill", getRandomColor());
     let x = Math.random() * width;
     let y = Math.random() * height;
-    let size = Math.random() * 8 + 2; // Random size between 2px and 10px
+    let size = Math.random() * 8 + 2; // Size between 2px and 10px
     dot.setAttribute("cx", x);
     dot.setAttribute("cy", y);
     dot.setAttribute("r", size);
-    dot.setAttribute("class", "bouncing-dot"); // Apply bouncing animation
-    animateDot(dot, x, y, size);
+    dot.setAttribute("class", size > 5 ? "bouncing-dot" : "ellipse"); // Differentiate for animation
+    animateDot(dot, x, y);
     document.body.appendChild(dot);
 }
 
-// Create div-based dots with moving and fading effects
 function createDivDot() {
     const dot = document.createElement('div');
     dot.className = 'dot';
-    const size = Math.random() * 10 + 2; // Random size between 2px and 12px
+    const size = Math.random() * 10 + 2;
     dot.style.width = `${size}px`;
     dot.style.height = `${size}px`;
     dot.style.backgroundColor = getRandomColor();
-    dot.style.position = 'absolute';
     dot.style.top = `${Math.random() * 100}vh`;
     dot.style.left = `${Math.random() * 100}vw`;
-    dot.style.borderRadius = '50%';
-    dot.style.animation = `move ${Math.random() * 5 + 5}s linear infinite, fadeInOut 5s infinite`;
     document.body.appendChild(dot);
 }
 
-function animateDot(dot, x, y, size) {
+function animateDot(dot, x, y) {
     let dx = (Math.random() - 0.5) * 2;
     let dy = (Math.random() - 0.5) * 2;
 
     function move() {
-        if (x + dx > width - size || x + dx < size) dx = -dx;
-        if (y + dy > height - size || y + dy < size) dy = -dy;
+        if (x + dx > width || x + dx < 0) dx = -dx;
+        if (y + dy > height || y + dy < 0) dy = -dy;
 
         x += dx;
         y += dy;
@@ -117,14 +118,13 @@ function animateDot(dot, x, y, size) {
     move();
 }
 
-// Initialize the dots
 function initDots() {
-    const numSVG = 200; // Number of SVG dots
+    const numSVG = 200;
     for (let i = 0; i < numSVG; i++) {
         createSVGDot();
     }
 
-    const numDiv = 300; // Number of div-based dots
+    const numDiv = 300;
     for (let i = 0; i < numDiv; i++) {
         createDivDot();
     }
