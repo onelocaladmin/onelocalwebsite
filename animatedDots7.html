@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Comprehensive Animated Effects</title>
+    <title>Unified Animated Effects</title>
     <style>
         body, html {
             margin: 0;
@@ -25,12 +25,8 @@
         }
 
         @keyframes move {
-            from {
-                transform: translate(0px, 0px);
-            }
-            to {
-                transform: translate(calc(100vw - 100%), calc(100vh - 100%));
-            }
+            from { transform: translate(0px, 0px); }
+            to { transform: translate(calc(100vw - 100%), calc(100vh - 100%)); }
         }
 
         @keyframes fadeInOut {
@@ -39,12 +35,8 @@
         }
 
         @keyframes pulse {
-            0%, 100% {
-                r: 2px;
-            }
-            50% {
-                r: 10px;
-            }
+            0%, 100% { r: 2px; }
+            50% { r: 10px; }
         }
 
         .bouncing-dot, .ellipse {
@@ -52,12 +44,8 @@
         }
 
         @keyframes bounce {
-            0%, 100% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-20px);
-            }
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
         }
     </style>
 </head>
@@ -119,12 +107,11 @@ function animateDot(dot, x, y) {
 }
 
 function initDots() {
-    const numSVG = 200;
+    const numSVG = 200; // Number of SVG dots
+    const numDiv = 300; // Number of div-based dots
     for (let i = 0; i < numSVG; i++) {
         createSVGDot();
     }
-
-    const numDiv = 300;
     for (let i = 0; i < numDiv; i++) {
         createDivDot();
     }
