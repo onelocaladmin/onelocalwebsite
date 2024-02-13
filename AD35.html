@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mytho-Chrystic Cyberpunk Vista</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #000; /* Deep cosmic black */
+        }
+        svg {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+        .fibonacci-dot {
+            fill-opacity: 0.8;
+            transition: all 0.6s ease;
+        }
+        .fibonacci-dot:hover {
+            fill-opacity: 1;
+            r: 8px;
+        }
+        .dot {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.6;
+        }
+        @keyframes move {
+            0% { transform: translate(0px, 0px); }
+            100% { transform: translate(calc(100vw - 100%), calc(100vh - 100%)); }
+        }
+        @keyframes pulse {
+            0%, 100% { r: 2px; }
+            50% { r: 10px; }
+        }
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+    </style>
+</head>
+<body>
+<svg id="cosmos"></svg>
+<svg id="flower" width="87" height="87" viewBox="0 0 87 87" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <!-- Flower SVG path data here... -->
+</svg>
+<script>
+const svgNS = "http://www.w3.org/2000/svg";
+const width = window.innerWidth;
+const height = window.innerHeight;
+let rotationAngle = 0;
+let animationStep = 0; // New variable to track the animation progress
+
+function createCircle(x, y, r, color) {
+    const svg = document.getElementById('cosmos');
+    let circle = document.createElementNS(svgNS, "circle");
+    circle.setAttribute("cx", x);
+    circle.setAttribute("cy", y);
+    circle.setAttribute("r", r);
+    circle.setAttribute("fill", color);
+    svg.appendChild(circle);
+}
+
+function generateMovingCircles() {
+    const svg = document.getElementById('cosmos');
+    svg.innerHTML = ''; // Clear the canvas on each frame
+    const numCircles = 100; // Number of circles to be drawn
+    let phi = (1 + Math.sqrt(5)) / 2;
+    let maxRadius = 5; // Max radius of the circles
+    for (let i = 0; i < numCircles; i++) {
+        let distance = Math.sqrt(i + animationStep) * 12; // Adjust distance for dynamic movement
+        let angle = (i + animationStep / 20) * phi * Math.PI * 2; // Adjust angle to simulate rotation and movement
+        let x = width / 2 + Math.cos(angle) * distance;
+        let y = height / 2 + Math.sin(angle) * distance;
+        createCircle(x, y, maxRadius * Math.sin(i + animationStep / 20), `hsl(${(angle + rotationAngle) % 360}, 100%, 50%)`);
+    }
+}
+
+function updateAnimation() {
+    rotationAngle += 0.5; // Adjust for desired speed of rotation
+    animationStep += 1; // Increment to move circles along the spiral
+    generateMovingCircles();
+}
+
+setInterval(updateAnimation, 100); // Update the animation every 100 milliseconds
+</script>
+
+
+</body>
+</html>
