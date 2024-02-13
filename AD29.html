@@ -52,7 +52,8 @@
 const svgNS = "http://www.w3.org/2000/svg";
 const width = window.innerWidth;
 const height = window.innerHeight;
-const colors = ["red", "orange", "yellow", "green", "blue", "indigo", "violet"]; // Rainbow colors
+const colors = ["red", "orange", "yellow", "green", "blue", "indigo", "violet"];
+let rotationAngle = 0; // Initial rotation angle
 
 function getRandomColor() {
     return colors[Math.floor(Math.random() * colors.length)];
@@ -69,34 +70,34 @@ function createFibonacciDot(x, y, r, color) {
     svg.appendChild(dot);
 }
 
-function clearSpiral() {
-    const svg = document.getElementById('cosmos');
-    while (svg.firstChild) {
-        svg.removeChild(svg.firstChild);
-    }
-}
-
 function generateFibonacciSpiral() {
-    clearSpiral(); // Clear existing dots before generating new ones
-    const numDots = 500; // Increase the number of dots for a larger spiral
-    let phi = (1 + Math.sqrt(5)) / 2; // Golden ratio
+    const svg = document.getElementById('cosmos');
+    svg.innerHTML = ''; // Clear existing dots
+    const numDots = 500;
+    let phi = (1 + Math.sqrt(5)) / 2;
     for (let i = 0; i < numDots; i++) {
-        let distance = Math.sqrt(i) * 20; // Increase the distance
-        let angle = i * phi * Math.PI * 2;
+        let distance = Math.sqrt(i) * 20;
+        let angle = i * phi * Math.PI * 2 + rotationAngle; // Adjust angle with rotation
         let x = width / 2 + Math.cos(angle) * distance;
         let y = height / 2 + Math.sin(angle) * distance;
-        createFibonacciDot(x, y, Math.max(10 * (i / numDots), 5), getRandomColor()); // Adjust the minimum and maximum radius as needed
+        createFibonacciDot(x, y, Math.max(10 * (i / numDots), 5), getRandomColor());
     }
 }
 
-// Initial generation of the spiral
+function updateSpiralRotation() {
+    rotationAngle += 0.1; // Increment the rotation angle for each refresh
+    const svg = document.getElementById('cosmos');
+    svg.style.transform = `rotate(${rotationAngle}deg)`; // Apply rotation
+}
+
+// Generate the initial spiral
 generateFibonacciSpiral();
 
-// Set an interval to regenerate the spiral every 2 seconds (2000 milliseconds)
-// You can adjust the interval time to make it refresh faster or slower
-setInterval(generateFibonacciSpiral, 500);
-
-// Rest of your background dots code here...
+// Refresh the spiral to create a spinning effect
+setInterval(() => {
+    updateSpiralRotation(); // Update rotation
+    generateFibonacciSpiral(); // Regenerate the spiral with the updated rotation
+}, 100); // Adjust the interval as needed for smoother animation
 
 </script>
 </body>
