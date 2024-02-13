@@ -69,7 +69,15 @@ function createFibonacciDot(x, y, r, color) {
     svg.appendChild(dot);
 }
 
+function clearSpiral() {
+    const svg = document.getElementById('cosmos');
+    while (svg.firstChild) {
+        svg.removeChild(svg.firstChild);
+    }
+}
+
 function generateFibonacciSpiral() {
+    clearSpiral(); // Clear existing dots before generating new ones
     const numDots = 500; // Increase the number of dots for a larger spiral
     let phi = (1 + Math.sqrt(5)) / 2; // Golden ratio
     for (let i = 0; i < numDots; i++) {
@@ -81,7 +89,12 @@ function generateFibonacciSpiral() {
     }
 }
 
+// Initial generation of the spiral
 generateFibonacciSpiral();
+
+// Set an interval to regenerate the spiral every 2 seconds (2000 milliseconds)
+// You can adjust the interval time to make it refresh faster or slower
+setInterval(generateFibonacciSpiral, 500);
 
 // Rest of your background dots code here...
 
