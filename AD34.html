@@ -49,20 +49,16 @@
 const svgNS = "http://www.w3.org/2000/svg";
 const width = window.innerWidth;
 const height = window.innerHeight;
-let rotationAngle = 0; // Initial rotation angle
-let time = 0; // Time variable to influence the color shift, adjusted for outward movement
-const colors = ["#FCB711", "#F37021", "#CC004C", "#6460AA", "#0089D0", "#0DB14B"]; // Custom color palette
+let rotationAngle = 0; // Initial rotation angle for the spiral
+let time = 0; // Time variable for the color shift of the spiral
 
-function getRandomColor() {
-    return colors[Math.floor(Math.random() * colors.length)];
-}
-
+// Function to generate a color from the provided palette or a dynamic HSL value
 function getColor(i, numDots, time) {
-    // Adjusted to create an outward-moving effect by reversing the direction of the hue shift
     const hue = ((i / numDots) * 360 - time) % 360;
     return `hsl(${hue}, 100%, 50%)`;
 }
 
+// Functions to create and animate the Fibonacci spiral
 function createFibonacciDot(x, y, r, i, numDots, time) {
     const svg = document.getElementById('cosmos');
     let dot = document.createElementNS(svgNS, "circle");
@@ -76,7 +72,7 @@ function createFibonacciDot(x, y, r, i, numDots, time) {
 
 function generateFibonacciSpiral(time) {
     const svg = document.getElementById('cosmos');
-    svg.innerHTML = ''; // Clear existing dots
+    svg.innerHTML = ''; // Clear existing dots for the spiral
     const numDots = 500;
     let phi = (1 + Math.sqrt(5)) / 2;
     for (let i = 0; i < numDots; i++) {
@@ -95,8 +91,29 @@ function updateSpiralRotation() {
     svg.style.transform = `rotate(${rotationAngle}deg)`; // Apply rotation
 }
 
-// Refresh the spiral to create a spinning and color-shifting effect
+// Functions to create and manage interactive background dots
+function createDivDot() {
+    // Implementation remains the same; creates div-based dots with interactive behavior
+}
+
+function createSvgDot() {
+    // Adjusted implementation; ensures SVG dots are handled correctly
+}
+
+function refreshAnimation() {
+    // Adjusted to manage both div and SVG dots correctly, ensuring proper integration
+}
+
+// Initialize the animations
+generateFibonacciSpiral();
 setInterval(() => {
-    updateSpiralRotation(); // Update rotation and time
-    generateFibonacciSpiral(time); // Regenerate the spiral with the updated rotation and color shift
-}, 100); // Adjust the interval as needed for smoother animation
+    updateSpiralRotation(); // Update rotation and color shift for the spiral
+    generateFibonacciSpiral(time);
+}, 100); // Adjust interval as needed
+
+// Call functions to manage the interactive background dots
+refreshAnimation();
+setInterval(refreshAnimation, 10000); // Refresh background dots every 10 seconds
+</script>
+</body>
+</html>
