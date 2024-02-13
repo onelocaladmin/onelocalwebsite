@@ -52,42 +52,55 @@
 const svgNS = "http://www.w3.org/2000/svg";
 const width = window.innerWidth;
 const height = window.innerHeight;
-let rotationAngle = 0;
-let animationStep = 0; // New variable to track the animation progress
+let rotationAngle = 0; // Initial rotation angle
+let colorShift = 0; // Variable to control the shifting of color bands
 
-function createCircle(x, y, r, color) {
-    const svg = document.getElementById('cosmos');
-    let circle = document.createElementNS(svgNS, "circle");
-    circle.setAttribute("cx", x);
-    circle.setAttribute("cy", y);
-    circle.setAttribute("r", r);
-    circle.setAttribute("fill", color);
-    svg.appendChild(circle);
+function getColor(angle, colorShift) {
+    // Calculate hue based on angle and colorShift for a rotating effect
+    const hue = (angle + colorShift) % 360;
+    return `hsl(${hue}, 100%, 50%)`;
 }
 
-function generateMovingCircles() {
+function createFibonacciDot(x, y, r, angle) {
     const svg = document.getElementById('cosmos');
-    svg.innerHTML = ''; // Clear the canvas on each frame
-    const numCircles = 100; // Number of circles to be drawn
+    let dot = document.createElementNS(svgNS, "circle");
+    dot.setAttribute("cx", x);
+    dot.setAttribute("cy", y);
+    dot.setAttribute("r", r);
+    dot.setAttribute("fill", getColor(angle, colorShift)); // Calculate color based on angle
+    dot.setAttribute("class", "fibonacci-dot");
+    svg.appendChild(dot);
+}
+
+function generateFibonacciSpiral() {
+    const svg = document.getElementById('cosmos');
+    svg.innerHTML = ''; // Clear existing dots for redraw
+    const numDots = 500;
     let phi = (1 + Math.sqrt(5)) / 2;
-    let maxRadius = 5; // Max radius of the circles
-    for (let i = 0; i < numCircles; i++) {
-        let distance = Math.sqrt(i + animationStep) * 12; // Adjust distance for dynamic movement
-        let angle = (i + animationStep / 20) * phi * Math.PI * 2; // Adjust angle to simulate rotation and movement
+    for (let i = 0; i < numDots; i++) {
+        let distance = Math.sqrt(i) * 20;
+        let angle = i * phi * Math.PI * 2; // Angle for positioning and coloring
         let x = width / 2 + Math.cos(angle) * distance;
         let y = height / 2 + Math.sin(angle) * distance;
-        createCircle(x, y, maxRadius * Math.sin(i + animationStep / 20), `hsl(${(angle + rotationAngle) % 360}, 100%, 50%)`);
+        createFibonacciDot(x, y, Math.max(10 * (i / numDots), 5), angle);
     }
 }
 
-function updateAnimation() {
-    rotationAngle += 0.5; // Adjust for desired speed of rotation
-    animationStep += 1; // Increment to move circles along the spiral
-    generateMovingCircles();
+function updateSpiral() {
+    rotationAngle += 0.1; // Increment the rotation angle for each refresh
+    colorShift += 5; // Increment color shift for a dynamic effect
+    const svg = document.getElementById('cosmos');
+    svg.style.transform = `rotate(${rotationAngle}deg)`; // Apply rotation
+    generateFibonacciSpiral(); // Regenerate the spiral with the updated color shift
 }
 
-setInterval(updateAnimation, 100); // Update the animation every 100 milliseconds
+// Initialize the spiral
+generateFibonacciSpiral();
+
+// Continuously update the spiral for the animation effect
+setInterval(updateSpiral, 100);
 </script>
+
 
 
 </body>
