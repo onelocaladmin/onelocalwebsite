@@ -53,10 +53,11 @@ const svgNS = "http://www.w3.org/2000/svg";
 const width = window.innerWidth;
 const height = window.innerHeight;
 let rotationAngle = 0; // Initial rotation angle
-let time = 0; // Time variable to influence the color shift
+let time = 0; // Time variable to influence the color shift, adjusted for outward movement
 
 function getColor(i, numDots, time) {
-    const hue = ((i / numDots) * 360 + time) % 360; // Shift hue based on time
+    // Reverse the direction of the hue shift to create an outward-moving effect
+    const hue = ((i / numDots) * 360 - time) % 360; // Subtract time from hue
     return `hsl(${hue}, 100%, 50%)`; // Use HSL for smooth color transition
 }
 
@@ -87,7 +88,7 @@ function generateFibonacciSpiral(time) {
 
 function updateSpiralRotation() {
     rotationAngle += 0.1; // Increment the rotation angle for each refresh
-    time += 10; // Increment time to shift the colors outward
+    time += 10; // Adjust time to correctly shift the colors outward
     const svg = document.getElementById('cosmos');
     svg.style.transform = `rotate(${rotationAngle}deg)`; // Apply rotation
 }
@@ -96,7 +97,7 @@ function updateSpiralRotation() {
 setInterval(() => {
     updateSpiralRotation(); // Update rotation and time
     generateFibonacciSpiral(time); // Regenerate the spiral with the updated rotation and color shift
-}, 300); // Adjust the interval as needed for smoother animation
+}, 100); // Adjust the interval as needed for smoother animation
 
 </script>
 
