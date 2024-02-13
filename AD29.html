@@ -52,20 +52,20 @@
 const svgNS = "http://www.w3.org/2000/svg";
 const width = window.innerWidth;
 const height = window.innerHeight;
-const colors = ["red", "orange", "yellow", "green", "blue", "indigo", "violet"];
 let rotationAngle = 0; // Initial rotation angle
 
-function getRandomColor() {
-    return colors[Math.floor(Math.random() * colors.length)];
+function getColor(i, numDots) {
+    const hue = (i / numDots) * 360; // Full spectrum across the dots
+    return `hsl(${hue}, 100%, 50%)`; // Use HSL for smooth color transition
 }
 
-function createFibonacciDot(x, y, r, color) {
+function createFibonacciDot(x, y, r, i, numDots) {
     const svg = document.getElementById('cosmos');
     let dot = document.createElementNS(svgNS, "circle");
     dot.setAttribute("cx", x);
     dot.setAttribute("cy", y);
     dot.setAttribute("r", r);
-    dot.setAttribute("fill", color);
+    dot.setAttribute("fill", getColor(i, numDots)); // Use index to calculate color
     dot.setAttribute("class", "fibonacci-dot");
     svg.appendChild(dot);
 }
@@ -80,7 +80,7 @@ function generateFibonacciSpiral() {
         let angle = i * phi * Math.PI * 2 + rotationAngle; // Adjust angle with rotation
         let x = width / 2 + Math.cos(angle) * distance;
         let y = height / 2 + Math.sin(angle) * distance;
-        createFibonacciDot(x, y, Math.max(10 * (i / numDots), 5), getRandomColor());
+        createFibonacciDot(x, y, Math.max(10 * (i / numDots), 5), i, numDots);
     }
 }
 
@@ -97,8 +97,9 @@ generateFibonacciSpiral();
 setInterval(() => {
     updateSpiralRotation(); // Update rotation
     generateFibonacciSpiral(); // Regenerate the spiral with the updated rotation
-}, 500); // Adjust the interval as needed for smoother animation
+}, 100); // Adjust the interval as needed for smoother animation
 
 </script>
+
 </body>
 </html>
