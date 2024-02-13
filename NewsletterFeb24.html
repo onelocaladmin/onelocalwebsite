@@ -2,53 +2,99 @@
 <html>
 <head>
     <title>ONE|Local Community Newsletter</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #eeeeee;
+            font-family: Arial, sans-serif;
+        }
+        .header, .footer {
+            background-color: #8B0000; /* Dark red */
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+        }
+        .header img {
+            display: block;
+            width: 120px;
+            height: auto;
+            margin: auto;
+        }
+        .content {
+            background-color: #ffffff;
+            max-width: 960px;
+            margin: auto;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h2 {
+            color: #0a7f99;
+        }
+        p {
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            color: #666666; /* Adjusted for readability */
+            text-align: justify;
+        }
+        .manifesto {
+            font-style: italic;
+            background-color: #e8e8e8;
+            padding: 15px;
+            border-left: 5px solid #8B0000;
+            margin: 20px 0;
+        }
+        a {
+            background-color: #0066cc;
+            color: #ffffff;
+            padding: 10px 20px;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 20px;
+            border-radius: 4px;
+        }
+        .footer p {
+            color: #cccccc;
+            margin: 0;
+        }
+    </style>
 </head>
-<body style="margin: 0; padding: 0; background-color: #eeeeee; font-family: Arial, sans-serif;">
+<body>
+    <div class="header">
+        <img src="https://ibb.co/1fwMN13" alt="ONE|Local Logo">
+    </div>
     <table align="center" border="0" cellpadding="0" cellspacing="0" width="600" style="border-collapse: collapse;">
-        <tr>
-            <td style="background-color: #ff0000; text-align: center; padding: 10px;">
-                <img src="https://ibb.co/1fwMN13" alt="ONE|Local Logo" style="display: block; width: 120px; height: auto; margin: auto;">
-            </td>
-        </tr>
         <tr>
             <td style="background: url('https://i1.createsend1.com/ei/y/94/30E/785/111239/csfinal/fiji-hero1.jpg') no-repeat center center / cover; padding: 40px; text-align: center;">
                 <!-- Overlay Text -->
                 <div style="color: #ffffff;">
                     <h1 style="font-size: 28px; margin: 0;">Heading Title</h1>
                     <p style="font-size: 18px; margin: 0;">Subheading Caption</p>
-                    <a href="#" style="background-color: #0066cc; color: #ffffff; padding: 10px 20px; text-decoration: none; display: inline-block; margin-top: 20px; border-radius: 4px;">Click Here</a>
+                    <a href="#">Click Here</a>
                 </div>
             </td>
         </tr>
         <tr>
-            <td style="background-color: #ffffff; padding: 20px;">
-                <h2 style="font-size: 24px; color: #333333;">Main Header</h2>
-                <p style="font-size: 16px; color: #666666;">This is a paragraph of text in a single column. It can contain any information you'd like to include, such as news updates, tips, or other content relevant to your audience.</p>
-            </td>
-        </tr>
-        <tr>
-            <td style="background-color: #ffffff; padding: 20px;">
+            <td class="content">
+                <h2>Main Header</h2>
+                <p>This is a paragraph of text in a single column. It can contain any information you'd like to include, such as news updates, tips, or other content relevant to your audience.</p>
+                <!-- Two-column section -->
                 <table border="0" cellpadding="0" cellspacing="0" width="100%">
                     <tr>
                         <td width="50%" style="padding-right: 10px;">
                             <img src="https://i3.createsend1.com/ei/y/94/30E/785/111239/csfinal/32-990000079e028a3c.jpg" alt="Image" style="width: 100%; max-width: 280px; height: auto; display: block;">
                         </td>
                         <td width="50%" style="padding-left: 10px;">
-                            <p style="font-size: 16px; color: #666666;">This is a text column that can accompany the image to its left. Use this space to expand on the image's context, offer insights, or detail the services or products you wish to promote.</p>
+                            <p>This is a text column that can accompany the image to its left. Use this space to expand on the image's context, offer insights, or detail the services or products you wish to promote.</p>
                         </td>
                     </tr>
                 </table>
             </td>
         </tr>
         <tr>
-            <td style="background-color: #444444; padding: 20px; text-align: center;">
-                <table border="0" cellpadding="0" cellspacing="0" width="100%">
-                    <tr>
-                        <td style="padding: 0; text-align: center;">
-                            <p style="color: #cccccc; margin: 0;">Unsubscribe | Privacy Policy</p>
-                        </td>
-                    </tr>
-                </table>
+            <td class="footer" style="background-color: #444444; padding: 20px; text-align: center;">
+                <p>Unsubscribe | Privacy Policy</p>
             </td>
         </tr>
     </table>
