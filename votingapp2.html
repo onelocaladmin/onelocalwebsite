@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vote on Fairness in Politics</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        #vote-container {
+            width: 300px;
+            border: 2px solid #d4d4d4;
+            border-radius: 20px;
+            padding: 20px;
+            background: #fff;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 18px;
+            margin-bottom: 30px;
+        }
+
+        #voting-slider {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        #voting-slider span {
+            font-weight: bold;
+        }
+
+        #fairness-slider {
+            -webkit-appearance: none;
+            width: 100%;
+            height: 10px;
+            border-radius: 5px;
+            background: #ddd;
+            outline: none;
+            opacity: 0.7;
+            -webkit-transition: .2s;
+            transition: opacity .2s;
+        }
+
+        #fairness-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%; 
+            background: #4CAF50;
+            cursor: pointer;
+        }
+
+        #fairness-slider::-moz-range-thumb {
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            background: #4CAF50;
+            cursor: pointer;
+        }
+
+        #slider-value {
+            position: absolute;
+            top: -40px; /* Adjust this value as needed */
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+            padding: 5px 10px;
+            background: #4CAF50;
+            color: white;
+        }
+
+        #vote-actions {
+            text-align: center;
+        }
+
+        button {
+            padding: 10px 20px;
+            margin-top: 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: #800080;
+            color: white;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+        }
+
+        button:focus,
+        button:hover {
+            background-color: #a500a5;
+        }
+    </style>
+</head>
+<body>
+
+    <main id="vote-container">
+        <h1>I support fairness in Politics</h1>
+        
+        <div id="voting-slider">
+            <span>YES</span>
+            <input type="range" min="1" max="5" value="3.5" step="0.5" id="fairness-slider">
+            <div id="slider-value">3.5</div>
+        </div>
+        
+        <div id="vote-actions">
+            <button id="comment-button">COMMENT</button>
+            <button id="vote-button">VOTE</button>
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var slider = document.getElementById('fairness-slider');
+            var output = document.getElementById('slider-value');
+
+            output.textContent = slider.value; // Display the default slider value
+
+            // Update the current slider value (each time you drag the slider handle)
+            slider.oninput = function() {
+                output.textContent = this.value;
+            }
+        });
+    </script>
+
+</body>
+</html>
