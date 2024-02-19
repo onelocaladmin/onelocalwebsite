@@ -4,97 +4,93 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>People DAO Engagement Platform</title>
-<!-- Bootstrap CSS for grid layout and components -->
+<!-- Include Bootstrap for styling and layout -->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-<!-- Custom styles -->
+<!-- Custom CSS for additional styling -->
 <style>
-  body {
-    background-color: #f5f5f5;
-    font-family: Arial, sans-serif;
-  }
-  .header {
-    background-color: #fff;
-    padding: 15px;
-    border-bottom: 2px solid #ddd;
-  }
-  .sidebar {
-    background-color: #e9ecef;
-    padding: 15px;
-    border-right: 2px solid #ddd;
-  }
-  .sidebar h3 {
-    color: #333;
-    font-size: 18px;
-  }
-  .content {
-    padding: 15px;
-  }
-  .proposal {
-    background-color: #fff;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    margin-bottom: 15px;
-    padding: 15px;
-  }
-  .proposal h5 {
-    margin: 0 0 10px 0;
-  }
-  .vote-slider {
-    height: 20px;
-    background-color: #ccc;
-    border-radius: 10px;
-    position: relative;
-  }
-  .vote-slider .thumb {
-    position: absolute;
-    top: -5px;
-    left: 50%;
-    width: 30px;
-    height: 30px;
-    background-color: #28a745;
-    border-radius: 15px;
-    cursor: pointer;
-  }
-  /* Additional styles will be needed for full implementation */
+  /* Custom styles will be needed for a perfect match */
+  /* Add your CSS here */
 </style>
 </head>
 <body>
 
 <div class="container-fluid">
   <div class="row">
-    <div class="col-12 header">
-      <!-- Top header with tabs -->
-      <ul class="nav">
-        <li class="nav-item">
-          <a class="nav-link active" href="#">Governance</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Engagement</a>
-        </li>
-      </ul>
+    <div class="col-12">
+      <!-- Main Header -->
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">INDY</a>
+        <div class="navbar-nav">
+          <a class="nav-item nav-link active" href="#">Governance</a>
+          <a class="nav-item nav-link" href="#">Engagement</a>
+        </div>
+      </nav>
     </div>
   </div>
+
   <div class="row">
-    <div class="col-3 sidebar">
-      <!-- Sidebar with districts and categories -->
-      <h3>INDY</h3>
-      <div>Colorado</div>
-      <div>District 2: Boulder County</div>
-      <div>City of Boulder</div>
-      <!-- Categories would go here -->
+    <div class="col-3">
+      <!-- Sidebar with district selection and policy categories -->
+      <div class="list-group">
+        <a href="#" class="list-group-item">Econ policy</a>
+        <!-- Add additional categories here -->
+      </div>
     </div>
-    <div class="col-9 content">
-      <!-- Main content area -->
-      <div class="proposal">
-        <h5>Proposal 1</h5>
-        <p>Point 1: draft legislation to create term limits</p>
-        <p>Point 2: form action committee to get signatures</p>
-        <!-- Interactive vote slider -->
-        <div class="vote-slider">
-          <div class="thumb"></div>
+
+    <div class="col-9">
+      <!-- Main Content Area -->
+      <div class="row">
+        <div class="col-12">
+          <!-- Sub-header with location and scope selectors -->
+          <div class="d-flex justify-content-between">
+            <div>
+              <h2>Colorado</h2>
+              <h3>District 2: Boulder County</h3>
+              <h4>City of Boulder</h4>
+            </div>
+            <div>
+              <!-- Scope Selector Dropdown -->
+              <select class="form-control">
+                <option>Global</option>
+                <option>National</option>
+                <option>State</option>
+                <option>Local</option>
+              </select>
+            </div>
+          </div>
+          <div class="d-flex justify-content-between">
+            <div>
+              <!-- Tab selectors for Issues, Polls, Proposals, etc. -->
+              <ul class="nav nav-tabs">
+                <li class="nav-item">
+                  <a class="nav-link active" href="#">Proposals</a>
+                </li>
+                <!-- Additional tabs here -->
+              </ul>
+            </div>
+            <div>
+              <!-- User Profile and Settings -->
+              <!-- Profile image and settings icon here -->
+            </div>
+          </div>
+        </div>
+        <!-- Proposals Section -->
+        <div class="col-12">
+          <div class="card">
+            <div class="card-body">
+              <!-- Proposal Item -->
+              <h5 class="card-title">Proposal 1</h5>
+              <p class="card-text">Point 1: draft legislation to create term limits</p>
+              <p class="card-text">Point 2: form action committee to get signatures</p>
+              <!-- Voting Slider -->
+              <!-- Custom voting slider would be here -->
+              <!-- Comments Section -->
+              <!-- Custom comments section would be here -->
+            </div>
+          </div>
+          <!-- Additional proposals would follow -->
         </div>
       </div>
-      <!-- Additional proposals would be added here -->
     </div>
   </div>
 </div>
