@@ -5,93 +5,95 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>People DAO Engagement Platform</title>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<!-- Custom CSS for additional styling -->
 <style>
-  /* Insert custom CSS here */
+  /* Custom styles for nested frames and components */
+  .frame {
+    border: 1px solid #ddd;
+    margin-bottom: 1rem;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    background-color: #fff;
+  }
+
+  .nested {
+    padding-left: 1rem;
+    border-left: 3px solid #007bff;
+    margin-bottom: 1rem;
+  }
+
+  .nested h5 {
+    font-size: 1rem;
+    color: #007bff;
+  }
+
+  .component {
+    background-color: #f8f9fa;
+    padding: 0.5rem;
+    margin-bottom: 0.5rem;
+    border-radius: 0.25rem;
+  }
 </style>
 </head>
 <body>
 
 <div class="container-fluid">
-  <div class="row">
-    <div class="col-12">
-      <!-- Main Header with tabs -->
-      <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">INDY</a>
-        <div class="navbar-nav">
-          <a class="nav-item nav-link active" href="#">Governance</a>
-          <a class="nav-item nav-link" href="#">Engagement</a>
-        </div>
-      </nav>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="col-3">
-      <!-- Sidebar with nested frames for district and policy categories -->
-      <div class="border-right p-3">
-        <!-- Nested list group for district selection -->
-        <div class="list-group mb-3">
-          <a href="#" class="list-group-item list-group-item-action active">Dist. 1</a>
-          <a href="#" class="list-group-item list-group-item-action">Dist. 2</a>
+  <!-- Main Frame -->
+  <div class="frame">
+    <div class="row">
+      <!-- Sidebar Frame -->
+      <div class="col-md-3 frame">
+        <h4>Sidebar</h4>
+        <!-- Nested Component: District Selector -->
+        <div class="nested">
+          <h5>District</h5>
+          <div class="component">Dist. 1</div>
+          <div class="component">Dist. 2</div>
           <!-- More districts -->
         </div>
-
-        <!-- Policy categories list -->
-        <div class="list-group">
-          <a href="#" class="list-group-item list-group-item-action">Econ policy</a>
+        <!-- Nested Component: Policy Categories -->
+        <div class="nested">
+          <h5>Policy Categories</h5>
+          <div class="component">Econ Policy</div>
+          <div class="component">Healthcare</div>
           <!-- More categories -->
         </div>
       </div>
-    </div>
 
-    <div class="col-9">
-      <!-- Main Content Area -->
-      <div class="row">
-        <div class="col-12 mb-3">
-          <!-- Sub-header with nested elements for location and scope selectors -->
-          <div class="d-flex justify-content-between align-items-center">
-            <div>
-              <h2>Colorado</h2>
-              <h3>District 2: Boulder County</h3>
-              <h4>City of Boulder</h4>
-            </div>
-            <div>
-              <!-- Scope Selector Dropdown -->
-              <select class="form-control w-auto">
-                <option>Global</option>
-                <option>National</option>
-                <option>State</option>
-                <option>Local</option>
-              </select>
-            </div>
-          </div>
+      <!-- Main Content Frame -->
+      <div class="col-md-9 frame">
+        <h4>Main Content</h4>
+        <!-- Nested Component: Location and Scope Selector -->
+        <div class="nested">
+          <h5>Location and Scope</h5>
+          <div class="component">Colorado - District 2: Boulder County - City of Boulder</div>
+          <div class="component">Scope Selector: [Global, National, State, Local]</div>
         </div>
-
-        <div class="col-12">
-          <!-- Tab content area for proposals, polls, etc. -->
-          <div class="tab-content" id="nav-tabContent">
-            <!-- Proposals tab pane -->
-            <div class="tab-pane fade show active" id="nav-proposals" role="tabpanel" aria-labelledby="nav-proposals-tab">
-              <!-- Proposals content -->
-              <div class="card mb-3">
-                <div class="card-body">
-                  <h5 class="card-title">Proposal 1</h5>
-                  <p class="card-text">Point 1: draft legislation to create term limits</p>
-                  <p class="card-text">Point 2: form action committee to get signatures</p>
-                  <!-- Interactive elements like voting slider would go here -->
-                </div>
-              </div>
-              <!-- Additional proposals -->
-            </div>
-            <!-- Additional tabs for polls, people's legislation, etc. -->
+        <!-- Nested Component: Proposals -->
+        <div class="nested">
+          <h5>Proposals</h5>
+          <div class="component">
+            <strong>Proposal 1:</strong> draft legislation to create term limits
           </div>
+          <div class="component">
+            <strong>Proposal 2:</strong> form action committee to get signatures
+          </div>
+          <!-- More proposals -->
         </div>
+        <!-- Nested Component: Polls -->
+        <div class="nested">
+          <h5>Polls</h5>
+          <!-- Example poll components -->
+          <div class="component">Poll 1: Should term limits be implemented?</div>
+          <!-- More polls -->
+        </div>
+        <!-- Additional nested components as needed -->
       </div>
     </div>
   </div>
 </div>
 
-<!-- Bootstrap JS and dependencies -->
+<!-- Bootstrap JS for interactive components -->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.7.2/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
