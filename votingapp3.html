@@ -5,55 +5,94 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>People DAO Platform</title>
 <style>
-    /* Add your CSS styles here */
-</style>
-<script>
-    // Add your JavaScript here
-    function initializePlatform() {
-        // Initialization code
-    }
+  /* Basic reset */
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: Arial, sans-serif; }
 
-    document.addEventListener('DOMContentLoaded', initializePlatform);
-</script>
+  /* Layout styles */
+  #nav-bar { background-color: #333; color: white; padding: 10px; text-align: center; }
+  #main-container { display: flex; }
+  #governance-sidebar { width: 200px; background-color: #f4f4f4; padding: 20px; }
+  #engagement { flex-grow: 1; padding: 20px; }
+  .district { display: block; margin-bottom: 10px; }
+  .active { background-color: #ddd; }
+  #categories { list-style: none; }
+  #categories li { margin-bottom: 5px; }
+  #footer { background-color: #333; color: white; text-align: center; padding: 10px; margin-top: 20px; }
+
+  /* Engagement styles */
+  .poll, .proposal { margin-bottom: 20px; padding: 10px; border: 1px solid #ddd; }
+</style>
 </head>
 <body>
-<header>
-    <!-- Navigation bar goes here -->
-</header>
 
-<aside>
-    <!-- Sidebar for Governance goes here -->
-    <nav>
-        <ul>
-            <li>Dist. 1</li>
-            <li>Dist. 2</li>
-            <!-- More districts -->
-        </ul>
-    </nav>
-</aside>
+<!-- Navigation Bar -->
+<div id="nav-bar">
+  <h1>People DAO Platform</h1>
+</div>
 
-<main>
-    <!-- Main content goes here -->
-    <section id="engagement">
-        <header>
-            <!-- Engagement header goes here -->
-        </header>
-        <article id="polls">
-            <!-- Polls content goes here -->
-        </article>
-        <article id="proposals">
-            <!-- Proposals content goes here -->
-        </article>
-        <!-- More articles for different content -->
-    </section>
-</main>
+<!-- Main Container -->
+<div id="main-container">
 
-<footer>
-    <!-- Footer content goes here -->
-</footer>
+  <!-- Sidebar for Governance -->
+  <div id="governance-sidebar">
+    <h2>Governance</h2>
+    <button class="district active" onclick="toggleDistrict('Dist. 1')">Dist. 1</button>
+    <button class="district" onclick="toggleDistrict('Dist. 2')">Dist. 2</button>
+    <!-- More districts -->
+    <h3>Categories</h3>
+    <ul id="categories">
+      <li>Econ policy</li>
+      <li>Healthcare</li>
+      <!-- More categories -->
+    </ul>
+  </div>
+
+  <!-- Engagement Section -->
+  <div id="engagement">
+    <h2>Engagement</h2>
+    
+    <!-- Polls -->
+    <div class="poll">
+      <h3>Poll 1</h3>
+      <p>What are the chances you'll vote for each of the following candidates this election cycle?</p>
+      <button onclick="vote('Kennedy')">Kennedy</button>
+      <button onclick="vote('Biden')">Biden</button>
+      <button onclick="vote('Trump')">Trump</button>
+    </div>
+    
+    <!-- Proposals -->
+    <div class="proposal">
+      <h3>Proposal 1</h3>
+      <p>Form action committee to get signatures</p>
+      <!-- Proposal 1 content -->
+    </div>
+    <!-- More proposals -->
+  </div>
+</div>
+
+<!-- Footer -->
+<div id="footer">
+  <p>&copy; 2024 People DAO Platform</p>
+</div>
 
 <script>
-    // Additional JavaScript code for interactive components
+  function toggleDistrict(districtName) {
+    // Here we would also fetch the relevant data for the district
+    document.querySelectorAll('.district').forEach(button => {
+      if (button.textContent === districtName) {
+        button.classList.add('active');
+      } else {
+        button.classList.remove('active');
+      }
+    });
+  }
+
+  function vote(candidateName) {
+    alert('Thank you for your vote for ' + candidateName);
+    // Here we would send the vote to the server
+  }
 </script>
+
 </body>
 </html>
