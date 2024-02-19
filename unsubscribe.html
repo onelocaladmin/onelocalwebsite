@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unsubscribe Confirmation</title>
+<style>
+    /* Basic styling */
+    body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        padding-top: 20px;
+    }
+    #unsubscribeMessage {
+        display: none;
+        color: red;
+        margin-top: 20px;
+    }
+</style>
+</head>
+<body>
+
+<button id="unsubscribeButton">Unsubscribe</button>
+<p id="unsubscribeMessage">You're unsubscribed</p>
+
+<script>
+    // JavaScript to handle button click and display message
+    document.getElementById('unsubscribeButton').onclick = function() {
+        document.getElementById('unsubscribeMessage').style.display = 'block';
+        // Optionally, disable the button after click to prevent multiple unsubscribes
+        this.disabled = true;
+    };
+</script>
+
+</body>
+</html>
