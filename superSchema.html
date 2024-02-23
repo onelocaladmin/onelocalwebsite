@@ -1,1 +1,159 @@
 
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        .iframe-container {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr); /* Adjust the number of columns as needed */
+            gap: 10px; /* Adjust the gap between iframes as needed */
+        }
+
+        .iframe-container iframe {
+            width: 100%;
+            height: 200px; /* Adjust the iframe height as needed */
+            border: 1px solid #ccc;
+        }
+    </style>
+</head>
+<body>
+    <div>
+      <p>{
+  "User": {
+    "id": "U123",
+    "agentId": "A123",
+    "name": "Cam Alot",
+    "moniker": "CamAlot",
+    "userName": "camalot",
+    "email": "camalot999@gmail.com",
+    "phone": "123-456-7890",
+    "address": {
+      "street": "123 Main St.",
+      "city": "Boulder",
+      "state": "CO",
+      "zip": "94105",
+      "country": "USA",
+      "region": "West",
+      "continent": "North America",
+      "planet": "Earth",
+      "ecoregions": {
+        "lv1": "Great Plains",
+        "lv2": "South Central Semi-arid Prairies",
+        "lv3": "High Plains",
+        "lv4": "Front Range Fans"
+      }
+    },
+    "location": {
+      "name": "Cam's House",
+      "venue": "Cam's House",
+      "latitude": "37.783692",
+      "longitude": "-122.409972"
+    },
+    "alternateIdentities": [{
+      "id": "A123",
+      "name": "Barry Allen",
+      "moniker": "Scarlet Speedster",
+      "userName": "CrimsonKing",
+      "email": "flash52@gmail.com",
+      "catchphrase": "run fast"
+    }],
+    "organizations": ["hackhouse"],
+    "groups": [{
+      "id": "G123",
+      "name": "Boulder Producers Guild",
+      "roles": ["CEO"]
+    }],
+    "events": {
+      "interested": [],
+      "going": [],
+      "hosting": []
+    },
+    "skills": ["programming", "design"],
+    "attributes": {
+      "physical": ["height", "weight"],
+      "personality": ["extrovert"],
+      "wealth": ["cash", "crypto"]
+    },
+    "resources": [],
+    "projects": [],
+    "badges": [],
+    "services": [],
+    "products": [],
+    "memberships": ["Player", "Producer"],
+    "friendships": [],
+    "friendRequests": [],
+    "posts": [],
+    "comments": [],
+    "interests": [],
+    "purchases": [],
+    "inGameTokens": []
+  },
+  "Organization": {
+    "id": "O123",
+    "name": "Hackhouse",
+    "members": ["U123"],
+    "resources": [],
+    "venues": [],
+    "groups": [{
+      "id": "G123",
+      "name": "Directors",
+      "roles": ["CEO"]
+    }]
+  },
+  "Group": {
+    "id": "G123",
+    "name": "Boulder Producers Guild",
+    "members": ["U123"],
+    "roles": [{
+      "id": "R123",
+      "name": "CEO",
+      "tasks": ["Set up chairs"]
+    }]
+  },
+  "Event": {
+    "id": "E123",
+    "name": "Hackathon",
+    "description": "A hackathon event",
+    "location": "Boulder, CA",
+    "organizer": "U123",
+    "attendees": [],
+    "tickets": []
+  },
+  "Task": {
+    "id": "T123",
+    "name": "Set up chairs",
+    "description": "Arrange chairs for the event",
+    "status": "active",
+    "dueDate": "2018-01-01T00:00:00Z",
+    "assignedTo": "U123"
+  },
+  "Resource": {
+    "id": "R123",
+    "type": "laptop",
+    "description": "A high-performance laptop",
+    "location": "Boulder, CA"
+  },
+  "Skill": {
+    "id": "S123",
+    "name": "Programming",
+    "users": ["U123"]
+  },
+  "Product": {
+    "id": "P123",
+    "name": "Software Tool",
+    "description": "A productivity software tool",
+    "price": 100.00,
+    "owner": "U123"
+  },
+  "Service": {
+    "id": "SV123",
+    "name": "Consulting",
+    "description": "Professional consulting services",
+    "price": 150.00,
+    "provider": "U123"
+  }
+}
+</p>
+    </div>
+</body>
+</html>
