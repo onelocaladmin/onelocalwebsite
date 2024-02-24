@@ -2,75 +2,69 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Enhanced JSON Editor</title>
+    <title>Simple JSON Editor</title>
     <style>
         body {
-            font-family: 'Arial', sans-serif;
-            margin: 0;
-            padding: 20px;
+            font-family: Arial, sans-serif;
             display: flex;
-            flex-direction: column;
+            justify-content: center;
             align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
         }
-        #jsonInput, #jsonOutput {
-            width: 90%;
-            min-height: 200px;
-            margin: 10px 0;
+        .editor-container {
+            width: 80%;
+            display: flex;
+            justify-content: space-between;
+        }
+        textarea {
+            width: 48%;
+            height: 400px;
             padding: 10px;
+            font-size: 16px;
+            border-radius: 5px;
             border: 1px solid #ccc;
-            border-radius: 4px;
-            font-family: monospace;
         }
-        #jsonOutput {
-            background-color: #f9f9f9;
-        }
-        .button {
-            padding: 10px 20px;
-            margin: 10px;
-            border: none;
-            border-radius: 4px;
-            background-color: #4CAF50;
-            color: white;
-            cursor: pointer;
-        }
-        .button:hover {
-            background-color: #45a049;
+        .output {
+            width: 48%;
+            height: 400px;
+            background-color: #fff;
+            overflow-y: auto;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            white-space: pre-wrap;
+            font-size: 16px;
         }
         .error {
-            color: #D8000C;
-            background-color: #FFD2D2;
-            padding: 10px;
-            margin: 10px 0;
-            border-radius: 4px;
-            width: 90%;
+            color: #ff0000;
         }
     </style>
 </head>
 <body>
-    <h2>Enhanced JSON Editor</h2>
-    <textarea id="jsonInput" placeholder="Enter JSON here..."></textarea>
-    <button class="button" onclick="formatAndValidateJSON()">Format & Validate JSON</button>
-    <div id="jsonOutput"></div>
+    <div class="editor-container">
+        <textarea id="jsonInput" placeholder="Enter JSON here..."></textarea>
+        <div class="output" id="jsonOutput"></div>
+    </div>
 
     <script>
-        function formatAndValidateJSON() {
-            const input = document.getElementById('jsonInput').value;
-            const output = document.getElementById('jsonOutput');
-            output.textContent = ''; // Clear previous output
+        const jsonInput = document.getElementById('jsonInput');
+        const jsonOutput = document.getElementById('jsonOutput');
+
+        jsonInput.addEventListener('input', () => {
             try {
-                // Parse the JSON input to ensure it is valid
-                const parsedJSON = JSON.parse(input);
-                // Stringify and format the JSON for display
-                const formattedJSON = JSON.stringify(parsedJSON, null, 2);
-                output.textContent = formattedJSON;
-                output.style.display = 'block';
+                // Parse JSON input to ensure it's valid
+                const parsedJson = JSON.parse(jsonInput.value);
+                // Format and display the JSON in the output area
+                jsonOutput.textContent = JSON.stringify(parsedJson, null, 2);
+                jsonOutput.classList.remove('error');
             } catch (e) {
-                // If an error occurs, display it to the user
-                output.innerHTML = `<div class="error">Error: ${e.message}</div>`;
-                output.style.display = 'block';
+                // Display error message if JSON is invalid
+                jsonOutput.textContent = "Invalid JSON: " + e.message;
+                jsonOutput.classList.add('error');
             }
-        }
+        });
     </script>
 </body>
 </html>
