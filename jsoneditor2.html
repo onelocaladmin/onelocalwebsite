@@ -1,70 +1,106 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <title>Simple JSON Editor</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced JSON Editor</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
-            background-color: #f0f0f0;
+            padding: 20px;
+            background-color: #edf2f7;
+            color: #333;
         }
+
+        #jsonInput, #jsonOutput {
+            width: calc(50% - 40px);
+            height: 400px;
+            padding: 10px;
+            margin-right: 20px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            background-color: #fff;
+            font-family: monospace;
+            resize: none;
+        }
+
+        #jsonOutput {
+            margin-right: 0;
+        }
+
         .editor-container {
-            width: 80%;
             display: flex;
             justify-content: space-between;
+            margin-bottom: 20px;
         }
-        textarea {
-            width: 48%;
-            height: 400px;
-            padding: 10px;
-            font-size: 16px;
+
+        .button {
+            padding: 10px 20px;
+            border: none;
             border-radius: 5px;
-            border: 1px solid #ccc;
+            background-color: #4a5568;
+            color: #fff;
+            cursor: pointer;
+            font-size: 1em;
         }
-        .output {
-            width: 48%;
-            height: 400px;
-            background-color: #fff;
-            overflow-y: auto;
-            padding: 10px;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-            white-space: pre-wrap;
-            font-size: 16px;
+
+        .button:hover {
+            background-color: #2d3748;
         }
+
         .error {
-            color: #ff0000;
+            color: #e53e3e;
         }
     </style>
 </head>
+
 <body>
     <div class="editor-container">
-        <textarea id="jsonInput" placeholder="Enter JSON here..."></textarea>
-        <div class="output" id="jsonOutput"></div>
+        <textarea id="jsonInput" placeholder="Paste your JSON here..."></textarea>
+        <textarea id="jsonOutput" placeholder="Formatted JSON will appear here..." readonly></textarea>
     </div>
+    <button class="button" id="formatBtn">Format JSON</button>
+    <div id="errorMessage" class="error"></div>
 
     <script>
-        const jsonInput = document.getElementById('jsonInput');
-        const jsonOutput = document.getElementById('jsonOutput');
+        document.getElementById('formatBtn').addEventListener('click', function() {
+            const inputArea = document.getElementById('jsonInput');
+            const outputArea = document.getElementById('jsonOutput');
+            const errorMessage = document.getElementById('errorMessage');
 
-        jsonInput.addEventListener('input', () => {
             try {
-                // Parse JSON input to ensure it's valid
-                const parsedJson = JSON.parse(jsonInput.value);
-                // Format and display the JSON in the output area
-                jsonOutput.textContent = JSON.stringify(parsedJson, null, 2);
-                jsonOutput.classList.remove('error');
-            } catch (e) {
-                // Display error message if JSON is invalid
-                jsonOutput.textContent = "Invalid JSON: " + e.message;
-                jsonOutput.classList.add('error');
+                // Parse the JSON input to ensure it is valid
+                const parsedJson = JSON.parse(inputArea.value);
+                // Format the JSON string with 4 space indentation
+                outputArea.value = JSON.stringify(parsedJson, null, 4);
+                errorMessage.textContent = ''; // Clear any previous error messages
+            } catch (error) {
+                errorMessage.textContent = 'Invalid JSON: ' + error.message;
             }
+        });
+
+        // Enhance UI to handle large JSON by auto-expanding text areas
+        function autoExpandField(field) {
+            field.style.height = 'inherit';
+            const computed = window.getComputedStyle(field);
+            const height = parseInt(computed.getPropertyValue('border-top-width'), 10)
+                         + parseInt(computed.getPropertyValue('padding-top'), 10)
+                         + field.scrollHeight
+                         + parseInt(computed.getPropertyValue('padding-bottom'), 10)
+                         + parseInt(computed.getPropertyValue('border-bottom-width'), 10);
+            field.style.height = height + 'px';
+        }
+
+        document.getElementById('jsonInput').addEventListener('input', function() {
+            autoExpandField(this);
+        });
+
+        document.getElementById('jsonOutput').addEventListener('input', function() {
+            autoExpandField(this);
         });
     </script>
 </body>
+
 </html>
