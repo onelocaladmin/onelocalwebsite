@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Object Editor</title>
+</head>
+<body>
+
+<script id="userData" type="application/json">
+{
+  "data": {
+    "id": 1,
+    "name": "John Doe",
+    "email": "john@example.com",
+    "role": "admin"
+  },
+  "metadata": {
+    "name": {
+      "editable": true,
+      "type": "text"
+    },
+    "email": {
+      "editable": true,
+      "type": "email"
+    },
+    "role": {
+      "editable": false,
+      "type": "text"
+    }
+  }
+}
+</script>
+
+<div id="editor"></div>
+
+<script>
+// Parse the embedded JSON to get data and metadata
+const { data, metadata } = JSON.parse(document.getElementById('userData').textContent);
+
+// Function to dynamically create the form based on metadata
+function createForm(data, metadata) {
+    const form = document.createElement('form');
+    Object.entries(metadata).forEach(([key, { editable, type }]) => {
+        if (editable) {
+            const label = document.createElement('label');
+            label.for = key;
+            label.textContent = key.charAt(0).toUpperCase() + key.slice(1);
+            const input = document.createElement('input');
+            input.type = type;
+            input.id = key;
+            input.name = key;
+            input.value = data[key];
+            form.appendChild(label);
+            form.appendChild(input);
+            form.appendChild(document.createElement('br'));
+        }
+    });
+
+    const submitButton = document.createElement('button');
+    submitButton.type = 'button'; // Using 'button' to prevent form submission for demonstration
+    submitButton.textContent = 'Save Changes';
+    submitButton.onclick = () => saveChanges();
+    form.appendChild(submitButton);
+
+    return form;
+}
+
+// Function to handle "Save Changes" click
+function saveChanges() {
+    const updatedData = {};
+    Object.keys(metadata).forEach(key => {
+        if (metadata[key].editable) {
+            updatedData[key] = document.getElementById(key).value;
+        } else {
+            updatedData[key] = data[key];
+        }
+    });
+    console.log('Updated Data:', updatedData);
+    alert('Check the console for updated data');
+}
+
+// Append the dynamically created form to the page
+document.getElementById('editor').appendChild(createForm(data, metadata));
+</script>
+
+</body>
+</html>
