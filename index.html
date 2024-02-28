@@ -19,6 +19,13 @@
             height: 100%;
             z-index: 1;
         }
+        body, html {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            overflow: auto; /* Changed from hidden to auto */
+        }
+        
         .content {
             position: relative;
             font-family: 'Arial', sans-serif;
@@ -29,8 +36,9 @@
             padding: 20px;
             box-shadow: 0 0 10px rgba(0,0,0,0.1);
             z-index: 2;
+            overflow-y: auto; /* Optional: Add this if you want only the content to scroll */
+            max-height: 100vh; /* Optional: Adjust this value as needed */
         }
-        /* Additional styles */
         .header, .footer {
             background-color: #8B0000; /* Dark red */
             color: white;
